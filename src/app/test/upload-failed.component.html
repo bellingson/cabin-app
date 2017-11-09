@@ -1,0 +1,14 @@
+<div class="page-wrapper">
+
+    <h3>Upload Failed</h3>
+
+    <div *ngIf="message" class="message">
+        {{message}}
+    </div>
+
+
+    <button type="button" (click)="retry()">Retry Upload</button>
+
+
+
+</div>

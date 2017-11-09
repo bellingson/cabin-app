@@ -1,0 +1,17 @@
+
+<div class="page-wrapper">
+
+    <h3>Patient Number</h3>
+
+    <form #f="ngForm" (ngSubmit)="submit(f.value)">
+
+        <input type="text" name="patientNumber" ngModel placeholder="Enter Patient #" required />
+
+        <br>
+
+        <button [disabled]="!f.valid">Update</button>
+
+    </form>
+
+</div>
+

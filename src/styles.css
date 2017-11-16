@@ -8,11 +8,27 @@ body {
 
 a { color: blue; }
 
+div.app-wrapper {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 div.page-wrapper {
-
-    max-width: 700px;
+    display: table;
+    height: 100%;
+    width: 100%;
+    max-width: 800px;
     margin: 0 auto;
+    text-align: center;
+}
 
+div.instruction-cell {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 

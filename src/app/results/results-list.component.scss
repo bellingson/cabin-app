@@ -1,0 +1,18 @@
+
+div.table-wrapper {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+
+    table { width: 100%; }
+
+  ul {
+    display: inline-block;
+    list-style: none;
+    li {
+      display: inline;
+      a { padding: 5px 20px; }
+    }
+  }
+
+}

@@ -1,3 +1,41 @@
-<p>
-  test-complete works!
-</p>
+
+<div class="page-wrapper">
+
+    <div *ngIf="session" class="instruction-cell">
+
+        <p>
+            Contratulations! You have comleted 1 out of 6 sessions for this week!
+        </p>
+
+        <p>
+            You responded with {{session.percentCorrect}}% accuracy and had an average response time of {{session.averageResponseSeconds}} seconds.
+        </p>
+
+        <p>
+            You have 5 sessions to compelte this week.
+        </p>
+
+        <p>
+            You are currently on week 1 of 6 weeks of training.
+        </p>
+
+        <ul>
+            <li>
+                <a [routerLink]="['../pre-test']">Done</a>
+            </li>
+            <li>
+                <a [routerLink]="['../results-list']">Results</a>
+            </li>
+            <li>
+                <a [routerLink]="['../test']">Train Again</a>
+            </li>
+        </ul>
+
+
+    </div>
+
+
+
+
+</div>
+

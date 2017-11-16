@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {TestService} from "./test.service";
+import {TestSession} from "../test-session.model";
 
 @Component({
   selector: 'app-test-complete',
@@ -8,9 +10,14 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class TestCompleteComponent implements OnInit {
 
-  constructor() { }
+  session: TestSession;
+
+  constructor(private testService: TestService) { }
 
   ngOnInit() {
+
+      this.session = this.testService.lastSession();
+
   }
 
 }

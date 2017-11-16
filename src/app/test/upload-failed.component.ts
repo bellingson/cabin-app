@@ -20,7 +20,7 @@ export class UploadFailedComponent implements OnInit {
 
       this.message = null;
 
-      this.testService.uploadSamples()
+      this.testService.uploadResults()
           .subscribe(() => {
 
               // complete

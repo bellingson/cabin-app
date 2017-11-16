@@ -24,7 +24,7 @@ export class UserInitComponent implements OnInit {
 
        this.userService.createPatient(value.patientNumber);
 
-       this.router.navigateByUrl('pre-test');
+       this.router.navigateByUrl('/pre-test');
 
     }
 

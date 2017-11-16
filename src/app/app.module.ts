@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 
@@ -19,7 +20,6 @@ import { AboutComponent } from './about/about.component';
 import { TestCompleteComponent } from './test/test-complete.component';
 import {TestService} from "./test/test.service";
 import { UploadFailedComponent } from './test/upload-failed.component';
-
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { UploadFailedComponent } from './test/upload-failed.component';
     cabinRoutes
   ],
   providers: [UserService,
-              TestService ],
+              TestService,
+            { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

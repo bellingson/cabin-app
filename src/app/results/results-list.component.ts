@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {TestService} from "../test/test.service";
+
+import {TestSession} from "../test-session.model";
 
 @Component({
   selector: 'app-results-list',
@@ -8,9 +11,18 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class ResultsListComponent implements OnInit {
 
-  constructor() { }
+  sessions: Array<TestSession>;
+
+  constructor(private testService: TestService) { }
 
   ngOnInit() {
+
+      this.testService.testSessions.subscribe(sessions => this.sessions = sessions);
+
+      console.log(this.sessions);
+
+
+
   }
 
 }

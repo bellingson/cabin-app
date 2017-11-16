@@ -1,0 +1,14 @@
+
+div.page-wrapper {
+    display: table;
+}
+
+
+ul {
+  display: inline-block;
+  list-style: none;
+  li {
+    display: inline;
+    a { padding: 5px 20px; }
+  }
+}

@@ -1,16 +1,19 @@
 <div class="page-wrapper">
 
-    <p>
-        Focus your gaze on the cross.  You will briefly see two faces.
-        Tap the half of the screen where the dot appears next
-        as promptly as you can!
-    </p>
+    <div class="instruction-cell">
 
-    <div class="options">
-        <a href="test">Start Now</a>
-        <a href="results-list">Results</a>
-        <a href="about">About</a>
+        <p>
+            Focus your gaze on the cross.  You will briefly see two faces.
+            Tap the half of the screen where the dot appears next
+            as promptly as you can!
+        </p>
+
+        <div class="options">
+            <a [routerLink]="['../test']">Start Now</a>
+            <a [routerLink]="['../results-list']">Results</a>
+            <a [routerLink]="['../about']">About</a>
+        </div>
+
     </div>
-
 
 </div>

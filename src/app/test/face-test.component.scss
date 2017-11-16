@@ -1,23 +1,17 @@
 
 div { margin: 0; padding: 0; }
 
-
 div.page-wrapper {
-   position: absolute;
-   top: 0;
-   left: 0;
-   z-index: 1;
-   background: #000;
-   width: 100%;
-   height: 100%;
-}
 
+}
 
 table.faces.hidden { display: none; }
 table.faces.show { display: table; }
 
 table {
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   height: 100%;
 
   td { text-align: center; vertical-align: middle; }

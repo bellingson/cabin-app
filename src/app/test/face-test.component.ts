@@ -6,7 +6,7 @@ import {FACES} from "./faces";
 import {TestSample} from "../test-sample.model";
 import {TestService} from "./test.service";
 
-const sampleCount = 3;
+const sampleCount = 5;
 
 enum Side {
     LEFT,
@@ -71,7 +71,7 @@ export class FaceTestComponent implements OnInit {
 
       this.currentSample = new TestSample();
       this.currentSample.ordinal = this.samples.length;
-      this.currentSample.startTime = Date.now();
+      // this.currentSample.startTime = Date.now();
 
       this.currentIndex = Math.floor(Math.random() * this.faces.length);
 
@@ -97,6 +97,10 @@ export class FaceTestComponent implements OnInit {
 
       this.showFaces = true;
 
+      // if(1 == true) {
+      //     return;
+      // }
+
       // 1 show faces
       setTimeout(() => {
           this.showFaces = false;
@@ -107,6 +111,7 @@ export class FaceTestComponent implements OnInit {
               this.canClick = true;
               this.showDotLeft = this.correctSide == Side.LEFT;
               this.showDotRight = this.correctSide == Side.RIGHT;
+              this.currentSample.startTime = Date.now();
 
               // 3 hide dot
               setTimeout(() => {
@@ -128,16 +133,15 @@ export class FaceTestComponent implements OnInit {
           return false;
       }
 
-      this.testService.samples.next(this.samples);
+      let testSession = this.testService.testComplete(this.samples)
 
-
-
-      this.testService.uploadSamples()
+      this.testService.uploadResults(testSession)
                         .subscribe(success => {
-                              this.router.navigateByUrl('test-complete');
+                              this.router.navigateByUrl('/test-complete');
+                              // this.router.navigateByUrl('/results-list');
                           }, err => {
                               console.log(err);
-                              this.router.navigateByUrl('upload-failed');
+                              this.router.navigateByUrl('/upload-failed');
                           });
 
       return true;

@@ -1,7 +1,10 @@
 
 import {TestSample} from "./test-sample.model";
+import {Mood} from "./mood";
 
 export class TestSession {
+
+    level: number;
 
     startTime: number;
     samples: Array<TestSample>;
@@ -12,5 +15,8 @@ export class TestSession {
     percentCorrect: string;
 
     averageResponseSeconds: string;
-    
+
+    active: Mood;
+    afraid: Mood;
+
 }

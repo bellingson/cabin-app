@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppInitComponent } from './app-init.component';
+import {testImports, testProviders} from "../face-test/test.helper.spec";
 
 describe('AppInitComponent', () => {
   let component: AppInitComponent;
@@ -8,7 +9,9 @@ describe('AppInitComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppInitComponent ]
+      declarations: [ AppInitComponent ],
+      providers: testProviders,
+      imports: testImports
     })
     .compileComponents();
   }));

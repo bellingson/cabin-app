@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cd ~/workspace/josh_carlson/cabin-app
+
+ng build --prod  --base-href /cabin/
+
+ssh -t root@nnm01 "rm -rf /var/www/domains/marquette.ifindtrail.com/cabin";
+
+rsync -avz dist root@nnm01:/var/www/domains/marquette.ifindtrail.com
+
+ssh -t root@nnm01 "mv /var/www/domains/marquette.ifindtrail.com/dist /var/www/domains/marquette.ifindtrail.com/cabin";

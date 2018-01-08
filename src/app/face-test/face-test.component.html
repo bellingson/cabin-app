@@ -1,0 +1,83 @@
+
+<div class="face-wrapper">
+
+  <div class="header">
+
+    <div class="accuracy" *ngIf="accuracy != null">
+      {{accuracy}} %
+    </div>
+
+
+    <div class="sample-counter" *ngIf="samples.length">
+      {{samples.length}} of {{sampleCount}}
+    </div>
+
+  </div>
+
+  <div *ngFor="let f of faces; index as i" id="f{{i}}" [class]="classForIndex(i)">
+    <div class="face left-face">
+      <img *ngIf="showFaces" src="assets/faces/{{leftImage}}" />
+
+      <div *ngIf="canClick" class="dot-container" (click)="clickLeft()">
+        <div *ngIf="showDotLeft" class="table-wrapper">
+          <div class="table-cell">
+            <svg height="20" width="20">
+              <circle cx="10" cy="10" r="10" stroke="black" stroke-width="3" fill="white" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrapper"  *ngIf="showCorrectLeft || showIncorrectLeft">
+        <div class="table-cell">
+
+          <p *ngIf="showCorrectLeft" class="correct">Correct</p>
+          <p *ngIf="showIncorrectLeft" class="not-correct">Incorrect</p>
+
+        </div>
+      </div>
+
+
+    </div>
+    <div class="plus">
+      +
+    </div>
+    <div class="face left-face">
+      <img *ngIf="showFaces" src="assets/faces/{{rightImage}}" />
+      <div *ngIf="canClick" class="dot-container" (click)="clickRight()">
+        <div *ngIf="showDotRight" class="table-wrapper">
+          <div class="table-cell">
+            <svg height="20" width="20">
+              <circle cx="10" cy="10" r="10" stroke="black" stroke-width="3" fill="white" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrapper" *ngIf="showCorrectRight || showIncorrectRight">
+          <div class="table-cell">
+
+            <p *ngIf="showCorrectRight" class="correct">Correct</p>
+            <p *ngIf="showIncorrectRight" class="not-correct">Incorrect</p>
+
+          </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>
+
+<div class="portrait">
+
+  <div class="message-wrapper">
+    <p>
+      Turn device to landscape orientation.
+    </p>
+  </div>
+
+</div>
+
+

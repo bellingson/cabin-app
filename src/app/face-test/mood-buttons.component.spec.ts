@@ -1,15 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultsListComponent } from './results-list.component';
-import {testImports, testProviders} from "../face-test/test.helper.spec";
+import { MoodButtonsComponent } from './mood-buttons.component';
+import {testImports, testProviders} from "./test.helper.spec";
 
-describe('ResultsListComponent', () => {
-  let component: ResultsListComponent;
-  let fixture: ComponentFixture<ResultsListComponent>;
+describe('MoodButtonsComponent', () => {
+  let component: MoodButtonsComponent;
+  let fixture: ComponentFixture<MoodButtonsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultsListComponent ],
+      declarations: [ MoodButtonsComponent ],
       providers: testProviders,
       imports: testImports
     })
@@ -17,7 +17,7 @@ describe('ResultsListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResultsListComponent);
+    fixture = TestBed.createComponent(MoodButtonsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

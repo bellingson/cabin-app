@@ -1,13 +1,4 @@
 
-<div *ngIf="isLandscape == false">
-
-    <p>
-        Please turn to the device to landscape orientation.
-    </p>
-
-</div>
-
-
 <div *ngIf="isLandscape" class="page-wrapper">
 
         <table *ngFor="let f of faces; index as i" id="f{{i}}" [class]="classForIndex(i)">
@@ -45,7 +36,7 @@
                 </td>
             </tr>
         </table>
-    
+
 </div>
 
 

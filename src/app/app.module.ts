@@ -8,18 +8,20 @@ import { FormsModule } from '@angular/forms';
 
 import {cabinRoutes} from "./app.router";
 
-
 import { AppComponent } from './app.component';
-import { FaceTestComponent } from './test/face-test.component';
+import { FaceTestComponent } from './face-test/face-test.component';
 import {UserService} from "./user/user.service";
 import { UserInitComponent } from './user/user-init.component';
 import { PreTestComponent } from './user/pre-test.component';
 import { AppInitComponent } from './user/app-init.component';
 import { ResultsListComponent } from './results/results-list.component';
 import { AboutComponent } from './about/about.component';
-import { TestCompleteComponent } from './test/test-complete.component';
-import {TestService} from "./test/test.service";
-import { UploadFailedComponent } from './test/upload-failed.component';
+import { TestCompleteComponent } from './face-test/test-complete.component';
+import {TestService} from "./face-test/test.service";
+import { UploadFailedComponent } from './face-test/upload-failed.component';
+import { MoodActiveComponent } from './face-test/mood-active.component';
+import { MoodAfraidComponent } from './face-test/mood-afraid.component';
+import { MoodButtonsComponent } from './face-test/mood-buttons.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,10 @@ import { UploadFailedComponent } from './test/upload-failed.component';
     ResultsListComponent,
     AboutComponent,
     TestCompleteComponent,
-    UploadFailedComponent
+    UploadFailedComponent,
+    MoodActiveComponent,
+    MoodAfraidComponent,
+    MoodButtonsComponent
   ],
   imports: [
     BrowserModule,

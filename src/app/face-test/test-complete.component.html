@@ -4,7 +4,7 @@
     <div *ngIf="session" class="instruction-cell">
 
         <p>
-            Contratulations! You have comleted 1 out of 6 sessions for this week!
+            Contratulations! You have comleted {{stats.sessionsThisWeek}} out of 6 sessions for this week!
         </p>
 
         <p>
@@ -12,11 +12,11 @@
         </p>
 
         <p>
-            You have 5 sessions to compelte this week.
+            You have {{stats.sessionsToDo}} sessions to complete this week.
         </p>
 
         <p>
-            You are currently on week 1 of 6 weeks of training.
+            You are currently on week {{stats.currentWeek}} of 6 weeks of training.
         </p>
 
         <ul>
@@ -27,7 +27,7 @@
                 <a [routerLink]="['../results-list']">Results</a>
             </li>
             <li>
-                <a [routerLink]="['../test']">Train Again</a>
+                <a [routerLink]="['../mood-active']">Train Again</a>
             </li>
         </ul>
 

@@ -3,10 +3,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {FACES} from "./faces";
-import {TestSample} from "../test-sample.model";
+import {TestSample} from "./test-sample.model";
 import {TestService} from "./test.service";
 
-const sampleCount = 5;
+const DEFAULT_SAMPLE_SIZE = 5;
 
 enum Side {
     LEFT,
@@ -27,9 +27,12 @@ export class FaceTestComponent implements OnInit {
   samples: Array<TestSample> = [];
 
   currentIndex: number;
+
+  sampleCount = DEFAULT_SAMPLE_SIZE;
+  accuracy: number;
+
   correctSide: Side;
   neutralSide: Side;
-
 
   // images
   leftImage: string;
@@ -47,14 +50,10 @@ export class FaceTestComponent implements OnInit {
   showCorrectRight = false;
   showIncorrectRight = false;
 
-  isLandscape = false;
-
   constructor(private testService: TestService,
               private router: Router) { }
 
   ngOnInit() {
-
-      this.isLandscape = window.innerWidth > window.innerHeight;
 
       // this.currentIndex = 0;
       // this.showDotLeft = true;
@@ -129,7 +128,7 @@ export class FaceTestComponent implements OnInit {
 
   checkFinished() : boolean {
 
-      if(this.samples.length < sampleCount) {
+      if(this.samples.length < this.sampleCount) {
           return false;
       }
 
@@ -198,6 +197,8 @@ export class FaceTestComponent implements OnInit {
       this.currentSample = null;
       this.canClick = false;
 
+      this.checkAccuracy();
+
       setTimeout(() => {
           this.nextSample();
       }, 1000);
@@ -207,10 +208,23 @@ export class FaceTestComponent implements OnInit {
   classForIndex(index: number) {
 
       if(this.currentIndex != null && this.currentIndex === index) {
-          return 'faces show';
+          return 'face-set show';
       }
 
-      return 'faces hidden';
+      return 'face-set hidden';
+  }
+
+  checkAccuracy()  {
+
+     const numberCorrect = this.samples.filter(sample => {
+                               return sample.correct;
+                            }).length;
+
+     this.accuracy = Math.floor(numberCorrect / this.samples.length * 100);
+
+    console.log(this.accuracy);
+
+
   }
 
 }

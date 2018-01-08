@@ -1,0 +1,158 @@
+
+div.face-wrapper {
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  div.header {
+      width: 100%;
+      height: 30px;
+      //border: 1px solid #fff;
+
+      div.accuracy {
+          display: inline-block;
+          float: left;
+          padding: 10px 0 0 15px;
+      }
+
+      div.sample-counter {
+          display: inline-block;
+          float: right;
+          padding: 10px 15px 0 0;
+      }
+
+  }
+
+  div.face-set {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    div.face {
+      //border: 1px solid #fff;
+      flex-basis: auto;
+      min-width: 300px;
+      min-height: 200px;
+      text-align: center;
+      flex-grow: 3;
+    }
+
+    div.dot-container {
+      min-height: 200px;
+      width: 100%;
+      //border: 1px solid #fff;
+
+    }
+
+    div.table-wrapper {
+      display: table;
+      min-height: 200px;
+      width: 100%;
+
+      div.table-cell {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
+
+    p.correct { color: green; }
+    p.not-correct { color: red; }
+
+
+    div.plus {
+      //border: 1px solid #fff;
+      flex-basis: 30px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+  }  // face-set
+
+  div.face-set.show { display: flex; }
+  div.face-set.hidden { display: none; }
+
+}
+
+div.portrait {
+   display: none;
+
+   //border: 1px solid #fff;
+   text-align: center;
+   height: 100%;
+   width: 100%;
+
+   div.message-wrapper {
+       display: table-cell;
+       vertical-align: middle;
+   }
+
+}
+
+
+@media (max-width: 600px) {
+
+  div.portrait {
+      display: table;
+  }
+
+  div.face-wrapper {
+     display: none;
+  }
+
+}
+
+
+
+
+/*
+
+div { margin: 0; padding: 0; }
+
+div.page-wrapper {
+
+}
+
+table.faces.hidden { display: none; }
+table.faces.show { display: table; }
+
+table {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 100%;
+
+  td { text-align: center; vertical-align: middle; }
+
+  td.cell { width: 45%;
+        img { width: 100%; max-width: 200px; }
+        div.clickable { width: 100%; height: 100%;  }
+
+        div.dot {
+          height: 100%;
+
+          div.dot-wrapper {
+              display: table;
+              height: 100%;
+              width: 100%;
+              div.dot-cell {
+                 display: table-cell;
+                 vertical-align: middle;
+              }
+          }
+        }
+        div.correct { color: green; }
+        div.not-correct { color: red; }
+    }
+
+  td.plus { color: #fff; font-size: 30px; }
+
+
+}
+
+*/

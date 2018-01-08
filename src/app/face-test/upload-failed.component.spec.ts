@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UploadFailedComponent } from './upload-failed.component';
+import {testImports, testProviders} from "./test.helper.spec";
 
 describe('UploadFailedComponent', () => {
   let component: UploadFailedComponent;
@@ -8,7 +9,9 @@ describe('UploadFailedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UploadFailedComponent ]
+      declarations: [ UploadFailedComponent ],
+      providers: testProviders,
+      imports: testImports
     })
     .compileComponents();
   }));

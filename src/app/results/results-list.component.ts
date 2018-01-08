@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {TestService} from "../test/test.service";
+import {TestService} from "../face-test/test.service";
 
-import {TestSession} from "../test-session.model";
+import {TestSession} from "../face-test/test-session.model";
 
 @Component({
   selector: 'app-results-list',

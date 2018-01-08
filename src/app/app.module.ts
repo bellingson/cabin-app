@@ -22,6 +22,7 @@ import { UploadFailedComponent } from './face-test/upload-failed.component';
 import { MoodActiveComponent } from './face-test/mood-active.component';
 import { MoodAfraidComponent } from './face-test/mood-afraid.component';
 import { MoodButtonsComponent } from './face-test/mood-buttons.component';
+import { PortraitMessageComponent } from './face-test/portrait-message.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MoodButtonsComponent } from './face-test/mood-buttons.component';
     UploadFailedComponent,
     MoodActiveComponent,
     MoodAfraidComponent,
-    MoodButtonsComponent
+    MoodButtonsComponent,
+    PortraitMessageComponent
   ],
   imports: [
     BrowserModule,

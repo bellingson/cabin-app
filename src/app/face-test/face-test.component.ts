@@ -58,6 +58,8 @@ export class FaceTestComponent implements OnInit {
       // this.currentIndex = 0;
       // this.showDotLeft = true;
 
+      console.log('screen width: ' + window.innerWidth);
+
       this.nextSample();
   }
 

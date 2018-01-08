@@ -1,0 +1,23 @@
+div.portrait {
+  display: none;
+
+  //border: 1px solid #fff;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+
+  div.message-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  div.portrait {
+    display: table;
+  }
+
+}

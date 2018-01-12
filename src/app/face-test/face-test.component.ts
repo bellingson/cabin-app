@@ -126,6 +126,7 @@ export class FaceTestComponent implements OnInit {
 
       }, 1000);
 
+
   }
 
   checkFinished() : boolean {

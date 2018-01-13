@@ -1,0 +1,17 @@
+div.instruction-cell {
+  padding: 30px;
+  display: table-cell;
+  vertical-align: middle;
+
+  strong {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 600px) {
+
+  div.page-wrapper {
+    display: none;
+  }
+
+}

@@ -1,0 +1,36 @@
+
+
+<div class="page-wrapper">
+
+    <div *ngIf="sessions" class="table-wrapper">
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>% Correct</th>
+            <th>Avg Response</th>
+        </tr>
+        <tr *ngFor="let session of sessions">
+            <td>{{session.startTime | date: 'EEE. MMM, d yyyy'}}</td>
+            <td>{{session.percentCorrect}} %</td>
+            <td>{{session.averageResponseSeconds}}</td>
+        </tr>
+    </table>
+
+        <ul>
+            <li>
+                <a [routerLink]="['../pre-test']">Done</a>
+            </li>
+            <li>
+                <a [routerLink]="['../mood']">Train Again</a>
+            </li>
+        </ul>
+
+
+
+    </div>
+
+
+</div>
+
+

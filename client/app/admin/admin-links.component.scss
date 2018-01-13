@@ -1,0 +1,10 @@
+ul.hlinks {
+  list-style: none;
+
+  li {
+    display: inline-block; border-right: 1px solid #999;
+    a { padding: 3px 20px; }
+  }
+
+  li:last-child { border-right: 0; }
+}

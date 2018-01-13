@@ -1,0 +1,7 @@
+<div class="button-wrapper">
+
+  <button class="button" *ngFor="let button of buttons" (click)="moodTouched(button)">
+    {{moodDescription(button)}}
+  </button>
+
+</div>

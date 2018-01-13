@@ -1,0 +1,30 @@
+
+<div class="page-wrapper">
+
+
+    <div class="instruction-cell">
+        <h3>Patient Number</h3>
+
+        <form #f="ngForm" (ngSubmit)="submit(f.value)">
+
+            <input type="text" name="patientId" ngModel placeholder="Enter Patient #" required />
+
+            <br>
+
+          <h4>PIN</h4>
+
+          <input type="password" name="pin" ngModel placeholder="PIN" required />
+
+          <br>
+
+          <div *ngIf="message" class="message">
+            {{message}}
+          </div>
+
+            <button [disabled]="!f.valid">Update</button>
+
+        </form>
+    </div>
+
+</div>
+

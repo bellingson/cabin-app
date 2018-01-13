@@ -1,0 +1,26 @@
+<div class="page-wrapper">
+
+  <div class="instruction-cell">
+
+    <form #f="ngForm" (ngSubmit)="updateSettings(f.value)">
+
+      <div class="group">
+        <label>Level</label>
+        <input type="text" name="level" [(ngModel)]="settings.level" placeholder="Level"/>
+
+      </div>
+
+      <div class="group">
+        <button>Update</button>
+      </div>
+
+    </form>
+
+    <div class="options">
+      <a [routerLink]="['../']">Back</a>
+    </div>
+
+  </div>
+
+
+</div>

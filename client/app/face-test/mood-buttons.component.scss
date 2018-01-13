@@ -1,0 +1,22 @@
+
+div.button-wrapper {
+  //border: 1px solid #fff;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  button {
+     padding: 5px;
+     border: 1px solid #999;
+     font-size: 13px;
+     min-width: 90px;
+     border-radius: 4px;
+     background-color: #f1f1f1;
+     color: #333;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+
+}

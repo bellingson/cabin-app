@@ -158,3 +158,17 @@ router.delete('/face-test/:id', jsonParser, (req, res, next) => {
 
 
 });
+
+router.get('/settings', jsonParser, (req, res, next) => {
+
+  faceTestDao.settings().subscribe(settings => {
+
+      res.send(settings);
+
+  }, err => {
+      console.log(err);
+      res.status(500).send({error: 'Failed to fetch settings'});
+  });
+
+
+});

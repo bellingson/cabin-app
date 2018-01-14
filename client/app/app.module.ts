@@ -25,6 +25,7 @@ import { ClearComponent } from './user/clear.component';
 import { SettingsComponent } from './settings/settings.component';
 import {AdminGuard} from "./admin/admin.guard";
 import { MoodComponent } from './face-test/mood.component';
+import { FaceComponent } from './face-test/face.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { MoodComponent } from './face-test/mood.component';
     PortraitMessageComponent,
     ClearComponent,
     SettingsComponent,
-    MoodComponent
+    MoodComponent,
+    FaceComponent
   ],
   imports: [
     BrowserModule,

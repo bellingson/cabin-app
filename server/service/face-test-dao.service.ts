@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import {GenericDao} from "./generic-dao.service";
 
 const testSessionCollection = 'testSession';
+const settingsCollection = 'settings';
 
 export class FaceTestDao extends GenericDao {
 
@@ -69,6 +70,9 @@ export class FaceTestDao extends GenericDao {
       return response;
   }
 
+  settings() : Observable<any> {
+     return this.getSingleton(settingsCollection);
+  }
 
 
 

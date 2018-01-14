@@ -50,6 +50,8 @@ export class FaceTestComponent implements OnInit {
   showCorrectRight = false;
   showIncorrectRight = false;
 
+  settings: any;
+
   constructor(private testService: TestService,
               private router: Router) { }
 

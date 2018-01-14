@@ -9,10 +9,15 @@ var jsonParser = bodyParser.json({ type: 'application/*+json'});
 
 export const OK = { message: 'ok'};
 
-const PIN = '2828';
-const ADMIN_PIN = '1941';
+// const PIN = '2828';
+// const ADMIN_PIN = '1941';
+
+
 
 const faceTestDao = new FaceTestDao();
+
+let settings;
+faceTestDao.settings().subscribe(_settings => settings = _settings);
 
 /* GET. */
 router.get('/', (req, res, next) => {
@@ -33,16 +38,16 @@ router.post('/verify-pin', jsonParser, (req, res, next) => {
   }
 
   res.status(401).send('Invalid PIN');
-
-
-
+  
 });
 
 function isPinValid(req) : boolean {
 
   const _pin = req.body.pin;
   const patientId = req.body.patientId;
-  const validPin = patientId == -1 ? ADMIN_PIN : PIN;
+  // const validPin = patientId == -1 ? ADMIN_PIN : PIN;
+
+  const validPin = patientId == -1 ? settings.adminPin : settings.pin;
 
   return _pin == validPin;
 }

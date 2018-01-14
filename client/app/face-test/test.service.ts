@@ -95,7 +95,6 @@ export class TestService {
 
       let response = new ReplaySubject<boolean>(1);
 
-
       let url = '/api/face-test';
       this.http.post(url, session)
         .subscribe(r => {
@@ -105,10 +104,6 @@ export class TestService {
           response.error(er);
           response.complete();
         });
-
-      // console.log('save test');
-      // console.log(session.samples);
-      // response.error('failed..');
 
        return response;
 
@@ -237,7 +232,7 @@ export class TestService {
       let userStart = moment(user.startTime);
       let weeks = moment().diff(userStart, 'weeks');
 
-      console.log('US: ' + userStart + ' : ' + weeks);
+      // console.log('US: ' + userStart + ' : ' + weeks);
 
       let stats = new TestStats();
       stats.totalWeeks = 6;
@@ -254,7 +249,7 @@ export class TestService {
 
       let dayOfWeek = startOfWeek.day();
 
-      console.log(startOfWeek.toDate() + ' : ' + dayOfWeek);
+      // console.log(startOfWeek.toDate() + ' : ' + dayOfWeek);
 
       let endOfWeek = moment();
       endOfWeek.day(6);
@@ -265,12 +260,12 @@ export class TestService {
 
       stats.endOfWeek = endOfWeek.valueOf();
 
-      console.log('EOW: ' + endOfWeek.toDate());
+      // console.log('EOW: ' + endOfWeek.toDate());
 
       let sessions;
       this.testSessions.subscribe(_sessions => sessions = _sessions);
 
-     console.log('CS1: ' + sessions.length);
+     // console.log('CS1: ' + sessions.length);
 
       stats.sessionsThisWeek = _.filter(sessions, session => {
 
@@ -280,12 +275,11 @@ export class TestService {
                                               session.startTime <= stats.endOfWeek;
                                   }).length;
 
-    console.log('STW: ' + stats.sessionsThisWeek);
+    // console.log('STW: ' + stats.sessionsThisWeek);
 
       stats.sessionsToDo = 6 - stats.sessionsThisWeek;
 
       this.stats.next(stats);
-
 
       return stats;
   }

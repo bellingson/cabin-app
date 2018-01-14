@@ -4,12 +4,75 @@ import {ObjectID} from "bson";
 
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import {Subject} from "rxjs/Subject";
 
 export const dbUrl = 'mongodb://localhost:27017';
 
 export const dbName = 'cabin';
 
 export class GenericDao {
+
+  getSingleton(collection: string) : Observable<any> {
+
+    const response = new ReplaySubject<any>(1);
+
+    this.connect().subscribe(client => {
+
+       const db = client.db(dbName);
+       db.collection(collection)
+         .find({})
+         .limit(1)
+         .toArray((err, docs) => {
+
+              if(checkMongoError(err, client, response) == true)  return;
+
+              client.close();
+
+              let value = docs.length > 0 ? docs[0] : null;
+              response.next(value);
+              response.complete();
+         });
+
+    });
+
+
+    return response;
+  }
+
+  connect() : Observable<any> {
+
+    let response = new Subject<any>();
+
+    MongoClient.connect(dbUrl, (err, client) => {
+
+      if(err) {
+        response.error(err);
+        response.complete();
+        client.close();
+        return;
+      }
+
+      response.next(client);
+      response.complete();
+
+    });
+
+    return response;
+  }
+
+
+  checkError(err, client, response: Subject<any>) : boolean {
+
+      if(err) {
+        client.close();
+        response.error(err);
+        response.complete();
+        return true;
+      }
+
+      return false;
+  }
+
 
   get(collection: string, id: string) : Observable<any> {
 
@@ -171,3 +234,17 @@ export class GenericDao {
 
 
 }
+
+
+export function checkMongoError(err, client, response: Subject<any>) : boolean {
+
+  if(err) {
+    client.close();
+    response.error(err);
+    response.complete();
+    return true;
+  }
+
+  return false;
+}
+

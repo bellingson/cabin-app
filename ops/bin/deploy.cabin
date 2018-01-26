@@ -1,0 +1,13 @@
+#!/bin/sh
+
+BASE=~/workspace/josh_carlson/cabin-app
+
+cd $BASE
+
+./ops/bin/build.container
+
+docker push bellingson/cabin:latest
+
+ssh -t vhost@nnm02 '~/bin/run.cabin'
+
+rm -rf $BASE/build

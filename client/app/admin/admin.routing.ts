@@ -4,6 +4,7 @@ import {AdminBaseComponent} from "./admin-base.component";
 import {TestSessionDetailComponent} from "./test-session-detail.component";
 import {PatientListComponent} from "./patient-list.component";
 import {AdminGuard} from "./admin.guard";
+import {AdminSettingsComponent} from "./admin-settings.component";
 
 const routes: Routes = [
 
@@ -11,7 +12,8 @@ const routes: Routes = [
     { path: '', redirectTo: 'list', pathMatch: 'full'},
     { path: 'list', component: TestSessionListComponent },
     { path: 'detail/:id', component: TestSessionDetailComponent },
-    { path: 'patient-list', component: PatientListComponent }
+    { path: 'patient-list', component: PatientListComponent },
+    { path: 'settings', component: AdminSettingsComponent }
   ]}
 ];
 

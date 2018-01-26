@@ -6,7 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import {Subject} from "rxjs/Subject";
 
-export const dbUrl = 'mongodb://localhost:27017';
+// export const dbUrl = 'mongodb://localhost:27017';
+
+export const dbUrl = 'mongodb://cabindb:27017';
 
 export const dbName = 'cabin';
 

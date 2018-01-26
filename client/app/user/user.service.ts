@@ -14,7 +14,7 @@ const USER_KEY = 'patient';
 export class UserService {
 
 
-    user = new ReplaySubject<User>(1);
+  user = new ReplaySubject<User>(1);
 
   constructor(private http: HttpClient) {
       this.initialize();
@@ -49,7 +49,13 @@ export class UserService {
 
       let url = `/api/face-test/verify-pin`;
       this.http.post(url, { patientId:patientId, pin: pin} )
-        .subscribe(r => {
+        .subscribe((r : any) => {
+
+          if(!r.token) {
+             response.error("No pin token");
+             response.complete();
+             return;
+          }
 
           const admin = patientId == '-1';
 
@@ -57,7 +63,8 @@ export class UserService {
                                 startTime: Date.now(),
                                 level: 1,
                                 pin: pin,
-                                 admin: admin,
+                                token: r.token,
+                                admin: admin,
                               } as User;
 
 

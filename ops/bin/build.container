@@ -1,0 +1,46 @@
+#!/bin/sh
+
+VERSION=`date +%Y-%m-%d-%H%M`;
+
+BASE=~/workspace/josh_carlson/cabin-app
+
+cd $BASE
+
+BUILD_DIR=$BASE/build
+DIST_DIR=$BASE/dist
+DOCKER_FILE=$BASE/ops/container/Dockerfile
+PACKAGE_FILE=$BASE/ops/container/package.json
+
+rm -rf $BUILD_DIR
+mkdir -p $BUILD_DIR
+
+cp $DOCKER_FILE $BUILD_DIR
+
+
+rm -rf $DIST_DIR
+
+npm run tsc
+ng build --prod
+
+mv $DIST_DIR $BUILD_DIR
+
+#cp -R node_modules $BUILD_DIR/node_modules
+
+cp $PACKAGE_FILE $BUILD_DIR/dist
+
+cd $BUILD_DIR/dist
+yarn
+
+cd $BUILD_DIR
+
+docker build -t cabin .
+
+docker tag cabin  bellingson/cabin:$VERSION
+docker tag cabin  bellingson/cabin:latest
+
+#docker push bellingson/cabin:latest
+
+
+
+
+

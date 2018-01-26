@@ -33,5 +33,9 @@ export class TestAdminService {
     return this.http.get<Array<any>>(url);
   }
 
+  settings() : Observable<any> {
+    let url = '/api/admin/settings';
+    return this.http.get(url);
+  }
 
 }

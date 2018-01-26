@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 import { Observable } from 'rxjs/Observable';
@@ -89,6 +89,15 @@ export class TestService {
 
   }
 
+  private authHeader() {
+
+    if(this.user) {
+      return { headers: new HttpHeaders().set('Authorization', this.user.token) };
+    } else {
+      return { headers: new HttpHeaders() };
+    }
+  }
+
   uploadResults(session?: TestSession) : Observable<boolean> {
 
       session = session ? session : this.lastSession();
@@ -96,7 +105,7 @@ export class TestService {
       let response = new ReplaySubject<boolean>(1);
 
       let url = '/api/face-test';
-      this.http.post(url, session)
+      this.http.post(url, session, this.authHeader() )
         .subscribe(r => {
           response.next(true);
           response.complete();

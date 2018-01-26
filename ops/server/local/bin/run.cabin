@@ -1,0 +1,10 @@
+#!/bin/bash
+
+docker rm -f cabin
+
+docker run --name cabin \
+            -p 8081:3000 \
+            --link cabindb \
+            --restart=always \
+            -d cabin
+

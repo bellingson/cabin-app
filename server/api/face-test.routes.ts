@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 
+import * as jwt from 'jsonwebtoken';
+
 import {FaceTestDao} from "../service/face-test-dao.service";
 
 export const router = express.Router();
@@ -9,10 +11,10 @@ var jsonParser = bodyParser.json({ type: 'application/*+json'});
 
 export const OK = { message: 'ok'};
 
+
+
 // const PIN = '2828';
 // const ADMIN_PIN = '1941';
-
-
 
 const faceTestDao = new FaceTestDao();
 
@@ -33,12 +35,14 @@ router.get('/', (req, res, next) => {
 router.post('/verify-pin', jsonParser, (req, res, next) => {
 
   if(isPinValid(req)) {
-    res.send(OK);
+
+    let token = jwt.sign({patientId: req.body.patientId}, settings.jwtSecret);
+    res.send({token: token});
     return;
   }
 
   res.status(401).send('Invalid PIN');
-  
+
 });
 
 function isPinValid(req) : boolean {
@@ -48,7 +52,6 @@ function isPinValid(req) : boolean {
   // const validPin = patientId == -1 ? ADMIN_PIN : PIN;
 
   const validPin = patientId == -1 ? settings.adminPin : settings.pin;
-
   return _pin == validPin;
 }
 

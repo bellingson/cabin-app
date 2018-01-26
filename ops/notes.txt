@@ -1,0 +1,47 @@
+
+userdel vhost
+rm -rf /home/vhost
+
+groupadd wheel
+useradd -m -G wheel vhost -s /bin/bash
+usermod -aG sudo vhost
+passwd vhost
+
+
+
+mkdir /home/vhost
+
+su - vhost
+sudo cp -R /root/.ssh .
+
+sudo chown -R vhost:vhost /home/vhost
+
+
+https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
+
+https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user
+
+
+DATA
+sudo mkdir -p /opt/cabin/mongo/data
+
+sudo chown -R vhost:vhost /opt/cabin
+
+
+FIREWALL
+
+sudo ufw disable
+sudo ufw enable
+
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+sudo ufw allow ssh
+
+
+sudo ufw allow 80/tcp
+sudo ufw allow 1080/tcp
+sudo ufw allow 443/tcp
+
+
+sudo ufw status

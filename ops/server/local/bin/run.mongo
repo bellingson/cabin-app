@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#docker exec -it mongo mongo
+
+docker rm -f cabindb
+
+docker run --name cabindb \
+            --restart=always \
+            -v ~/workspace/josh_carlson/data:/data/db  \
+            -d mongo

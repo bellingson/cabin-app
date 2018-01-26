@@ -6,7 +6,8 @@ import {FACES} from "./faces";
 import {TestSample} from "./test-sample.model";
 import {TestService} from "./test.service";
 
-const DEFAULT_SAMPLE_SIZE = 2;
+const DEFAULT_SAMPLE_SIZE = 5;
+
 
 enum Side {
     LEFT,

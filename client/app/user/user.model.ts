@@ -8,5 +8,6 @@ export interface User {
 
   admin: boolean;
 
+  token: string;
 
 }

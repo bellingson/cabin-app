@@ -1,0 +1,21 @@
+#!/bin/bash
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+export TERM=linux
+
+function ds() {
+	docker exec -ti $1 /bin/bash
+}
+
+function blockip() {
+    sudo ufw deny from $1 to any
+}
+
+alias d="docker"
+
+alias dum="du -h -d 1 ."
+
+
+echo '';

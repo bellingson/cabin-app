@@ -31,6 +31,9 @@ export class AuthService {
   }
 
   setToken(token: string) {
+
+     document.cookie = `auth=${token}`;
+
      this.token.next(token);
   }
 

@@ -20,6 +20,8 @@ export class UserInitComponent implements OnInit {
   ngOnInit() {
 
       console.log('user init');
+
+    console.log(document.cookie);
   }
 
     submit(value) {

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import {FACES} from "./faces";
 import {TestSample} from "./test-sample.model";
 import {TestService} from "./test.service";
+import {UserService} from "../user/user.service";
+import {User} from "../user/user.model";
 
 const DEFAULT_SAMPLE_SIZE = 5;
 
@@ -41,6 +43,7 @@ export class FaceTestComponent implements OnInit {
 
   // UI State
   showFaces = false;
+  showShapes = false;
   showDotLeft = false;
   showDotRight = false;
   canClick = false;
@@ -55,10 +58,15 @@ export class FaceTestComponent implements OnInit {
 
   loading = true;
 
-  constructor(private testService: TestService,
+  user: User;
+
+  constructor(private userService: UserService,
+              private testService: TestService,
               private router: Router) { }
 
   ngOnInit() {
+
+      this.userService.user.subscribe(user => this.user = user);
 
       this.testService.preloadImages()
             .subscribe(() => {
@@ -107,6 +115,8 @@ export class FaceTestComponent implements OnInit {
       this.showIncorrectRight = false;
 
       // input
+      this.showShapes = false;
+      this.showShapes = false;
       this.showDotLeft = false;
       this.showDotRight = false;
       this.canClick = false;
@@ -125,6 +135,7 @@ export class FaceTestComponent implements OnInit {
           setTimeout(() => {
 
               this.canClick = true;
+              this.showShapes = true;
               this.showDotLeft = this.correctSide == Side.LEFT;
               this.showDotRight = this.correctSide == Side.RIGHT;
               this.currentSample.startTime = Date.now();
@@ -132,6 +143,7 @@ export class FaceTestComponent implements OnInit {
               // 3 hide dot
               setTimeout(() => {
                   if(this.currentSample) {
+                      this.showShapes = false;
                       this.showDotLeft = false;
                       this.showDotRight = false;
                   }

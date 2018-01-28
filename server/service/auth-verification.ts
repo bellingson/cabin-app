@@ -36,9 +36,9 @@ export function authVerification(req, res, next) {
 
 export function adminVerification(req, res, next) {
 
-  console.log('admin verification');
+  // console.log('admin verification');
 
-  let token = req.get('Authorization');
+  let token = getToken(req);
   if(token == null) {
     res.status(401).send('Authorization failed');
     return;
@@ -60,4 +60,30 @@ export function adminVerification(req, res, next) {
       .send('Authorization failed');
   }
 
+}
+
+function getToken(req) : string {
+
+  let token = req.get('Authorization');
+  if(token) {
+    return token;
+  }
+
+  const cookie = req.get('Cookie');
+  if(cookie == null) {
+    return null;
+  }
+
+  const parts = cookie.split(';');
+
+  for(let part of parts) {
+     const kv = part.split('=');
+     if(kv && kv.length == 2) {
+       if(kv[0] == 'auth') {
+          return kv[1];
+       }
+     }
+  }
+
+  return null;
 }

@@ -262,55 +262,16 @@ export class TestService {
       let user;
       this.userService.user.subscribe(_user => user = _user);
 
-      let userStart = moment(user.startTime);
-      let weeks = moment().diff(userStart, 'weeks');
-
-      // console.log('US: ' + userStart + ' : ' + weeks);
-
       let stats = new TestStats();
       stats.totalWeeks = 6;
-      stats.currentWeek = weeks > 6 ? 6 : weeks;
+      stats.currentWeek = user.level;
+      stats.sessionsThisWeek = 0;
+      stats.sessionsToDo = 6;
 
-      let startOfWeek = moment();
-      startOfWeek.day(0);
-      startOfWeek.hours(0);
-      startOfWeek.minutes(0);
-      startOfWeek.second(0);
-      startOfWeek.millisecond(0);
-
-      stats.startOfWeek = startOfWeek.valueOf();
-
-      let dayOfWeek = startOfWeek.day();
-
-      // console.log(startOfWeek.toDate() + ' : ' + dayOfWeek);
-
-      let endOfWeek = moment();
-      endOfWeek.day(6);
-      endOfWeek.hours(23);
-      endOfWeek.minutes(59);
-      endOfWeek.second(59);
-      endOfWeek.millisecond(999);
-
-      stats.endOfWeek = endOfWeek.valueOf();
-
-      // console.log('EOW: ' + endOfWeek.toDate());
-
-      let sessions;
-      this.testSessions.subscribe(_sessions => sessions = _sessions);
-
-     // console.log('CS1: ' + sessions.length);
-
-      stats.sessionsThisWeek = _filter(sessions, session => {
-
-                                        // console.log('CS2: ' + new Date(session.startTime) + ' : ' + new Date(stats.startOfWeek) + ' : ' + new Date(stats.endOfWeek));
-
-                                       return session.startTime >= stats.startOfWeek &&
-                                              session.startTime <= stats.endOfWeek;
-                                  }).length;
-
-    // console.log('STW: ' + stats.sessionsThisWeek);
-
-      stats.sessionsToDo = 6 - stats.sessionsThisWeek;
+      this.testSessions.subscribe(_sessions => {
+          stats.sessionsThisWeek = _size(_filter(_sessions,{level: user.level }));
+          stats.sessionsToDo = stats.sessionsThisWeek >= 6 ? 0 : 6 - stats.sessionsThisWeek;
+      });
 
       this.stats.next(stats);
 

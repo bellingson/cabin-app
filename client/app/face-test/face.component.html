@@ -2,13 +2,58 @@
   <img *ngIf="showFaces" src="assets/faces/{{image}}" />
 
   <div *ngIf="canClick" class="dot-container" (click)="click()">
-    <div *ngIf="showDot" class="table-wrapper">
+
+
+    <div *ngIf="showShapes && showDot" class="table-wrapper">
       <div class="table-cell">
-        <svg height="20" width="20">
+        <svg *ngIf="level <= 4" height="20" width="20">
           <circle cx="10" cy="10" r="10" stroke="black" stroke-width="3" fill="white" />
         </svg>
+        <svg *ngIf="level >= 5" height="20" width="70">
+          <rect x="0" width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+          <circle cx="32" cy="10" r="10" stroke="black" stroke-width="3" fill="white" />
+          <rect x="45" width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+        </svg>
+
       </div>
     </div>
+
+
+    <div *ngIf="showShapes && showDot == false" class="table-wrapper">
+      <div class="table-cell">
+        <svg *ngIf="level == 4" height="20" width="20">
+          <rect width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+        </svg>
+        <svg *ngIf="level == 5" height="20" width="50">
+          <rect x="0" width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+          <rect x="32" width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+          <rect x="45" width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+        </svg>
+
+        <div *ngIf="level == 6">
+          <svg height="20" width="20">
+            <rect x="0" width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+          </svg>
+          <svg height="20" width="20">
+            <!--<polygon  points="10 7, 20 20, 0 20" stroke="black" stroke-width="3" fill="white"/>-->
+            <polygon points="10 0, 20 20, 0 20" stroke="black" stroke-width="2" fill="white" />
+          </svg>
+          <svg height="20" width="20">
+            <rect x="0" width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+          </svg>
+        </div>
+
+        <!--
+        <svg *ngIf="level == 6" height="20" width="70">
+          <rect x="0" width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+          <polygon x="32"  points="10 7, 20 20, 0 20" fill="white"/>
+          <polygon  points="35 7, 45 45, 30 35" fill="white"/>
+          <rect x="45" width="20" height="20" stroke="black" stroke-width="3" fill="white" />
+        </svg>
+        -->
+      </div>
+    </div>
+
   </div>
 
   <div class="table-wrapper"  *ngIf="showCorrect || showIncorrect">

@@ -25,9 +25,11 @@
   <div *ngFor="let f of faces; index as i" id="f{{i}}" [class]="classForIndex(i)">
 
     <app-face
+      [level]="user.level"
       [image]="leftImage"
       [showFaces]="showFaces"
       [canClick]="canClick"
+      [showShapes]="showShapes"
       [showDot]="showDotLeft"
       [showCorrect]="showCorrectLeft"
       [showIncorrect]="showIncorrectLeft"
@@ -40,9 +42,11 @@
     </div>
 
     <app-face
+      [level]="user.level"
       [image]="rightImage"
       [showFaces]="showFaces"
       [canClick]="canClick"
+      [showShapes]="showShapes"
       [showDot]="showDotRight"
       [showCorrect]="showCorrectRight"
       [showIncorrect]="showIncorrectRight"

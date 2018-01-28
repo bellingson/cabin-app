@@ -3,6 +3,8 @@ import * as bodyParser from 'body-parser';
 
 import * as jwt from 'jsonwebtoken';
 
+import { authVerification } from '../service/auth-verification';
+
 import {FaceTestDao} from "../service/face-test-dao.service";
 
 export const router = express.Router();
@@ -10,11 +12,6 @@ export const router = express.Router();
 var jsonParser = bodyParser.json({ type: 'application/*+json'});
 
 export const OK = { message: 'ok'};
-
-
-
-// const PIN = '2828';
-// const ADMIN_PIN = '1941';
 
 const faceTestDao = new FaceTestDao();
 
@@ -57,22 +54,20 @@ function isPinValid(req) : boolean {
 
 /* POST save session */
 
-router.post('/', jsonParser, (req, res, next) => {
-
-  console.log('save face test');
-
-  if(isPinValid(req) == false) {
-    res.status(401).send({error: 'Invalid PIN'});
-    return;
-  }
+router.post('/', authVerification, jsonParser, (req, res, next) => {
 
   let testSession = req.body;
   testSession.ip = req.ip;
   testSession.userAgent = req.get('User-Agent');
 
+  if(req.token.patientId != testSession.patientId) {
+     res.status(401).send({error: 'Access denied'});
+     return;
+  }
+
   faceTestDao.saveTestSession(testSession)
     .subscribe(r => {
-      console.log('saved test session');
+       console.log('saved test session');
         res.send(OK);
     }, err => {
       console.log('save face test error');

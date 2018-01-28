@@ -14,3 +14,10 @@
 </div>
 
 <app-portrait-message></app-portrait-message>
+
+<div class="preload">
+  <div *ngFor="let face of faces">
+    <img src="assets/faces/{{face.f}}" height="1" width="1" alt="" />
+    <img src="assets/faces/{{face.n}}" height="1" width="1" alt="" />
+  </div>
+</div>

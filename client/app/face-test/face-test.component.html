@@ -1,5 +1,13 @@
+<div *ngIf="loading" class="page-wrapper loading">
 
-<div class="face-wrapper">
+  <div class="instruction-cell">
+    <div class="spinner"></div>
+  </div>
+
+</div>
+
+
+<div *ngIf="loading == false" class="face-wrapper">
 
   <div class="header">
 
@@ -45,4 +53,6 @@
 </div>
 
 <app-portrait-message></app-portrait-message>
+
+</div>
 

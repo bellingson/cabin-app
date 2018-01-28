@@ -11,6 +11,7 @@ console.log('cabin app server: ' + __dirname);
 
 import * as faceTestApi from './api/face-test.routes';
 import * as faceTestAdminApi from './api/admin.routes';
+import {adminVerification} from "./service/auth-verification";
 
 export const app = express();
 
@@ -24,7 +25,7 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'client')));
 
-app.use('/api/admin', faceTestAdminApi.router);
+app.use('/api/admin', adminVerification, faceTestAdminApi.router);
 app.use('/api/face-test', faceTestApi.router);
 
 

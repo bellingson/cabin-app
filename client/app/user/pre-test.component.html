@@ -12,10 +12,15 @@
             <a [routerLink]="['../mood']">Start Now</a>
             <a [routerLink]="['../results-list']">Results</a>
             <a [routerLink]="['../about']">About</a>
-            <a [routerLink]="['../settings']">Settings</a>
+
+            <div *ngIf="user && user.admin">
+              <a [routerLink]="['../settings']">Settings</a>
+              <a [routerLink]="['/admin/list']">Admin</a>
+            </div>
 
         </div>
 
     </div>
+
 
 </div>

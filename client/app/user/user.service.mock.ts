@@ -1,7 +1,7 @@
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import * as _ from 'lodash';
+import * as _clone from 'lodash/clone';
 
 export class UserServiceMock {
 
@@ -34,7 +34,7 @@ export class UserServiceMock {
       return;
     }
 
-    user = _.clone(user);
+    user = _clone(user);
     user.level = level;
 
     this.user.next(user);

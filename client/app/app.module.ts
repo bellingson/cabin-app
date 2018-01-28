@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
@@ -26,6 +26,8 @@ import { SettingsComponent } from './settings/settings.component';
 import {AdminGuard} from "./admin/admin.guard";
 import { MoodComponent } from './face-test/mood.component';
 import { FaceComponent } from './face-test/face.component';
+import {AuthInterceptor} from "./user/auth.interceptor";
+import {AuthService} from "./user/auth.service";
 
 
 @NgModule({
@@ -53,9 +55,12 @@ import { FaceComponent } from './face-test/face.component';
     cabinRoutes
   ],
   providers: [UserService,
+              AuthService,
               TestService,
-            { provide: LocationStrategy, useClass: HashLocationStrategy },
-              AdminGuard ],
+              { provide: LocationStrategy, useClass: HashLocationStrategy },
+              AdminGuard,
+              { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, }
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

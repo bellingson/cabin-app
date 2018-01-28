@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 
 import {Mood, MOOD_CATEGORY} from "./mood";
 
-import * as _ from 'lodash';
 import {TestService} from "./test.service";
+import {FACES} from "./faces";
+import {UserService} from "../user/user.service";
 
 @Component({
   selector: 'app-mood',
@@ -14,15 +15,20 @@ import {TestService} from "./test.service";
 })
 export class MoodComponent implements OnInit {
 
+  faces = FACES;
+
   responses = [];
   index = 0;
 
   mood: string;
 
-  constructor(private testService: TestService,
+  constructor(private userService: UserService,
+              private testService: TestService,
               private router: Router) { }
 
   ngOnInit() {
+
+    this.userService.updateUserLevel();
 
     this.testService.startSession();
 

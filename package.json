@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.config.json",
     "build": "ng build",
     "tsc": "cd server && tsc --p tsconfig.json",
     "tscw": "cd server && tsc --watch",

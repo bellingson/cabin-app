@@ -8,7 +8,6 @@ export interface TestSession {
     clientId: number;
 
     patientId: string;
-    pin: string;
 
     testNumber: number;
     level: number;

@@ -4,9 +4,13 @@ import { HttpClient } from '@angular/common/http';
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import * as _ from 'lodash';
+import * as moment from 'moment';
+
+import * as _clone from 'lodash/clone';
+
 import {Observable} from "rxjs/Observable";
 import {User} from "./user.model";
+import {AuthService} from "./auth.service";
 
 const USER_KEY = 'patient';
 
@@ -16,7 +20,7 @@ export class UserService {
 
   user = new ReplaySubject<User>(1);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
       this.initialize();
   }
 
@@ -33,6 +37,7 @@ export class UserService {
     this.user.subscribe(user => {
 
       if(user) {
+         this.updateLevel(user);
          let json = JSON.stringify(user);
          localStorage.setItem(USER_KEY, json);
       } else {
@@ -57,7 +62,7 @@ export class UserService {
              return;
           }
 
-          const admin = patientId == '-1';
+           const admin = patientId == '-1';
 
           const _user: User = { patientId: patientId,
                                 startTime: Date.now(),
@@ -67,6 +72,7 @@ export class UserService {
                                 admin: admin,
                               } as User;
 
+          this.authService.setToken(r.token);
 
           // console.log(_user);
 
@@ -96,10 +102,44 @@ export class UserService {
       return;
     }
 
-    user = _.clone(user);
+    user = _clone(user);
     user.level = level;
 
     this.user.next(user);
+  }
+
+  updateUserLevel() {
+      let user;
+      this.user.subscribe(_user => user = _user);
+
+      const level = this.calculateLevel(user);
+      if(user.level != level) {
+         user = _clone(user);
+         this.user.next(user); // will set level
+      }
+
+  }
+
+  private updateLevel(user: User) {
+
+    user.level = this.calculateLevel(user);
+
+  }
+
+  private calculateLevel(user: User) : number {
+      return moment().diff(moment(user.startTime),'weeks') + 1;
+  }
+
+  setStartTime(startTime: number) {
+
+    let user;
+    this.user.subscribe(_user => user = _clone(_user));
+
+    user.startTime = startTime;
+
+    this.user.next(user);
+
+
   }
 
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {TestAdminService} from "./test-admin.service";
 import {adminRouting} from "./admin.routing";
 
@@ -13,6 +13,7 @@ import { PatientListComponent } from './patient-list.component';
 import { AdminLinksComponent } from './admin-links.component';
 import {AdminGuard} from "./admin.guard";
 import { AdminSettingsComponent } from './admin-settings.component';
+import {AuthInterceptor} from "../user/auth.interceptor";
 
 @NgModule({
   declarations: [ TestSessionListComponent, AdminBaseComponent, TestSessionDetailComponent, PatientListComponent, AdminLinksComponent, AdminSettingsComponent ],
@@ -21,7 +22,10 @@ import { AdminSettingsComponent } from './admin-settings.component';
               ReactiveFormsModule,
               HttpClientModule,
               adminRouting],
-  providers: [ TestAdminService, AdminGuard ]
+  providers: [
+    TestAdminService, AdminGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, }
+  ]
 })
 
 export class AdminModule {

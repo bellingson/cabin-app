@@ -53,17 +53,29 @@ export class FaceTestComponent implements OnInit {
 
   settings: any;
 
+  loading = true;
+
   constructor(private testService: TestService,
               private router: Router) { }
 
   ngOnInit() {
+
+      this.testService.preloadImages()
+            .subscribe(() => {
+                this.loading = false;
+                this.nextSample();
+            }, err => {
+              console.log(err);
+                this.loading = false;
+                this.nextSample();
+            });
 
       // this.currentIndex = 0;
       // this.showDotLeft = true;
 
       console.log('screen width: ' + window.innerWidth);
 
-      this.nextSample();
+
   }
 
   nextSample() {

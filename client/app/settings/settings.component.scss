@@ -11,6 +11,24 @@ form {
 
   input { border-radius: 4px; margin-bottom: 5px; }
 
+  input.start-time { max-width: 150px; }
+
   input[name='level'] { max-width: 30px; }
 
 }
+
+div.options {
+
+  ul {
+     list-style: none;
+     li {
+       display: inline; border-right: 1px solid #fff;
+       padding: 5px 25px;
+       a { color: #fff; }
+     }
+     li:last-child { border-right: 0; }
+  }
+
+
+}
+

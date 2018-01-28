@@ -2,20 +2,29 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/forkJoin';
 
 import {UserService} from "../user/user.service";
 import {TestSample} from "./test-sample.model";
 import {TestSession} from "./test-session.model";
 
-import {Mood} from "./mood";
-
 import * as _ from 'lodash';
 
+import * as _assign from 'lodash/assign';
+import * as _clone from 'lodash/clone';
+import * as _compact from 'lodash/compact';
+import * as _map from 'lodash/map';
+import * as _max from 'lodash/max';
+import * as _sum from 'lodash/sum';
+import * as _filter from 'lodash/filter';
+import * as _size from 'lodash/size';
+import * as _last from 'lodash/last';
+
 import * as moment from 'moment';
+
 import {TestStats} from "./test-stats.model";
 import {User} from "../user/user.model";
 
@@ -54,7 +63,7 @@ export class TestService {
     if(json) {
        let _stats = JSON.parse(json);
        let stats = new TestStats();
-       _.assign(stats, _stats);
+       _assign(stats, _stats);
        this.stats.next(stats);
     } else {
        this.countStats();
@@ -124,16 +133,27 @@ export class TestService {
 
       console.log('complete1: ' + samples.length);
 
-      let totalTime = _(samples).map('time').sum();
+    console.log(samples);
+    console.log(_.map(samples,'time'));
+    console.log(_map(samples,'time'));
+
+      // let totalTime = _(samples).map('time').sum();
+      let totalTime = _sum(_map(samples,'time'));
 
       console.log(totalTime);
 
       let session;
-      this.currentSession.subscribe(_session => session = _.clone(_session));
+      this.currentSession.subscribe(_session => session = _clone(_session));
 
-      session.sampleCount = _.size(samples);
-      session.correctCount = _(samples).filter(sample => sample.correct).size();
-      session.incorrectCount = _(samples).filter(sample => sample.correct == false).size();
+      if(session == null) {
+         session = this.createSession();
+      }
+
+      session.sampleCount = _size(samples);
+      // session.correctCount = _(samples).filter(sample => sample.correct).size();
+      session.correctCount = _size(_filter(samples, sample => sample.correct));
+      // session.incorrectCount = _(samples).filter(sample => sample.correct == false).size();
+      session.incorrectCount = _size(_filter(samples, sample => sample.correct == false));
       session.percentCorrect = ((session.correctCount / session.sampleCount) * 100).toFixed(0);
       session.samples = samples;
       session.testNumber = this.nextTestNumber();
@@ -143,14 +163,14 @@ export class TestService {
       session.averageResponseMilli = totalTime / session.sampleCount;
       session.averageResponseSeconds = ( (totalTime / 1000) / session.sampleCount).toFixed(1);
 
-      console.log(session);
+      // console.log(session);
 
       let sessions;
       this.testSessions.subscribe(_sessions => sessions = _sessions);
 
       sessions.push(session);
 
-      console.log('done: ' + sessions.length);
+      // console.log('done: ' + sessions.length);
 
       this.testSessions.next(sessions);
       this.currentSession.next(null);
@@ -169,7 +189,8 @@ export class TestService {
        return 1;
     }
 
-    const maxNumber =  _(sessions).map('testNumber').compact().max();
+    // const maxNumber =  _(sessions).map('testNumber').compact().max();
+    const maxNumber =  _max(_compact(_map(sessions, 'testNumber')));
     console.log('max n: ' + maxNumber);
     if(maxNumber) {
        return maxNumber + 1;
@@ -187,22 +208,25 @@ export class TestService {
           return null;
       }
 
-      return _.last(sessions);
+      return _last(sessions);
   }
 
   startSession() {
 
-    let level = this.checkTestLevel();
+    const session = this.createSession();
+    this.currentSession.next(session);
 
-    let session = { } as TestSession;
+  }
+
+  createSession() : TestSession {
+
+    const session = { } as TestSession;
     session.clientId = Date.now();
     session.patientId = this.user.patientId;
-    session.pin = this.user.pin;
 
     session.startTime = Date.now();
-    session.level = level;
-
-    this.currentSession.next(session);
+    session.level = this.user.level;
+    return session
 
   }
 
@@ -211,7 +235,7 @@ export class TestService {
     let session;
     this.currentSession.subscribe(_session => session = _session);
 
-    let newSession = _.clone(session);
+    let newSession = _clone(session);
     newSession.moods = moods;
 
     this.currentSession.next(newSession);
@@ -276,7 +300,7 @@ export class TestService {
 
      // console.log('CS1: ' + sessions.length);
 
-      stats.sessionsThisWeek = _.filter(sessions, session => {
+      stats.sessionsThisWeek = _filter(sessions, session => {
 
                                         // console.log('CS2: ' + new Date(session.startTime) + ' : ' + new Date(stats.startOfWeek) + ' : ' + new Date(stats.endOfWeek));
 
@@ -291,6 +315,43 @@ export class TestService {
       this.stats.next(stats);
 
       return stats;
+  }
+
+  preloadImages() : Observable<boolean> {
+
+      // console.log('preload start');
+
+      return Observable.of(true);
+
+      /*
+      const response = new Subject<boolean>();
+
+      const obs = _(FACES)
+                  .map(faces => {
+                  const f = `assets/faces/${faces.f}`;
+                  const a = `assets/faces/${faces.n}`;
+
+                  // const fo = this.http.get(f, { responseType: 'blob', headers: new HttpHeaders().set('Cache', 'my-auth-token') })
+                  const fo = this.http.get(f, { responseType: 'blob' })
+                  const ao = this.http.get(a, { responseType: 'blob' })
+
+                  return [ fo, ao];
+                }).flatten()
+                  .valueOf();
+
+      Observable.forkJoin(obs)
+          .subscribe(r => {
+            console.log('preload complete');
+              response.next(true);
+              response.complete();
+          }, err => {
+              response.error(err);
+              response.complete();
+          });
+
+      return response;
+      */
+
   }
 
 

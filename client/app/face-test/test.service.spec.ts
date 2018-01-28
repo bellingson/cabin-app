@@ -77,7 +77,7 @@ fdescribe('TestService', () => {
 
     for(let i=0;i<10;i++) {
 
-      let testSession = new TestSession();
+      let testSession = { } as TestSession;
       let startTime = moment().add(i,'hours');
 
       testSession.startTime = startTime.valueOf();

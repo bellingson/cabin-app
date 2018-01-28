@@ -3,7 +3,7 @@
 docker rm -f cabin
 
 docker run --name cabin \
-            -p 80:3000 \
-            --link mongo \
+            -p 3000:3000 \
+            --link cabindb \
             --restart=always \
             -d bellingson/cabin

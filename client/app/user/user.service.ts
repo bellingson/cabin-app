@@ -20,7 +20,8 @@ export class UserService {
 
   user = new ReplaySubject<User>(1);
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient,
+              private authService: AuthService) {
       this.initialize();
   }
 

@@ -1,18 +1,23 @@
 import { TestBed, inject } from '@angular/core/testing';
 
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
 import { TestService } from './test.service';
 import {UserService} from "../user/user.service";
 import {UserServiceMock} from "../user/user.service.mock";
 
 import * as moment from 'moment';
 import {TestSession} from "./test-session.model";
+import {AuthService} from "../user/auth.service";
 
 
-fdescribe('TestService', () => {
+describe('TestService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [ HttpClientTestingModule ],
       providers: [TestService,
-        { provide: UserService, useClass: UserServiceMock }
+        { provide: UserService, useClass: UserServiceMock },
+        AuthService
       ]
     });
   });

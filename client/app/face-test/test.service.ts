@@ -131,12 +131,6 @@ export class TestService {
 
       let sample1 = samples[0];
 
-      console.log('complete1: ' + samples.length);
-
-    console.log(samples);
-    console.log(_.map(samples,'time'));
-    console.log(_map(samples,'time'));
-
       // let totalTime = _(samples).map('time').sum();
       let totalTime = _sum(_map(samples,'time'));
 

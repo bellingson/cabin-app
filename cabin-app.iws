@@ -3,15 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="587f8dac-177b-4287-9ed3-5ec28d2c1c93" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cabin-app.iws" afterPath="$PROJECT_DIR$/cabin-app.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/face-test/face-test.component.html" afterPath="$PROJECT_DIR$/client/app/face-test/face-test.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/admin/test-session-detail.component.html" afterPath="$PROJECT_DIR$/client/app/admin/test-session-detail.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/face-test/face-test.component.ts" afterPath="$PROJECT_DIR$/client/app/face-test/face-test.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/face-test/face.component.html" afterPath="$PROJECT_DIR$/client/app/face-test/face.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/face-test/face.component.ts" afterPath="$PROJECT_DIR$/client/app/face-test/face.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/face-test/test-stats.model.ts" afterPath="$PROJECT_DIR$/client/app/face-test/test-stats.model.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/face-test/test.service.ts" afterPath="$PROJECT_DIR$/client/app/face-test/test.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/user/auth.service.ts" afterPath="$PROJECT_DIR$/client/app/user/auth.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/user/user-init.component.ts" afterPath="$PROJECT_DIR$/client/app/user/user-init.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/service/auth-verification.ts" afterPath="$PROJECT_DIR$/server/service/auth-verification.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/settings/settings.component.html" afterPath="$PROJECT_DIR$/client/app/settings/settings.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/settings/settings.component.scss" afterPath="$PROJECT_DIR$/client/app/settings/settings.component.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/settings/settings.component.ts" afterPath="$PROJECT_DIR$/client/app/settings/settings.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/user/user.model.ts" afterPath="$PROJECT_DIR$/client/app/user/user.model.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/user/user.service.ts" afterPath="$PROJECT_DIR$/client/app/user/user.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/service/face-test-dao.service.ts" afterPath="$PROJECT_DIR$/server/service/face-test-dao.service.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -28,8 +29,8 @@
       <file leaf-file-name="test.service.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/face-test/test.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="271" column="81" lean-forward="false" selection-start-line="271" selection-start-column="81" selection-end-line="271" selection-end-column="81" />
+            <state relative-caret-position="-160">
+              <caret line="133" column="4" lean-forward="false" selection-start-line="133" selection-start-column="4" selection-end-line="133" selection-end-column="4" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -37,51 +38,41 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="admin.routes.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/api/admin.routes.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="445">
+              <caret line="136" column="18" lean-forward="true" selection-start-line="136" selection-start-column="18" selection-end-line="136" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="face-test-dao.service.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/service/face-test-dao.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="750">
+              <caret line="54" column="43" lean-forward="true" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="face.component.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/app/face-test/face.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="38" column="78" lean-forward="false" selection-start-line="38" selection-start-column="78" selection-end-line="38" selection-end-column="78" />
+            <state relative-caret-position="419">
+              <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="face.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/face-test/face.component.ts">
+      <file leaf-file-name="test-session-detail.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/admin/test-session-detail.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="21" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="face-test.component.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/face-test/face-test.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="48" column="31" lean-forward="false" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="face-test.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/face-test/face-test.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="45" column="2" lean-forward="false" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test-stats.model.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/face-test/test-stats.model.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="119">
+              <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -90,8 +81,8 @@
       <file leaf-file-name="user.service.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/user/user.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="74" column="31" lean-forward="true" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
+            <state relative-caret-position="255">
+              <caret line="67" column="10" lean-forward="true" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -99,31 +90,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="auth.service.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/user/auth.service.ts">
+      <file leaf-file-name="settings.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state relative-caret-position="457">
+              <caret line="60" column="29" lean-forward="false" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="30" column="25" lean-forward="false" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="auth-verification.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/service/auth-verification.ts">
+      <file leaf-file-name="settings.component.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+            <state relative-caret-position="285">
+              <caret line="19" column="52" lean-forward="false" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test-complete.component.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/face-test/test-complete.component.html">
+      <file leaf-file-name="face-test.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/face-test/face-test.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="41" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="41" />
+            <state relative-caret-position="423">
+              <caret line="124" column="42" lean-forward="false" selection-start-line="124" selection-start-column="42" selection-end-line="124" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -133,7 +136,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>styles.css</find>
       <find>mood-active</find>
       <find>left-face</find>
       <find>new TestSes</find>
@@ -160,9 +162,10 @@
       <find>max n</find>
       <find>lodash/fp/</find>
       <find>.sessionsToDo =</find>
-      <find>countStats()</find>
       <find>showDotLeft</find>
       <find>showDot</find>
+      <find>setStartTime</find>
+      <find>countStats()</find>
     </findStrings>
     <replaceStrings>
       <replace>[routerLink]</replace>
@@ -191,9 +194,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/build/dist/package.json" />
-        <option value="$PROJECT_DIR$/build/Dockerfile" />
-        <option value="$PROJECT_DIR$/ops/container/Dockerfile" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/ops/container/package.json" />
         <option value="$PROJECT_DIR$/ops/server/nnm02/bin/run.cabin" />
@@ -225,22 +225,25 @@
         <option value="$PROJECT_DIR$/client/app/admin/admin.guard.ts" />
         <option value="$PROJECT_DIR$/ops/server/cabin01/cabin.conf" />
         <option value="$PROJECT_DIR$/client/app/app.component.ts" />
-        <option value="$PROJECT_DIR$/client/app/settings/settings.component.scss" />
-        <option value="$PROJECT_DIR$/client/app/settings/settings.component.html" />
-        <option value="$PROJECT_DIR$/client/app/settings/settings.component.ts" />
         <option value="$PROJECT_DIR$/client/app/face-test/mood.component.ts" />
         <option value="$PROJECT_DIR$/client/app/face-test/test-session.model.ts" />
         <option value="$PROJECT_DIR$/client/app/user/user.service.mock.ts" />
         <option value="$PROJECT_DIR$/node_modules/lodash/README.md" />
-        <option value="$PROJECT_DIR$/client/app/user/user.service.ts" />
         <option value="$PROJECT_DIR$/client/app/user/user-init.component.ts" />
         <option value="$PROJECT_DIR$/client/app/user/auth.service.ts" />
         <option value="$PROJECT_DIR$/server/service/auth-verification.ts" />
         <option value="$PROJECT_DIR$/client/app/face-test/test-stats.model.ts" />
-        <option value="$PROJECT_DIR$/client/app/face-test/test.service.ts" />
-        <option value="$PROJECT_DIR$/client/app/face-test/face-test.component.ts" />
         <option value="$PROJECT_DIR$/client/app/face-test/face.component.ts" />
         <option value="$PROJECT_DIR$/client/app/face-test/face-test.component.html" />
+        <option value="$PROJECT_DIR$/client/app/user/user.model.ts" />
+        <option value="$PROJECT_DIR$/client/app/settings/settings.component.html" />
+        <option value="$PROJECT_DIR$/client/app/settings/settings.component.scss" />
+        <option value="$PROJECT_DIR$/client/app/settings/settings.component.ts" />
+        <option value="$PROJECT_DIR$/client/app/face-test/face-test.component.ts" />
+        <option value="$PROJECT_DIR$/client/app/user/user.service.ts" />
+        <option value="$PROJECT_DIR$/client/app/face-test/test.service.ts" />
+        <option value="$PROJECT_DIR$/server/service/face-test-dao.service.ts" />
+        <option value="$PROJECT_DIR$/client/app/admin/test-session-detail.component.html" />
         <option value="$PROJECT_DIR$/client/app/face-test/face.component.html" />
       </list>
     </option>
@@ -257,7 +260,7 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
+    <option name="y" value="203" />
     <option name="width" value="1440" />
     <option name="height" value="877" />
   </component>
@@ -308,7 +311,13 @@
             <path>
               <item name="cabin-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="cabin-app" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cabin-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cabin-app" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -452,12 +461,12 @@
       <workItem from="1515343784721" duration="26878000" />
       <workItem from="1515706812711" duration="37289000" />
       <workItem from="1516906155856" duration="30677000" />
-      <workItem from="1517138951537" duration="9624000" />
+      <workItem from="1517138951537" duration="13244000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126312000" />
+    <option name="totallyTimeSpent" value="129932000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -544,13 +553,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ops/bin/build.container">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/service/generic-dao.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1294">
@@ -675,14 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/api/admin.routes.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/admin/test-admin.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -740,7 +734,7 @@
         <state relative-caret-position="307">
           <caret line="79" column="43" lean-forward="false" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
           <folding>
-            <element signature="e#0#56#0" expanded="true" />
+            <element signature="e#0#56#0" expanded="false" />
             <marker date="1517080648462" expanded="true" signature="1821:2274" ph="..." />
           </folding>
         </state>
@@ -762,44 +756,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/user/user.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="17" lean-forward="false" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/app.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="44" lean-forward="true" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#50#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="39" lean-forward="false" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="97" lean-forward="false" selection-start-line="9" selection-start-column="97" selection-end-line="9" selection-end-column="97" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="53" column="31" lean-forward="false" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
           <folding>
             <element signature="e#0#50#0" expanded="false" />
           </folding>
@@ -811,7 +771,7 @@
         <state relative-caret-position="285">
           <caret line="32" column="29" lean-forward="false" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -820,14 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/service/face-test-dao.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="16" column="2" lean-forward="false" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -869,16 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/user/user.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="74" column="31" lean-forward="true" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/user/auth.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="382">
@@ -911,24 +853,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/face-test/test.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="271" column="81" lean-forward="false" selection-start-line="271" selection-start-column="81" selection-end-line="271" selection-end-column="81" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/face-test/face-test.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="45" column="2" lean-forward="false" selection-start-line="45" selection-start-column="2" selection-end-line="45" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/face-test/face.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -945,10 +869,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/user/user.model.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="52" lean-forward="false" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="60" column="29" lean-forward="false" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/face-test/face-test.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="124" column="42" lean-forward="false" selection-start-line="124" selection-start-column="42" selection-end-line="124" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="25" lean-forward="false" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/user/user.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="67" column="10" lean-forward="true" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/face-test/test.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-160">
+          <caret line="133" column="4" lean-forward="false" selection-start-line="133" selection-start-column="4" selection-end-line="133" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/api/admin.routes.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="136" column="18" lean-forward="true" selection-start-line="136" selection-start-column="18" selection-end-line="136" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/admin/test-session-detail.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/service/face-test-dao.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="54" column="43" lean-forward="true" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/face-test/face.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="38" column="78" lean-forward="false" selection-start-line="38" selection-start-column="78" selection-end-line="38" selection-end-column="78" />
+        <state relative-caret-position="419">
+          <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
           <folding />
         </state>
       </provider>

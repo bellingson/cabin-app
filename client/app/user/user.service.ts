@@ -64,13 +64,20 @@ export class UserService {
 
            const admin = patientId == '-1';
 
+          const patientNumber: number = parseInt(patientId.replace(/\D/g, ''), 10);
+
+          const controlVersion = patientNumber % 2 == 0;
+
           const _user: User = { patientId: patientId,
                                 startTime: Date.now(),
                                 level: 1,
+                                controlVersion: controlVersion,
                                 pin: pin,
                                 token: r.token,
-                                admin: admin,
+                                admin: admin
                               } as User;
+
+          console.log(_user);
 
           this.authService.setToken(r.token);
 
@@ -128,20 +135,11 @@ export class UserService {
 
   private calculateLevel(user: User) : number {
       return moment().diff(moment(user.startTime),'weeks') + 1;
+
   }
 
-  setStartTime(startTime: number) {
-
-    let user;
-    this.user.subscribe(_user => user = _clone(_user));
-
-    user.startTime = startTime;
-
+  updateUser(user: User) {
     this.user.next(user);
-
-
   }
-
-
 
 }

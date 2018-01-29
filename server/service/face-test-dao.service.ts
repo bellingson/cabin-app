@@ -48,10 +48,10 @@ export class FaceTestDao extends GenericDao {
                         .groupBy('patientId')
                         .valueOf();
 
-              console.log(byId);
+              // console.log(byId);
 
               for(let id in byId) {
-                console.log(id);
+                // console.log(id);
                   let _sessions = byId[id];
 
                   let lastSession = _.maxBy(_sessions, 'startTime');

@@ -86,6 +86,16 @@ export class FaceTestComponent implements OnInit {
 
   }
 
+  /*
+Control version: in the control version the target dot will occur in equal numbers
+behind the affective (n = 50) and neutral (n = 50) stimuli. i.e., affective left = 50,
+affective right = 50. neutral left = 50, neutral right = 50
+
+Training version: in the training version the target dot will only occur behind the
+neutral stimulus (n = 200; neutral left = 100, neutral right = 100, affective
+left = 0, affective right = 0).
+   */
+
   nextSample() {
 
       // finish
@@ -104,9 +114,19 @@ export class FaceTestComponent implements OnInit {
       let face = this.faces[this.currentIndex];
       this.assignImages(face);
 
-      this.correctSide = Math.random() <= 0.5 ? Side.LEFT : Side.RIGHT;
+      if(this.user.controlVersion) {
 
-      this.currentSample.showDotOnNeutralFace = this.correctSide == this.neutralSide;
+        console.log('control version true');
+
+        this.correctSide = Math.random() <= 0.5 ? Side.LEFT : Side.RIGHT;
+        this.currentSample.showDotOnNeutralFace = this.correctSide == this.neutralSide;
+      } else {
+
+        console.log('control version false');
+
+        this.correctSide = this.neutralSide;
+        this.currentSample.showDotOnNeutralFace = true;
+      }
 
       // response
       this.showCorrectLeft = false;
@@ -122,10 +142,6 @@ export class FaceTestComponent implements OnInit {
       this.canClick = false;
 
       this.showFaces = true;
-
-      // if(1 == true) {
-      //     return;
-      // }
 
       // 1 show faces
       setTimeout(() => {

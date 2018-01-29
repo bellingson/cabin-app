@@ -4,6 +4,8 @@ import {User} from "../user/user.model";
 
 import * as moment from 'moment';
 
+import * as _clone from 'lodash/clone';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -15,6 +17,8 @@ export class SettingsComponent implements OnInit {
 
   startTime: string;
 
+  message: string;
+
   constructor(private userService: UserService) {
 
   }
@@ -22,7 +26,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
 
     this.userService.user.subscribe(user => {
-      this.user = user;
+      this.user = _clone(user);
       // console.log(user);
 
       this.displayStartTime();
@@ -51,7 +55,12 @@ export class SettingsComponent implements OnInit {
         startTime.add(-7,'days');
       }
 
-      this.userService.setStartTime(startTime.toDate().getTime());
+      this.user.startTime = startTime.toDate().getTime();
+      this.userService.updateUser(this.user);
+
+      console.log(this.user);
+
+      this.message = 'Update complete';
 
   }
 

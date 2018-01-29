@@ -48,7 +48,7 @@ export function adminVerification(req, res, next) {
 
     req.token = jwt.verify(token, settings.jwtSecret);
 
-    if(req.token == null || req.token.patientId != -1) {
+    if(req.token == null || req.token.participantId != -1) {
       res.status(401).send('Authorization failed');
       return;
     }

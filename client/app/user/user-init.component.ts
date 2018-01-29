@@ -26,7 +26,7 @@ export class UserInitComponent implements OnInit {
 
     submit(value) {
 
-       this.userService.createPatient(value.patientId, value.pin)
+       this.userService.createParticipant(value.participantId, value.pin)
          .subscribe(r => {
             this.router.navigateByUrl('/pre-test');
           }, err => {

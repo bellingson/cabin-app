@@ -14,14 +14,14 @@ export class UserServiceMock {
 
   createTestPatient() {
 
-    let _user = { patientId: 1, startTime: Date.now(), level: 1 };
+    let _user = { participantId: 1, startTime: Date.now(), level: 1 };
     let userJson = JSON.stringify(_user);
-    localStorage.setItem('patient', userJson);
+    localStorage.setItem('participant', userJson);
 
     this.user.next(_user);
   }
 
-  createPatient(patientId: number) {
+  createParticipant(participantId: number) {
      this.createTestPatient();
   }
 

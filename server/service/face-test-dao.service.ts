@@ -24,7 +24,7 @@ export class FaceTestDao extends GenericDao {
   getTestSessions(findText?: string) : Observable<Array<any>> {
 
       if(findText) {
-        return super.query(testSessionCollection, {patientId: findText}, { startTime: -1});
+        return super.query(testSessionCollection, {participantId: findText}, { startTime: -1});
       } else {
         return super.query(testSessionCollection,{}, { startTime: -1});
       }
@@ -45,7 +45,7 @@ export class FaceTestDao extends GenericDao {
               let r = [];
 
               let byId = _(testSessions)
-                        .groupBy('patientId')
+                        .groupBy('participantId')
                         .valueOf();
 
               // console.log(byId);
@@ -56,8 +56,8 @@ export class FaceTestDao extends GenericDao {
 
                   let lastSession = _.maxBy(_sessions, 'startTime');
 
-                  let patient = { patientId: id, sessionCount: _sessions.length, lastTest: lastSession.startTime }
-                  r.push(patient);
+                  let participant = { participantId: id, sessionCount: _sessions.length, lastTest: lastSession.startTime }
+                  r.push(participant);
               }
 
 

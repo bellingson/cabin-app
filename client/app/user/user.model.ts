@@ -1,6 +1,6 @@
 export interface User {
 
-  patientId: string;
+  participantId: string;
   pin: string;
 
   controlVersion: boolean;

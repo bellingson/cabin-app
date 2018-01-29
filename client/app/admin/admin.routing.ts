@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {TestSessionListComponent} from "./test-session-list.component";
 import {AdminBaseComponent} from "./admin-base.component";
 import {TestSessionDetailComponent} from "./test-session-detail.component";
-import {PatientListComponent} from "./patient-list.component";
+import {ParticipantListComponent} from "./participant-list.component";
 import {AdminGuard} from "./admin.guard";
 import {AdminSettingsComponent} from "./admin-settings.component";
 
@@ -12,7 +12,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'list', pathMatch: 'full'},
     { path: 'list', component: TestSessionListComponent },
     { path: 'detail/:id', component: TestSessionDetailComponent },
-    { path: 'patient-list', component: PatientListComponent },
+    { path: 'participant-list', component: ParticipantListComponent },
     { path: 'settings', component: AdminSettingsComponent }
   ]}
 ];

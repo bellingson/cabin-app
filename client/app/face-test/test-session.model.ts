@@ -7,7 +7,7 @@ export interface TestSession {
     _id: string;
     clientId: number;
 
-    patientId: string;
+    participantId: string;
 
     testNumber: number;
     level: number;

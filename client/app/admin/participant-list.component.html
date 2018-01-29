@@ -10,14 +10,14 @@
 <table class="table table-striped table-hover">
   <thead>
   <tr>
-    <th>Patient #</th>
+    <th>Participant #</th>
     <th>Session #</th>
     <th>Last Session</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let p of patients">
-    <td>{{p.patientId}}</td>
+    <td>{{p.participantId}}</td>
     <td>{{p.sessionCount}}</td>
     <td>{{p.lastTest | date: 'M/d/yyyy' }}</td>
   </tr>

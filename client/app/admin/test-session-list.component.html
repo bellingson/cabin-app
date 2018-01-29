@@ -4,7 +4,7 @@
   <div class="float-left">
 
     <form class="form-inline">
-      <input class="form-control" [formControl]="findText" type="text" placeholder="Patient #"/>
+      <input class="form-control" [formControl]="findText" type="text" placeholder="Participant #"/>
     </form>
 
   </div>
@@ -36,7 +36,7 @@
   <thead>
   <tr>
 
-    <th>Patient #</th>
+    <th>Participant #</th>
     <th>Test #</th>
     <th>Week</th>
     <th>Time</th>
@@ -50,7 +50,7 @@
   <tbody>
   <tr *ngFor="let test of testSessions" >
 
-    <td><a (click)="fetchTestSessions(test.patientId)">{{test.patientId}}</a></td>
+    <td><a (click)="fetchTestSessions(test.participantId)">{{test.participantId}}</a></td>
     <td>{{test.testNumber}}  <a [routerLink]="['../', 'detail', test._id ]"><i class="fas fa-eye"></i></a></td>
     <td>{{test.level}}</td>
     <td>{{test.startTime | date: 'M/d/yyyy hh:mm aa' }}</td>

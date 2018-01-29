@@ -26,7 +26,7 @@ export class AdminGuard implements CanActivate {
     }
 
     // admin
-    if(this.user.patientId == '-1') {
+    if(this.user.participantId == '-1') {
       return true;
     }
 

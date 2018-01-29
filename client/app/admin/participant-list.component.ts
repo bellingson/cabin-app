@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {TestAdminService} from "./test-admin.service";
 
 @Component({
-  selector: 'app-patient-list',
-  templateUrl: './patient-list.component.html',
-  styleUrls: ['./patient-list.component.scss']
+  selector: 'app-participant-list',
+  templateUrl: './participant-list.component.html',
+  styleUrls: ['./participant-list.component.scss']
 })
-export class PatientListComponent implements OnInit {
+export class ParticipantListComponent implements OnInit {
 
   patients: Array<any>;
 

@@ -12,7 +12,7 @@ import {Observable} from "rxjs/Observable";
 import {User} from "./user.model";
 import {AuthService} from "./auth.service";
 
-const USER_KEY = 'patient';
+const USER_KEY = 'participant';
 
 @Injectable()
 export class UserService {
@@ -48,12 +48,12 @@ export class UserService {
 
   }
 
-  createPatient(patientId: string, pin: string) : Observable<boolean> {
+  createParticipant(participantId: string, pin: string) : Observable<boolean> {
 
       const response = new ReplaySubject<boolean>(1);
 
       let url = `/api/face-test/verify-pin`;
-      this.http.post(url, { patientId:patientId, pin: pin} )
+      this.http.post(url, { participantId:participantId, pin: pin} )
         .subscribe((r : any) => {
 
           if(!r.token) {
@@ -62,13 +62,13 @@ export class UserService {
              return;
           }
 
-           const admin = patientId == '-1';
+           const admin = participantId == '-1';
 
-          const patientNumber: number = parseInt(patientId.replace(/\D/g, ''), 10);
+          const participantNumber: number = parseInt(participantId.replace(/\D/g, ''), 10);
 
-          const controlVersion = patientNumber % 2 == 0;
+          const controlVersion = participantNumber % 2 == 0;
 
-          const _user: User = { patientId: patientId,
+          const _user: User = { participantId: participantId,
                                 startTime: Date.now(),
                                 level: 1,
                                 controlVersion: controlVersion,

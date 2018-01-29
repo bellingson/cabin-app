@@ -33,7 +33,7 @@ router.post('/verify-pin', jsonParser, (req, res, next) => {
 
   if(isPinValid(req)) {
 
-    let token = jwt.sign({patientId: req.body.patientId}, settings.jwtSecret);
+    let token = jwt.sign({participantId: req.body.participantId}, settings.jwtSecret);
     res.send({token: token});
     return;
   }
@@ -45,10 +45,9 @@ router.post('/verify-pin', jsonParser, (req, res, next) => {
 function isPinValid(req) : boolean {
 
   const _pin = req.body.pin;
-  const patientId = req.body.patientId;
-  // const validPin = patientId == -1 ? ADMIN_PIN : PIN;
+  const participantId = req.body.participantId;
 
-  const validPin = patientId == -1 ? settings.adminPin : settings.pin;
+  const validPin = participantId == -1 ? settings.adminPin : settings.pin;
   return _pin == validPin;
 }
 
@@ -60,7 +59,7 @@ router.post('/', authVerification, jsonParser, (req, res, next) => {
   testSession.ip = req.ip;
   testSession.userAgent = req.get('User-Agent');
 
-  if(req.token.patientId != testSession.patientId) {
+  if(req.token.participantId != testSession.participantId) {
      res.status(401).send({error: 'Access denied'});
      return;
   }

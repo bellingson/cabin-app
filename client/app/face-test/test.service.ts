@@ -216,7 +216,7 @@ export class TestService {
 
     const session = { } as TestSession;
     session.clientId = Date.now();
-    session.patientId = this.user.patientId;
+    session.participantId = this.user.participantId;
 
     session.startTime = Date.now();
     session.level = this.user.level;

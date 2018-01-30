@@ -1,6 +1,6 @@
 <div class="page-wrapper">
 
-  <div class="mood-afraid instruction-cell">
+  <div *ngIf="canTakeTest" class="mood-afraid instruction-cell">
 
     <p>
       Indicate to what extent you CURRENTLY feel this way: <br>
@@ -10,6 +10,30 @@
     <app-mood-buttons (mood)="moodSelected($event)"></app-mood-buttons>
 
   </div>
+
+  <div *ngIf="canTakeTest == false" class="instruction-cell">
+
+      <div *ngIf="sessionsThisWeekCount() >= 6">
+        <p>
+          You may complete up to 6 sessions per week.
+        </p>
+        <p>
+          You have completed {{sessionsThisWeekCount()}} this week.
+        </p>
+      </div>
+
+    <div *ngIf="sessionsTodayCount() >= 3">
+      <p>
+        You may complete up to 3 sessions per day.
+      </p>
+      <p>
+        You have completed {{sessionsTodayCount()}} today.
+      </p>
+    </div>
+
+
+  </div>
+
 
 </div>
 

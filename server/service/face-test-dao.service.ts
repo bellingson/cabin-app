@@ -1,5 +1,5 @@
 
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 import * as _ from 'lodash';
 
@@ -72,6 +72,48 @@ export class FaceTestDao extends GenericDao {
 
   settings() : Observable<any> {
      return this.getSingleton(settingsCollection);
+  }
+
+  stats(participantId: string) : Observable<any> {
+
+    const response = new Subject();
+
+    const levels = { level1: {}, level2: {}, level3: {}, level4: {}, level5: {}, level6: {} };
+    for(let level of _.keys(levels)) {
+        levels[level].sessionCount = 0;
+    }
+
+    this.query(testSessionCollection, { participantId: participantId})
+        .subscribe(r => {
+
+          let byLevel = _.groupBy(r, 'level');
+
+          for(let levelNum of _.keys(byLevel)) {
+             let sessionsForLevel = byLevel[levelNum];
+             let level = levels[`level${levelNum}`].sessionCount = _.size(sessionsForLevel);
+          }
+
+          response.next(levels);
+    });
+
+    return response;
+  }
+
+  sessionSummary(participantId: string) : Observable<any> {
+
+    const response = new Subject();
+
+    this.query(testSessionCollection, { participantId: participantId})
+      .subscribe(testSessions => {
+
+          let sessionSummaries = _.map(testSessions, testSession => {
+                                    return _.omit(testSession,['samples','moods','userAgent','ip']);
+                                 });
+
+          response.next(sessionSummaries);
+      });
+
+    return response;
   }
 
 

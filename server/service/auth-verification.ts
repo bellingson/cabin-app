@@ -10,7 +10,8 @@ faceTestDao.settings().subscribe(_settings => settings = _settings);
 
 export function authVerification(req, res, next) {
 
-  let token = req.get('Authorization');
+  // let token = req.get('Authorization');
+  let token = getToken(req);
   if(token == null) {
     res.status(401).send('Authorization failed');
     return;

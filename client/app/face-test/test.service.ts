@@ -98,14 +98,14 @@ export class TestService {
 
   }
 
-  private authHeader() {
-
-    if(this.user) {
-      return { headers: new HttpHeaders().set('Authorization', this.user.token) };
-    } else {
-      return { headers: new HttpHeaders() };
-    }
-  }
+  // private authHeader() {
+  //
+  //   if(this.user) {
+  //     return { headers: new HttpHeaders().set('Authorization', this.user.token) };
+  //   } else {
+  //     return { headers: new HttpHeaders() };
+  //   }
+  // }
 
   uploadResults(session?: TestSession) : Observable<boolean> {
 
@@ -114,10 +114,20 @@ export class TestService {
       let response = new ReplaySubject<boolean>(1);
 
       let url = '/api/face-test';
-      this.http.post(url, session, this.authHeader() )
+      this.http.post(url, session )
         .subscribe(r => {
-          response.next(true);
-          response.complete();
+
+          this.fetchSummaries().subscribe(sessionSummaries => {
+
+            this.testSessions.next(sessionSummaries);
+            response.next(true);
+            response.complete();
+
+          }, err => {
+              response.error(err);
+              response.complete();
+          });
+
         }, er => {
           response.error(er);
           response.complete();
@@ -272,6 +282,46 @@ export class TestService {
       return stats;
   }
 
+  canTakeTest() : boolean {
+
+    if(_.size(this.sessionsThisWeek()) >= 6) {
+      return false;
+    }
+
+    if(_.size(this.sessionsToday()) >= 3) {
+      return false;
+    }
+
+    return true;
+  }
+
+  sessionsToday() : Array<TestSession> {
+
+    let today = moment();
+
+    let testSessions;
+    this.testSessions.subscribe(_testSessions => {
+      testSessions = _.filter(_testSessions, testSession => {
+        return moment(testSession.startTime).diff(today, 'days') == 0;
+      });
+    });
+
+    return testSessions;
+
+
+  }
+
+  sessionsThisWeek() : Array<TestSession> {
+
+    let testSessions;
+    this.testSessions.subscribe(_testSessions => {
+        testSessions = _.filter(_testSessions, { level: this.user.level });
+    });
+
+    return testSessions;
+  }
+
+
   preloadImages() : Observable<boolean> {
 
       // console.log('preload start');
@@ -306,6 +356,14 @@ export class TestService {
 
       return response;
       */
+
+  }
+
+  fetchSummaries() : Observable<Array<TestSession>> {
+
+    let url = '/api/face-test/session-summary';
+
+    return this.http.get<Array<TestSession>>(url);
 
   }
 

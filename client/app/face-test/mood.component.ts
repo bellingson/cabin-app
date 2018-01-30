@@ -22,11 +22,15 @@ export class MoodComponent implements OnInit {
 
   mood: string;
 
+  canTakeTest = false;
+
   constructor(private userService: UserService,
               private testService: TestService,
               private router: Router) { }
 
   ngOnInit() {
+
+    this.canTakeTest = this.testService.canTakeTest()
 
     this.userService.updateUserLevel();
 
@@ -50,6 +54,14 @@ export class MoodComponent implements OnInit {
 
      this.responses.push({ mood: this.mood, value: value });
      this.showNextMood();
+  }
+
+  sessionsThisWeekCount() : number {
+    return this.testService.sessionsThisWeek().length
+  }
+
+  sessionsTodayCount() : number {
+    return this.testService.sessionsToday().length
   }
 
 

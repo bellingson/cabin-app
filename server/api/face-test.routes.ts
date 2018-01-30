@@ -76,4 +76,28 @@ router.post('/', authVerification, jsonParser, (req, res, next) => {
 
 });
 
+router.get('/stats', authVerification, jsonParser, (req, res, next) => {
+
+  let participantId = req.token.participantId;
+
+  faceTestDao.stats(participantId).subscribe(r => {
+      res.send(r);
+  }, err => {
+      res.status(500).send({error: 'Failed to get stats'});
+  });
+
+});
+
+router.get('/session-summary', authVerification, jsonParser, (req, res, next) => {
+
+  let participantId = req.token.participantId;
+
+  faceTestDao.sessionSummary(participantId).subscribe(r => {
+    res.send(r);
+  }, err => {
+    res.status(500).send({error: 'Failed to get summaries'});
+  });
+
+});
+
 

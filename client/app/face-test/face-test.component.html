@@ -24,35 +24,51 @@
 
   <div *ngFor="let f of faces; index as i" id="f{{i}}" [class]="classForIndex(i)">
 
-    <app-face
-      [level]="user.level"
-      [image]="leftImage"
-      [showFaces]="showFaces"
-      [canClick]="canClick"
-      [showShapes]="showShapes"
-      [showDot]="showDotLeft"
-      [showCorrect]="showCorrectLeft"
-      [showIncorrect]="showIncorrectLeft"
-      (clicked)="clickLeft()"
-    >
-    </app-face>
+      <app-face
+        *ngIf="showCorrect == false && showIncorrect == false"
+        [level]="user.level"
+        [image]="leftImage"
+        [showFaces]="showFaces"
+        [canClick]="canClick"
+        [showShapes]="showShapes"
+        [showDot]="showDotLeft"
+        [showCorrect]="showCorrectLeft"
+        [showIncorrect]="showIncorrectLeft"
+        (clicked)="clickLeft()"
+      >
+      </app-face>
 
-    <div class="plus">
-      +
+      <div class="plus" *ngIf="showCorrect == false && showIncorrect == false">
+        +
+      </div>
+
+      <app-face
+        *ngIf="showCorrect == false && showIncorrect == false"
+        [level]="user.level"
+        [image]="rightImage"
+        [showFaces]="showFaces"
+        [canClick]="canClick"
+        [showShapes]="showShapes"
+        [showDot]="showDotRight"
+        [showCorrect]="showCorrectRight"
+        [showIncorrect]="showIncorrectRight"
+        (clicked)="clickRight()"
+      >
+      </app-face>
+
+    <div class="result-wrapper"  *ngIf="showCorrect || showIncorrect">
+      <div class="result-cell">
+
+        <p *ngIf="showCorrect" class="correct">Correct</p>
+        <p *ngIf="showIncorrect" class="not-correct">Incorrect</p>
+
+        <div class="response-time" *ngIf="responseTime">
+          <h5>Response Time: {{responseTime}}</h5>
+        </div>
+
+
+      </div>
     </div>
-
-    <app-face
-      [level]="user.level"
-      [image]="rightImage"
-      [showFaces]="showFaces"
-      [canClick]="canClick"
-      [showShapes]="showShapes"
-      [showDot]="showDotRight"
-      [showCorrect]="showCorrectRight"
-      [showIncorrect]="showIncorrectRight"
-      (clicked)="clickRight()"
-    >
-    </app-face>
 
 </div>
 

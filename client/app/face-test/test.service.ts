@@ -31,18 +31,23 @@ import {User} from "../user/user.model";
 const SESSIONS_KEY = 'sessions';
 const STATS_KEY = 'stats';
 
+export const DEFAULT_SAMPLE_COUNT = 5;
+export const SAMPLE_COUNT_KEY = 'sample_count';
+
 @Injectable()
 export class TestService {
 
   samples = new ReplaySubject<Array<TestSample>>(1);
 
-  testSessions = new ReplaySubject<Array<any>>(1);
+  testSessions = new ReplaySubject<Array<TestSession>>(1);
 
   private currentSession = new ReplaySubject<TestSession>(1);
 
   stats = new ReplaySubject<TestStats>(1);
 
   user: User;
+
+  sampleCount = new ReplaySubject<number>(1);
 
   constructor(private userService: UserService,
               private http: HttpClient) {
@@ -53,8 +58,22 @@ export class TestService {
 
     this.userService.user.subscribe(user => this.user = user);
 
+    this.initializeSampleCount();
+
     this.initializeSessions();
     this.initializeStats();
+  }
+
+  initializeSampleCount() {
+
+     let sampleCount = DEFAULT_SAMPLE_COUNT;
+     const _sampleSize = localStorage.getItem(SAMPLE_COUNT_KEY);
+     if(_sampleSize) {
+        sampleCount = parseInt(_sampleSize, 10)
+     }
+
+     this.sampleCount.next(sampleCount);
+
   }
 
   initializeStats() {
@@ -365,6 +384,17 @@ export class TestService {
 
     return this.http.get<Array<TestSession>>(url);
 
+  }
+
+  updateSampleCount(_sampleCount: number) {
+
+    if(_sampleCount == DEFAULT_SAMPLE_COUNT) {
+        localStorage.removeItem(SAMPLE_COUNT_KEY);
+    } else {
+        localStorage.setItem(SAMPLE_COUNT_KEY, _sampleCount.toString());
+    }
+
+    this.sampleCount.next(_sampleCount);
   }
 
 

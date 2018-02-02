@@ -8,13 +8,12 @@ import {TestService} from "./test.service";
 import {UserService} from "../user/user.service";
 import {User} from "../user/user.model";
 
-const DEFAULT_SAMPLE_SIZE = 5;
-
-
 enum Side {
     LEFT,
     RIGHT
 }
+
+const responseTime = { fast: 600, ok: 900, slow: 1500, timeout: 3000 };
 
 @Component({
   selector: 'app-face-test',
@@ -31,7 +30,7 @@ export class FaceTestComponent implements OnInit {
 
   currentIndex: number;
 
-  sampleCount = DEFAULT_SAMPLE_SIZE;
+  sampleCount;
   accuracy: number;
 
   correctSide: Side;
@@ -54,6 +53,11 @@ export class FaceTestComponent implements OnInit {
   showCorrectRight = false;
   showIncorrectRight = false;
 
+  showCorrect = false;
+  showIncorrect = false;
+
+  responseTime;
+
   settings: any;
 
   loading = true;
@@ -65,6 +69,8 @@ export class FaceTestComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+
+      this.testService.sampleCount.subscribe(_sampleCount => this.sampleCount = _sampleCount);
 
       this.userService.user.subscribe(user => this.user = user);
 
@@ -133,6 +139,10 @@ left = 0, affective right = 0).
       this.showIncorrectLeft = false;
       this.showCorrectRight = false;
       this.showIncorrectRight = false;
+
+      this.responseTime = null;
+      this.showCorrect = false;
+      this.showIncorrect = false;
 
       // input
       this.showShapes = false;
@@ -211,8 +221,10 @@ left = 0, affective right = 0).
       let correct = this.correctSide == Side.LEFT;
       if(correct) {
           this.showCorrectLeft = true;
+          this.showCorrect = true;
       } else {
           this.showIncorrectLeft = true;
+          this.showIncorrect = true;
       }
 
       this.handleResponse(correct);
@@ -226,8 +238,10 @@ left = 0, affective right = 0).
       let correct = this.correctSide == Side.RIGHT;
       if(correct) {
           this.showCorrectRight = true;
+          this.showCorrect = true;
       } else {
           this.showIncorrectRight = true;
+          this.showIncorrect = true;
       }
 
       this.handleResponse(correct);
@@ -239,6 +253,8 @@ left = 0, affective right = 0).
       this.currentSample.correct = correct;
       this.currentSample.time = Date.now() - this.currentSample.startTime;
 
+      this.responseTime = this.responseTimeString(this.currentSample.time);
+
       this.samples.push(this.currentSample);
       this.currentSample = null;
       this.canClick = false;
@@ -248,6 +264,20 @@ left = 0, affective right = 0).
       setTimeout(() => {
           this.nextSample();
       }, 1000);
+  }
+
+  responseTimeString(time: number) : string {
+
+    if(time <= responseTime.fast)
+      return 'Fast';
+
+    if(time <= responseTime.ok)
+      return 'Ok';
+
+    if(time < responseTime.timeout)
+      return 'Slow'
+
+    return 'Timeout'
   }
 
 
@@ -268,9 +298,11 @@ left = 0, affective right = 0).
 
      this.accuracy = Math.floor(numberCorrect / this.samples.length * 100);
 
-    console.log(this.accuracy);
-
+    // console.log(this.accuracy);
 
   }
+
+
+
 
 }

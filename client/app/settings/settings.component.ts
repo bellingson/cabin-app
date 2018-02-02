@@ -5,6 +5,7 @@ import {User} from "../user/user.model";
 import * as moment from 'moment';
 
 import * as _clone from 'lodash/clone';
+import {TestService} from "../face-test/test.service";
 
 
 @Component({
@@ -20,11 +21,16 @@ export class SettingsComponent implements OnInit {
 
   message: string;
 
-  constructor(private userService: UserService) {
+  sampleCount: number;
+
+  constructor(private userService: UserService,
+              private testService: TestService) {
 
   }
 
   ngOnInit() {
+
+    this.testService.sampleCount.subscribe(_sampleCount => this.sampleCount = _sampleCount);
 
     this.userService.user.subscribe(user => {
       this.user = _clone(user);
@@ -60,6 +66,8 @@ export class SettingsComponent implements OnInit {
       this.userService.updateUser(this.user);
 
       console.log(this.user);
+
+      this.testService.updateSampleCount(this.sampleCount);
 
       this.message = 'Update complete';
 

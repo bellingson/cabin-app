@@ -60,7 +60,7 @@ div.face-wrapper {
       }
     }
 
-    p.correct { color: green; }
+    p.correct { color: green;  }
     p.not-correct { color: red; }
 
 
@@ -96,4 +96,20 @@ div.preload {
     overflow: hidden;
 }
 
+div.result-wrapper {
 
+  display: table;
+
+  div.result-cell {
+      display: table-cell;
+      vertical-align: middle;
+      p { text-align: center; }
+
+      div.response-time {
+          h5 { font-size: 13px; }
+      }
+
+  }
+
+
+}

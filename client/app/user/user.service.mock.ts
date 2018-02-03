@@ -2,6 +2,9 @@
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import * as _clone from 'lodash/clone';
+import {User} from "./user.model";
+
+export const testUser = { participantId: 'ab123', startTime: Date.now(), level: 1, pin: '1234', controlVersion: false, admin: false, token: 'foo' } as User;
 
 export class UserServiceMock {
 
@@ -14,11 +17,11 @@ export class UserServiceMock {
 
   createTestPatient() {
 
-    let _user = { participantId: 1, startTime: Date.now(), level: 1 };
-    let userJson = JSON.stringify(_user);
+
+    let userJson = JSON.stringify(testUser);
     localStorage.setItem('participant', userJson);
 
-    this.user.next(_user);
+    this.user.next(testUser);
   }
 
   createParticipant(participantId: number) {

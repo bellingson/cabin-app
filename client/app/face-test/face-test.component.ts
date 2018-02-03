@@ -66,7 +66,9 @@ export class FaceTestComponent implements OnInit {
 
   constructor(private userService: UserService,
               private testService: TestService,
-              private router: Router) { }
+              private router: Router) {
+
+  }
 
   ngOnInit() {
 

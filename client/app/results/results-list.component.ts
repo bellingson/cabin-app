@@ -16,13 +16,12 @@ export class ResultsListComponent implements OnInit {
   constructor(private testService: TestService) { }
 
   ngOnInit() {
-
-      this.testService.testSessions.subscribe(sessions => this.sessions = sessions);
-
-      console.log(this.sessions);
-
-
-
+    this.fetchSessions();
   }
+
+  fetchSessions() {
+    this.testService.testSessions.subscribe(sessions => this.sessions = sessions);
+  }
+
 
 }

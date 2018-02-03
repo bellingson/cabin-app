@@ -1,0 +1,53 @@
+
+div.chart-page {
+  width: 100%;
+  text-align: center;
+
+  div.chart-wrapper {
+      width: 100%;
+      canvas {
+          margin: 0 auto;
+      }
+  }
+
+  div.data-wrapper {
+      width: 100%;
+      table {
+         margin: 0 auto;
+         min-width: 600px;
+      }
+  }
+
+
+}
+
+
+div.chart-tabs {
+
+  display: inline-block;
+  margin: 5px auto 20px auto;
+  background: #f1f1f1;
+  color: #333;
+  border: 1px solid #999;
+
+  div.tab {
+      display: inline-block;
+
+      padding: 5px 10px;
+      margin: 0;
+
+      border-right: 1px solid #999;
+      min-width: 100px;
+      font-size: 12px;
+      text-align: center;
+  }
+  div.tab:hover {
+      cursor: pointer;
+  }
+
+  div.tab:last-child {
+      border-right: 0;
+  }
+
+
+}

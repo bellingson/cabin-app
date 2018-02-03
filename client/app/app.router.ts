@@ -3,7 +3,7 @@ import {UserInitComponent} from "./user/user-init.component";
 import {PreTestComponent} from "./user/pre-test.component";
 import {FaceTestComponent} from "./face-test/face-test.component";
 import {AppInitComponent} from "./user/app-init.component";
-import {ResultsListComponent} from "./results/results-list.component";
+
 import {AboutComponent} from "./about/about.component";
 import {TestCompleteComponent} from "./face-test/test-complete.component";
 import {UploadFailedComponent} from "./face-test/upload-failed.component";
@@ -21,7 +21,7 @@ const routes: Routes = [
     { path: 'test', component: FaceTestComponent },
     { path: 'test-complete', component: TestCompleteComponent },
     { path: 'upload-failed', component: UploadFailedComponent },
-    { path: 'results-list', component: ResultsListComponent },
+    { path: 'results', loadChildren: 'app/results/results.module#ResultsModule' },
     { path: 'about', component: AboutComponent },
     { path: 'clear', component: ClearComponent },
     { path: 'settings', component: SettingsComponent, canActivate: [ AdminGuard ] },

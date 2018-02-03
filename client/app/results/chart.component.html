@@ -1,0 +1,51 @@
+<div class="chart-page">
+
+
+  <div class="chart-tabs">
+
+    <div class="tab" (click)="showResponseTime()">Response Time</div>
+    <div class="tab" (click)="showPercentCorrect()">% Correct</div>
+    <div class="tab" (click)="showData()">Data</div>
+
+  </div>
+
+  <div *ngIf="lineChartData && displayData == false" class="chart-wrapper">
+
+    <canvas baseChart width="600" height="300"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"></canvas>
+
+
+  </div>
+
+  <div *ngIf="displayData" class="data-wrapper">
+
+    <table>
+      <tr>
+        <th>Session #</th>
+        <th>Week</th>
+        <th>Date</th>
+        <th>% Correct</th>
+        <th>Avg Response Milli</th>
+      </tr>
+      <tr *ngFor="let session of testSessions">
+        <td>{{session.testNumber}}</td>
+        <td>{{session.level}}</td>
+        <td>{{session.startTime | date: 'EEE. MMM, d yyyy'}}</td>
+        <td>{{session.percentCorrect}} %</td>
+        <td>{{session.averageResponseMilli}}</td>
+      </tr>
+    </table>
+
+  </div>
+
+
+
+
+  <a [routerLink]="['/pre-test']">Done</a>
+
+</div>

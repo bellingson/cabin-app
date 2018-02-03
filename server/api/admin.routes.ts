@@ -5,9 +5,10 @@ import * as csvWriter from 'csv-write-stream';
 
 import * as _ from 'lodash';
 
+import * as moment from 'moment';
+
 import {FaceTestDao} from "../service/face-test-dao.service";
 import {OK} from "./face-test.routes";
-import {DatePipe} from "@angular/common";
 
 export const router = express.Router();
 
@@ -43,15 +44,13 @@ router.get('/face-test-summary.csv', (req, res, next) => {
          let writer = csvWriter({headers: headers});
          writer.pipe(res);
 
-         let datePipe = new DatePipe('en-US');
-
          _.each(testSessions, session => {
 
               let s = [session._id,
                        session.participantId,
                        session.testNumber,
                        session.level,
-                       datePipe.transform(session.startTime,'yyyy-MM-dd HH:mm'),
+                       moment(session.startTime).format('YYYY-MM-DD HH:mm:ss'),
                        session.correctCount,
                        session.incorrectCount,
                        session.percentCorrect,
@@ -81,15 +80,13 @@ router.get('/face-test-samples.csv', (req, res, next) => {
 
     writer.pipe(res);
 
-    let datePipe = new DatePipe('en-US');
-
     _.each(testSessions, session => {
 
       _.each(session.samples, sample => {
         let s = [session._id,
           session.participantId,
           session.testNumber,
-          datePipe.transform(session.startTime,'yyyy-MM-dd HH:mm'),
+          moment(session.startTime).format('YYYY-DD-MM HH:mm:ss'),
           sample.ordinal,
           sample.showDotOnNeutralFace,
           sample.correct,

@@ -14,7 +14,7 @@ import {UserService} from "./user/user.service";
 import { UserInitComponent } from './user/user-init.component';
 import { PreTestComponent } from './user/pre-test.component';
 import { AppInitComponent } from './user/app-init.component';
-import { ResultsListComponent } from './results/results-list.component';
+
 import { AboutComponent } from './about/about.component';
 import { TestCompleteComponent } from './face-test/test-complete.component';
 import {TestService} from "./face-test/test.service";
@@ -37,7 +37,6 @@ import {AuthService} from "./user/auth.service";
     UserInitComponent,
     PreTestComponent,
     AppInitComponent,
-    ResultsListComponent,
     AboutComponent,
     TestCompleteComponent,
     UploadFailedComponent,

@@ -12,6 +12,7 @@ import {TestSample} from "./test-sample.model";
 import {TestSession} from "./test-session.model";
 
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 import * as _assign from 'lodash/assign';
 import * as _clone from 'lodash/clone';
@@ -22,8 +23,6 @@ import * as _sum from 'lodash/sum';
 import * as _filter from 'lodash/filter';
 import * as _size from 'lodash/size';
 import * as _last from 'lodash/last';
-
-import * as moment from 'moment';
 
 import {TestStats} from "./test-stats.model";
 import {User} from "../user/user.model";
@@ -117,14 +116,6 @@ export class TestService {
 
   }
 
-  // private authHeader() {
-  //
-  //   if(this.user) {
-  //     return { headers: new HttpHeaders().set('Authorization', this.user.token) };
-  //   } else {
-  //     return { headers: new HttpHeaders() };
-  //   }
-  // }
 
   uploadResults(session?: TestSession) : Observable<boolean> {
 
@@ -302,6 +293,14 @@ export class TestService {
   }
 
   canTakeTest() : boolean {
+
+    if(this.user.restrictSessions == false) {
+      return true;
+    }
+
+    console.log(moment(this.user.startTime).format('YYYY-MM-DD'));
+
+    console.log(this.sessionsThisWeek().length);
 
     if(_.size(this.sessionsThisWeek()) >= 6) {
       return false;

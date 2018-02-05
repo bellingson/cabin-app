@@ -4,6 +4,7 @@ export interface User {
   pin: string;
 
   controlVersion: boolean;
+  restrictSessions: boolean;
 
   startTime: number;
   level: number;

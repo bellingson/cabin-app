@@ -63,7 +63,7 @@ export class UserService {
              return;
           }
 
-           const admin = participantId == '-1';
+          const admin = participantId == '-1';
 
           const participantNumber: number = parseInt(participantId.replace(/\D/g, ''), 10);
 
@@ -73,12 +73,13 @@ export class UserService {
                                 startTime: Date.now(),
                                 level: 1,
                                 controlVersion: controlVersion,
+                                restrictSessions: true,
                                 pin: pin,
                                 token: r.token,
                                 admin: admin
                               } as User;
 
-          console.log(_user);
+          // console.log(_user);
 
           this.authService.setToken(r.token);
 

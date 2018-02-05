@@ -1,0 +1,67 @@
+{
+  "index": "/index.html",
+  "assetGroups": [{
+    "name": "app",
+    "installMode": "prefetch",
+    "resources": {
+      "files": [
+        "/assets/faces/207Fcrop.jpg",
+        "/assets/faces/213Ncrop.jpg",
+        "/assets/faces/213Fcrop.jpg",
+        "/assets/faces/208Ncrop.jpg",
+        "/assets/faces/208Fcrop.jpg",
+        "/assets/faces/207Ncrop.jpg",
+        "/assets/faces/AF14AFS.jpg",
+        "/assets/faces/AF13NES.jpg",
+        "/assets/faces/AF13AFS.jpg",
+        "/assets/faces/AF01NES.jpg",
+        "/assets/faces/AF01AFS.jpg",
+        "/assets/faces/217Ncrop.jpg",
+        "/assets/faces/217Fcrop.jpg",
+        "/assets/faces/AF24NES.jpg",
+        "/assets/faces/AF24AFS.jpg",
+        "/assets/faces/AF22NES.jpg",
+        "/assets/faces/AF22AFS.jpg",
+        "/assets/faces/AF19NES.jpg",
+        "/assets/faces/AF19AFS.jpg",
+        "/assets/faces/AF14NES.jpg",
+        "/assets/faces/AM09NES.jpg",
+        "/assets/faces/AM09AFS.jpg",
+        "/assets/faces/AF32NES.jpg",
+        "/assets/faces/AF32AFS.jpg",
+        "/assets/faces/AF30NES.jpg",
+        "/assets/faces/AF30AFS.jpg",
+        "/assets/faces/AM23AFS.jpg",
+        "/assets/faces/AM22NES.jpg",
+        "/assets/faces/AM22AFS.jpg",
+        "/assets/faces/AM17NES.jpg",
+        "/assets/faces/AM17AFS.jpg",
+        "/assets/faces/AM10NES.jpg",
+        "/assets/faces/AM10AFS.jpg",
+        "/assets/faces/AM35NES.jpg",
+        "/assets/faces/AM35AFS.jpg",
+        "/assets/faces/AM34NES.jpg",
+        "/assets/faces/AM34AFS.jpg",
+        "/assets/faces/AM31NES.jpg",
+        "/assets/faces/AM31AFS.jpg",
+        "/assets/faces/AM23NES.jpg",
+        "/favicon.ico",
+        "/index.html"
+      ],
+      "versionedFiles": [
+        "/*.bundle.css",
+        "/*.bundle.js",
+        "/*.chunk.js"
+      ]
+    }
+  }, {
+    "name": "assets",
+    "installMode": "lazy",
+    "updateMode": "prefetch",
+    "resources": {
+      "files": [
+        "/assets/**"
+      ]
+    }
+  }]
+}

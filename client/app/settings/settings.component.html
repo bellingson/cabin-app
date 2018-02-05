@@ -4,39 +4,47 @@
 
     <form *ngIf="user" #f="ngForm" (ngSubmit)="updateSettings()">
 
-      <div class="group">
-        <label>Start Date</label>
-        <div>
-          <input type="text" class="start-time" name="startTime" [(ngModel)]="startTime" disabled />
-        </div>
-      </div>
-
-
-      <div class="group">
-        <label>Level</label>
-        <input type="text" name="level" [(ngModel)]="user.level" placeholder="Level" required/>
-      </div>
-
-      <div class="group">
-        <label>Control Group</label>
-        <input type="checkbox" name="controlVersion" [(ngModel)]="user.controlVersion" />
-      </div>
-
-      <div class="group">
-        <label>Restrict Sessions</label>
-        <input type="checkbox" name="restrictSessions" [(ngModel)]="user.restrictSessions" />
-      </div>
-
-      <div class="group">
-        <label>Sample Size</label>
-        <input type="text" class="sample-count" name="sampleCount" [(ngModel)]="sampleCount" />
-      </div>
-
-      <div class="group">
-        <button [disabled]="!f.valid">Update</button>
-      </div>
+      <table>
+        <tr>
+          <th>Start: </th>
+          <td>
+            <input type="text" class="start-time" name="startTime" [(ngModel)]="startTime" disabled />
+          </td>
+        </tr>
+        <tr>
+          <th>Level: </th>
+          <td>
+            <input type="text" name="level" [(ngModel)]="user.level" placeholder="Level" required/>
+          </td>
+        </tr>
+        <tr>
+          <th>Control Group: </th>
+          <td>
+            <input type="checkbox" name="controlVersion" [(ngModel)]="user.controlVersion" />
+          </td>
+        </tr>
+        <tr>
+          <th>Restrict Sessions: </th>
+          <td>
+            <input type="checkbox" name="restrictSessions" [(ngModel)]="user.restrictSessions" />
+          </td>
+        </tr>
+        <tr>
+          <th>Sample Size: </th>
+          <td>
+            <input type="text" class="sample-count" name="sampleCount" [(ngModel)]="sampleCount" />
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <button [disabled]="!f.valid">Update</button>
+          </td>
+        </tr>
+      </table>
 
     </form>
+
 
     <div *ngIf="message" class="message">
       {{message}}

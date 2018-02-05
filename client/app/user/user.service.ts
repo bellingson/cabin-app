@@ -74,8 +74,6 @@ export class UserService {
                                 level: 1,
                                 controlVersion: controlVersion,
                                 restrictSessions: true,
-                                pin: pin,
-                                token: r.token,
                                 admin: admin
                               } as User;
 

@@ -3,8 +3,11 @@ form {
 
   margin-bottom: 40px;
 
-  div.group {
-     margin-bottom: 20px;
+  table {
+      margin: 0 auto;
+      th { text-align: left; }
+      td, th { padding: 3px 15px 3px 5px; }
+      td { text-align: left; }
   }
 
   label { display: block; margin-bottom: 5px; }

@@ -1,7 +1,6 @@
 export interface User {
 
   participantId: string;
-  pin: string;
 
   controlVersion: boolean;
   restrictSessions: boolean;
@@ -10,7 +9,5 @@ export interface User {
   level: number;
 
   admin: boolean;
-
-  token: string;
 
 }

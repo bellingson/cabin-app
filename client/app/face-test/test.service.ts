@@ -203,9 +203,7 @@ export class TestService {
        return 1;
     }
 
-    // const maxNumber =  _(sessions).map('testNumber').compact().max();
     const maxNumber =  _max(_compact(_map(sessions, 'testNumber')));
-    console.log('max n: ' + maxNumber);
     if(maxNumber) {
        return maxNumber + 1;
     } else {
@@ -298,9 +296,10 @@ export class TestService {
       return true;
     }
 
-    console.log(moment(this.user.startTime).format('YYYY-MM-DD'));
-
-    console.log(this.sessionsThisWeek().length);
+    // console.log(moment(this.user.startTime).format('YYYY-MM-DD'));
+    //
+    // console.log(this.sessionsThisWeek().length);
+    // console.log(this.sessionsToday().length);
 
     if(_.size(this.sessionsThisWeek()) >= 6) {
       return false;

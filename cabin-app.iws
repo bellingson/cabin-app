@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="587f8dac-177b-4287-9ed3-5ec28d2c1c93" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/ngsw-config.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.angular-cli.json" afterPath="$PROJECT_DIR$/.angular-cli.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cabin-app.iws" afterPath="$PROJECT_DIR$/cabin-app.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/app.module.ts" afterPath="$PROJECT_DIR$/client/app/app.module.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/face-test/test.service.ts" afterPath="$PROJECT_DIR$/client/app/face-test/test.service.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/settings/settings.component.html" afterPath="$PROJECT_DIR$/client/app/settings/settings.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/settings/settings.component.scss" afterPath="$PROJECT_DIR$/client/app/settings/settings.component.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/user/user.model.ts" afterPath="$PROJECT_DIR$/client/app/user/user.model.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/user/user.service.ts" afterPath="$PROJECT_DIR$/client/app/user/user.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -25,16 +20,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="chart.component.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/results/chart.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="48" column="21" lean-forward="false" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
@@ -48,8 +33,18 @@
       <file leaf-file-name="settings.component.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="26" column="53" lean-forward="false" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
+            <state relative-caret-position="407">
+              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.component.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -58,8 +53,18 @@
       <file leaf-file-name="user.service.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/user/user.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="71" column="24" lean-forward="true" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
+            <state relative-caret-position="464">
+              <caret line="81" column="31" lean-forward="true" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="auth.service.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/app/user/auth.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="32" column="2" lean-forward="false" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -75,21 +80,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.service.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test.service.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/app/face-test/test.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-              <folding />
+            <state relative-caret-position="437">
+              <caret line="306" column="0" lean-forward="true" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.model.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user.model.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/user/user.model.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state relative-caret-position="165">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -100,16 +107,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="690">
               <caret line="46" column="36" lean-forward="false" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".angular-cli.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.angular-cli.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -129,8 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>max n</find>
-      <find>lodash/fp/</find>
       <find>.sessionsToDo =</find>
       <find>showDotLeft</find>
       <find>showDot</find>
@@ -159,6 +154,8 @@
       <find>^5.0.0</find>
       <find>as User</find>
       <find>.token</find>
+      <find>group</find>
+      <find>max n</find>
     </findStrings>
     <replaceStrings>
       <replace>[routerLink]</replace>
@@ -180,8 +177,8 @@
       <dir>$PROJECT_DIR$/client</dir>
       <dir>$PROJECT_DIR$/ops/server</dir>
       <dir>$PROJECT_DIR$/server</dir>
-      <dir>$PROJECT_DIR$/client/app</dir>
       <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/client/app</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -218,7 +215,6 @@
         <option value="$PROJECT_DIR$/client/app/face-test/face-test.component.scss" />
         <option value="$PROJECT_DIR$/client/app/face-test/face-test.component.html" />
         <option value="$PROJECT_DIR$/client/app/settings/settings.component.ts" />
-        <option value="$PROJECT_DIR$/client/app/settings/settings.component.scss" />
         <option value="$PROJECT_DIR$/client/app/face-test/mood.component.html" />
         <option value="$PROJECT_DIR$/client/app/user/pre-test.component.ts" />
         <option value="$PROJECT_DIR$/client/app/user/user.service.mock.ts" />
@@ -243,9 +239,10 @@
         <option value="$PROJECT_DIR$/client/ngsw-config.json" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/client/app/user/user.model.ts" />
-        <option value="$PROJECT_DIR$/client/app/settings/settings.component.html" />
-        <option value="$PROJECT_DIR$/client/app/face-test/test.service.ts" />
         <option value="$PROJECT_DIR$/client/app/user/user.service.ts" />
+        <option value="$PROJECT_DIR$/client/app/settings/settings.component.html" />
+        <option value="$PROJECT_DIR$/client/app/settings/settings.component.scss" />
+        <option value="$PROJECT_DIR$/client/app/face-test/test.service.ts" />
       </list>
     </option>
   </component>
@@ -291,6 +288,19 @@
               <item name="cabin-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="cabin-app" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cabin-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cabin-app" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cabin-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cabin-app" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cabin-app" type="b2602c69:ProjectViewProjectNode" />
@@ -453,12 +463,12 @@
       <workItem from="1517138951537" duration="13519000" />
       <workItem from="1517248406451" duration="6245000" />
       <workItem from="1517584050204" duration="13178000" />
-      <workItem from="1517781018357" duration="3967000" />
+      <workItem from="1517781018357" duration="4730000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153597000" />
+    <option name="totallyTimeSpent" value="154360000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -545,13 +555,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/admin/participant-list.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -662,13 +665,6 @@
           <folding>
             <element signature="e#0#50#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -841,7 +837,7 @@
         <state relative-caret-position="1035">
           <caret line="76" column="29" lean-forward="false" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -910,14 +906,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="26" column="53" lean-forward="false" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/face-test/mood.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -926,27 +914,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/face-test/test.service.ts">
+    <entry file="file://$PROJECT_DIR$/client/app/user/user.model.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+        <state relative-caret-position="165">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/app/user/user.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="71" column="24" lean-forward="true" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
+        <state relative-caret-position="464">
+          <caret line="81" column="31" lean-forward="true" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/user/user.model.ts">
+    <entry file="file://$PROJECT_DIR$/client/app/user/auth.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state relative-caret-position="450">
+          <caret line="32" column="2" lean-forward="false" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/settings/settings.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/face-test/test.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="306" column="0" lean-forward="true" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

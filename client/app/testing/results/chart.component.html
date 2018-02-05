@@ -32,7 +32,7 @@
         <th>% Correct</th>
         <th>Avg Response Milli</th>
       </tr>
-      <tr *ngFor="let session of testSessions">
+      <tr *ngFor="let session of testSessionsReversed">
         <td>{{session.testNumber}}</td>
         <td>{{session.level}}</td>
         <td>{{session.startTime | date: 'EEE. MMM, d yyyy'}}</td>
@@ -44,8 +44,8 @@
   </div>
 
 
-
-
-  <a [routerLink]="['/pre-test']">Done</a>
+  <a class="done" [routerLink]="['/t/pre-test']">Done</a>
 
 </div>
+
+<app-portrait-message></app-portrait-message>

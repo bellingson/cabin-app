@@ -65,7 +65,7 @@ export class SettingsComponent implements OnInit {
       this.user.startTime = startTime.toDate().getTime();
       this.userService.updateUser(this.user);
 
-      console.log(this.user);
+      // console.log(this.user);
 
       this.testService.updateSampleCount(this.sampleCount);
 

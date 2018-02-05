@@ -100,4 +100,14 @@ router.get('/session-summary', authVerification, jsonParser, (req, res, next) =>
 
 });
 
+router.get('/options', authVerification, jsonParser, (req, res, next) => {
+
+    faceTestDao.options().subscribe(options => {
+        res.send(options);
+    }, err => {
+      res.status(500).send({error: 'Failed to get options'});
+    })
+
+
+});
 

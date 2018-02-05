@@ -7,6 +7,7 @@ import {GenericDao} from "./generic-dao.service";
 
 const testSessionCollection = 'testSession';
 const settingsCollection = 'settings';
+const optionsCollection = 'options';
 
 export class FaceTestDao extends GenericDao {
 
@@ -72,6 +73,10 @@ export class FaceTestDao extends GenericDao {
 
   settings() : Observable<any> {
      return this.getSingleton(settingsCollection);
+  }
+
+  options() : Observable<any> {
+     return this.getSingleton(optionsCollection);
   }
 
   stats(participantId: string) : Observable<any> {

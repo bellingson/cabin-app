@@ -21,14 +21,13 @@ export class UserInitComponent implements OnInit {
 
       console.log('user init');
 
-    console.log(document.cookie);
   }
 
     submit(value) {
 
        this.userService.createParticipant(value.participantId, value.pin)
          .subscribe(r => {
-            this.router.navigateByUrl('/pre-test');
+            this.router.navigateByUrl('/t/pre-test');
           }, err => {
            console.log(err);
 

@@ -1,12 +1,35 @@
-<div class="page-wrapper pre-test">
 
-    <div class="instruction-cell">
+<div *ngIf="loading" class="page-wrapper">
+
+  <div class="instruction-cell">
+        <div class="spinner"></div>
+  </div>
+
+</div>
+
+
+<div *ngIf="error" class="page-wrapper">
+
+  <div class="instruction-cell">
+
+    <div class="error">
+      {{error}}
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="loading == false" class="page-wrapper pre-test">
+
+  <div class="instruction-cell">
 
         <p>
             Focus your gaze on the cross.  You will briefly see two faces.
             Tap the half of the screen where the dot appears next
             as promptly as you can!
         </p>
+
 
         <div class="options">
             <a [routerLink]="['../mood']">Start Now</a>

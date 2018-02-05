@@ -13,7 +13,8 @@ import { ParticipantListComponent } from './participant-list.component';
 import { AdminLinksComponent } from './admin-links.component';
 import {AdminGuard} from "./admin.guard";
 import { AdminSettingsComponent } from './admin-settings.component';
-import {AuthInterceptor} from "../user/auth.interceptor";
+import {AuthInterceptor} from "../testing/user/auth.interceptor";
+
 
 @NgModule({
   declarations: [ TestSessionListComponent, AdminBaseComponent, TestSessionDetailComponent, ParticipantListComponent, AdminLinksComponent, AdminSettingsComponent ],

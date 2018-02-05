@@ -13,46 +13,24 @@ import { FormsModule } from '@angular/forms';
 import {cabinRoutes} from "./app.router";
 
 import { AppComponent } from './app.component';
-import { FaceTestComponent } from './face-test/face-test.component';
-import {UserService} from "./user/user.service";
-import { UserInitComponent } from './user/user-init.component';
-import { PreTestComponent } from './user/pre-test.component';
-import { AppInitComponent } from './user/app-init.component';
 
-import { AboutComponent } from './about/about.component';
-import { TestCompleteComponent } from './face-test/test-complete.component';
-import {TestService} from "./face-test/test.service";
-import { UploadFailedComponent } from './face-test/upload-failed.component';
-import { MoodButtonsComponent } from './face-test/mood-buttons.component';
-import { PortraitMessageComponent } from './face-test/portrait-message.component';
-import { ClearComponent } from './user/clear.component';
-import { SettingsComponent } from './settings/settings.component';
+import {SharedModule} from "./shared/shared.module";
+import {UserService} from "./testing/user/user.service";
+import {AuthService} from "./testing/user/auth.service";
+import {TestService} from "./testing/face-test/test.service";
 import {AdminGuard} from "./admin/admin.guard";
-import { MoodComponent } from './face-test/mood.component';
-import { FaceComponent } from './face-test/face.component';
-import {AuthInterceptor} from "./user/auth.interceptor";
-import {AuthService} from "./user/auth.service";
+import {AuthInterceptor} from "./testing/user/auth.interceptor";
+import {ClearComponent} from "./clear.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FaceTestComponent,
-    UserInitComponent,
-    PreTestComponent,
-    AppInitComponent,
-    AboutComponent,
-    TestCompleteComponent,
-    UploadFailedComponent,
-    MoodButtonsComponent,
-    PortraitMessageComponent,
-    ClearComponent,
-    SettingsComponent,
-    MoodComponent,
-    FaceComponent
+    ClearComponent
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     FormsModule,
     HttpClientModule,

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import {ChartService} from "./chart.service";
+
 
 import * as _range from 'lodash/range';
 import * as _map from 'lodash/map';
+import * as _reverse from 'lodash/reverse';
+
 import {TestService} from "../face-test/test.service";
 import {TestSession} from "../face-test/test-session.model";
 
@@ -15,6 +17,7 @@ import {TestSession} from "../face-test/test-session.model";
 export class ChartComponent implements OnInit {
 
   testSessions: Array<TestSession>;
+  testSessionsReversed: Array<TestSession>;
 
   lineChartData:Array<any>;
   lineChartLabels:Array<any>;
@@ -58,7 +61,10 @@ export class ChartComponent implements OnInit {
 
   ngOnInit() {
 
-    this.testService.testSessions.subscribe(_testSessions => this.testSessions = _testSessions);
+    this.testService.testSessions.subscribe(_testSessions => {
+      this.testSessions = _testSessions;
+      this.testSessionsReversed = _reverse(_testSessions);
+    });
 
     this.showResponseTime();
 

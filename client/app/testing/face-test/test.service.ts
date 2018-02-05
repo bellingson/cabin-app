@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/forkJoin';
@@ -29,6 +30,7 @@ import {User} from "../user/user.model";
 
 const SESSIONS_KEY = 'sessions';
 const STATS_KEY = 'stats';
+const OPTIONS_KEY = 'options';
 
 export const DEFAULT_SAMPLE_COUNT = 200;
 export const SAMPLE_COUNT_KEY = 'sample_count';
@@ -48,6 +50,8 @@ export class TestService {
 
   sampleCount = new ReplaySubject<number>(1);
 
+  options = new ReplaySubject<any>(1);
+
   constructor(private userService: UserService,
               private http: HttpClient) {
       this.initialize();
@@ -57,10 +61,22 @@ export class TestService {
 
     this.userService.user.subscribe(user => this.user = user);
 
+    this.initializeOptions()
+
     this.initializeSampleCount();
 
     this.initializeSessions();
     this.initializeStats();
+  }
+
+  initializeOptions() {
+
+     const _options = localStorage.getItem(OPTIONS_KEY);
+     if(_options) {
+        const options = JSON.parse(_options);
+        this.options.next(options);
+     }
+
   }
 
   initializeSampleCount() {
@@ -383,6 +399,26 @@ export class TestService {
     }
 
     this.sampleCount.next(_sampleCount);
+  }
+
+  fetchOptions() : Observable<boolean> {
+
+    let response = new Subject<boolean>();
+
+    let url = '/api/face-test/options';
+    this.http.get(url).subscribe(options => {
+
+      let _options = JSON.stringify(options);
+      localStorage.setItem(OPTIONS_KEY, _options);
+      this.options.next(options);
+      response.next(true);
+      response.complete();
+    }, err => {
+       response.error(err);
+       response.complete();
+    });
+
+    return response;
   }
 
 

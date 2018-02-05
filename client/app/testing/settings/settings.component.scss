@@ -5,6 +5,7 @@ form {
 
   table {
       margin: 0 auto;
+      width: 400px;
       th { text-align: left; }
       td, th { padding: 3px 15px 3px 5px; }
       td { text-align: left; }
@@ -18,6 +19,11 @@ form {
   input.sample-count { max-width: 50px; }
 
   input[name='level'] { max-width: 30px; }
+
+  button {
+      background: #fff;
+      color: #000;
+  }
 
 }
 

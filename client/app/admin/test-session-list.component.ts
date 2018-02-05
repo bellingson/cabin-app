@@ -5,8 +5,7 @@ import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 
 import {TestAdminService} from "./test-admin.service";
-import {TestSession} from "../face-test/test-session.model";
-import {moodDescription} from "../face-test/mood";
+import {TestSession} from "../testing/face-test/test-session.model";
 
 declare var jQuery;
 

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import {FACES} from "./faces";
 
+import * as _filter from 'lodash/filter';
+
 import {TestSample, TimeClass} from "./test-sample.model";
 import {TestService} from "./test.service";
 import {UserService} from "../user/user.service";
@@ -65,6 +67,8 @@ export class FaceTestComponent implements OnInit {
 
   user: User;
 
+  options: any;
+
   constructor(private userService: UserService,
               private testService: TestService,
               private router: Router) {
@@ -72,6 +76,8 @@ export class FaceTestComponent implements OnInit {
   }
 
   ngOnInit() {
+
+      this.testService.options.subscribe(options => this.options = options);
 
       this.testService.sampleCount.subscribe(_sampleCount => this.sampleCount = _sampleCount);
 
@@ -127,28 +133,33 @@ left = 0, affective right = 0).
       setTimeout(() => {
           this.showFaces = false;
 
-          // 2 show dot
-          setTimeout(() => {
+          // 2 show shapes
+          setTimeout(this.displayShapes.bind(this), this.options.display.hideFaces);
 
-              this.canClick = true;
-              this.showShapes = true;
-              this.showDotLeft = this.correctSide == Side.LEFT;
-              this.showDotRight = this.correctSide == Side.RIGHT;
-              this.currentSample.startTime = Date.now();
+      }, this.options.display.showFaces); // 1000
 
-              // 3 hide dot
-              setTimeout(() => {
-                  if(this.currentSample) {
-                      this.showShapes = false;
-                      this.showDotLeft = false;
-                      this.showDotRight = false;
-                  }
-              }, 1000);
 
-          }, 300);
+  }
 
-      }, 1000);
+  private displayShapes() {
 
+    this.canClick = true;
+    this.showShapes = true;
+    this.showDotLeft = this.correctSide == Side.LEFT;
+    this.showDotRight = this.correctSide == Side.RIGHT;
+    this.currentSample.startTime = Date.now();
+
+    // 3 hide dot
+    setTimeout(this.hideShapes.bind(this), this.options.display.showShapes);
+  }
+
+  private hideShapes() {
+
+    if(this.currentSample) {
+      this.showShapes = false;
+      this.showDotLeft = false;
+      this.showDotRight = false;
+    }
 
   }
 
@@ -156,13 +167,13 @@ left = 0, affective right = 0).
 
     if(this.user.controlVersion) {
 
-      console.log('control version true');
+      // console.log('control version true');
 
       this.correctSide = Math.random() <= 0.5 ? Side.LEFT : Side.RIGHT;
       this.currentSample.showDotOnNeutralFace = this.correctSide == this.neutralSide;
     } else {
 
-      console.log('control version false');
+      // console.log('control version false');
 
       this.correctSide = this.neutralSide;
       this.currentSample.showDotOnNeutralFace = true;
@@ -187,12 +198,13 @@ left = 0, affective right = 0).
 
     this.showFaces = true;
 
-
   }
+
 
   checkFinished() : boolean {
 
-      if(this.samples.length < this.sampleCount) {
+      let samples = _filter(this.samples, sample => sample.timeClass != TimeClass.TOO_SLOW);
+      if(samples.length < this.sampleCount) {
           return false;
       }
 
@@ -200,11 +212,10 @@ left = 0, affective right = 0).
 
       this.testService.uploadResults(testSession)
                         .subscribe(success => {
-                              this.router.navigateByUrl('/test-complete');
-                              // this.router.navigateByUrl('/results-list');
+                              this.router.navigateByUrl('/t/test-complete');
                           }, err => {
                               console.log(err);
-                              this.router.navigateByUrl('/upload-failed');
+                              this.router.navigateByUrl('/t/upload-failed');
                           });
 
       return true;
@@ -214,11 +225,11 @@ left = 0, affective right = 0).
       if(this.neutralSide == Side.LEFT) {
           this.leftImage = face.n;
           this.rightImage = face.f;
-          console.log('netural left');
+          // console.log('netural left');
       } else {
           this.leftImage = face.f;
           this.rightImage = face.n;
-          console.log('netural right');
+          // console.log('netural right');
       }
   }
 
@@ -262,7 +273,7 @@ left = 0, affective right = 0).
       this.currentSample.time = Date.now() - this.currentSample.startTime;
       this.currentSample.timeClass = this.classForTime(this.currentSample.time);
 
-      this.responseTime = this.responseTimeString(this.currentSample.time);
+      this.responseTime = this.responseTimeString(this.currentSample.timeClass);
 
       this.samples.push(this.currentSample);
 
@@ -278,10 +289,10 @@ left = 0, affective right = 0).
 
   classForTime(time: number) : TimeClass {
 
-    if(time <= responseTime.fast)
+    if(time <= this.options.timeClass.fast)
       return TimeClass.FAST;
 
-    if(time < responseTime.slow) {
+    if(time < this.options.timeClass.tooSlow) {
       return TimeClass.OK;
     }
 

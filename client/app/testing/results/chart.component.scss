@@ -21,6 +21,14 @@ div.chart-page {
 
 }
 
+@media (max-width: 600px) {
+
+  div.chart-page {
+    display: none;
+  }
+
+}
+
 
 div.chart-tabs {
 
@@ -50,4 +58,10 @@ div.chart-tabs {
   }
 
 
+}
+
+a.done {
+    position: absolute;
+    top: 5px;
+    right: 25px;
 }

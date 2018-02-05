@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
-import {UserService} from "../user/user.service";
-import {User} from "../user/user.model";
+import {User} from "../testing/user/user.model";
+import {UserService} from "../testing/user/user.service";
 
 
 @Injectable()

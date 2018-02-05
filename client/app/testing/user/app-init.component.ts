@@ -22,9 +22,9 @@ export class AppInitComponent implements OnInit {
         let user;
         this.userService.user.subscribe(_user => user = _user);
         if(user == null) {
-            this.router.navigateByUrl('/user-init');
+            this.router.navigateByUrl('/t/user-init');
         } else {
-            this.router.navigateByUrl('/pre-test');
+            this.router.navigateByUrl('/t/pre-test');
         }
 
 

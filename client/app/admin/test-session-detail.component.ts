@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import {TestAdminService} from "./test-admin.service";
-import {TestSession} from "../face-test/test-session.model";
-import {moodDescription} from "../face-test/mood";
+
+import {TestSession} from "../testing/face-test/test-session.model";
+import {moodDescription} from "../testing/face-test/mood";
 
 @Component({
   selector: 'app-test-session-detail',

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import {TestSession} from "../face-test/test-session.model";
+import {TestSession} from "../testing/face-test/test-session.model";
+
 
 @Injectable()
 export class TestAdminService {

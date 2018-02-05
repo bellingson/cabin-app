@@ -30,7 +30,7 @@ import {User} from "../user/user.model";
 const SESSIONS_KEY = 'sessions';
 const STATS_KEY = 'stats';
 
-export const DEFAULT_SAMPLE_COUNT = 5;
+export const DEFAULT_SAMPLE_COUNT = 200;
 export const SAMPLE_COUNT_KEY = 'sample_count';
 
 @Injectable()
@@ -149,12 +149,7 @@ export class TestService {
 
   testComplete(samples: Array<TestSample>) : TestSession {
 
-      let sample1 = samples[0];
-
-      // let totalTime = _(samples).map('time').sum();
       let totalTime = _sum(_map(samples,'time'));
-
-      console.log(totalTime);
 
       let session;
       this.currentSession.subscribe(_session => session = _clone(_session));
@@ -164,9 +159,7 @@ export class TestService {
       }
 
       session.sampleCount = _size(samples);
-      // session.correctCount = _(samples).filter(sample => sample.correct).size();
       session.correctCount = _size(_filter(samples, sample => sample.correct));
-      // session.incorrectCount = _(samples).filter(sample => sample.correct == false).size();
       session.incorrectCount = _size(_filter(samples, sample => sample.correct == false));
       session.percentCorrect = ((session.correctCount / session.sampleCount) * 100).toFixed(0);
       session.samples = samples;
@@ -177,14 +170,11 @@ export class TestService {
       session.averageResponseMilli = totalTime / session.sampleCount;
       session.averageResponseSeconds = ( (totalTime / 1000) / session.sampleCount).toFixed(1);
 
-      // console.log(session);
-
       let sessions;
       this.testSessions.subscribe(_sessions => sessions = _sessions);
 
       sessions.push(session);
 
-      // console.log('done: ' + sessions.length);
 
       this.testSessions.next(sessions);
       this.currentSession.next(null);

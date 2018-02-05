@@ -3,7 +3,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {FACES} from "./faces";
-import {TestSample} from "./test-sample.model";
+
+import {TestSample, TimeClass} from "./test-sample.model";
 import {TestService} from "./test.service";
 import {UserService} from "../user/user.service";
 import {User} from "../user/user.model";
@@ -30,7 +31,7 @@ export class FaceTestComponent implements OnInit {
 
   currentIndex: number;
 
-  sampleCount;
+  sampleCount: number;
   accuracy: number;
 
   correctSide: Side;
@@ -89,7 +90,7 @@ export class FaceTestComponent implements OnInit {
       // this.currentIndex = 0;
       // this.showDotLeft = true;
 
-      console.log('screen width: ' + window.innerWidth);
+      // console.log('screen width: ' + window.innerWidth);
 
 
   }
@@ -113,47 +114,14 @@ left = 0, affective right = 0).
 
       this.currentSample = new TestSample();
       this.currentSample.ordinal = this.samples.length;
-      // this.currentSample.startTime = Date.now();
 
       this.currentIndex = Math.floor(Math.random() * this.faces.length);
-
       this.neutralSide = Math.random() <= 0.5 ? Side.LEFT : Side.RIGHT;
 
       let face = this.faces[this.currentIndex];
       this.assignImages(face);
 
-      if(this.user.controlVersion) {
-
-        console.log('control version true');
-
-        this.correctSide = Math.random() <= 0.5 ? Side.LEFT : Side.RIGHT;
-        this.currentSample.showDotOnNeutralFace = this.correctSide == this.neutralSide;
-      } else {
-
-        console.log('control version false');
-
-        this.correctSide = this.neutralSide;
-        this.currentSample.showDotOnNeutralFace = true;
-      }
-
-      // response
-      this.showCorrectLeft = false;
-      this.showIncorrectLeft = false;
-      this.showCorrectRight = false;
-      this.showIncorrectRight = false;
-
-      this.responseTime = null;
-      this.showCorrect = false;
-      this.showIncorrect = false;
-
-      // input
-      this.showShapes = false;
-      this.showShapes = false;
-      this.showDotLeft = false;
-      this.showDotRight = false;
-      this.canClick = false;
-
-      this.showFaces = true;
+      this.displayFaces();
 
       // 1 show faces
       setTimeout(() => {
@@ -180,6 +148,44 @@ left = 0, affective right = 0).
           }, 300);
 
       }, 1000);
+
+
+  }
+
+  private displayFaces() {
+
+    if(this.user.controlVersion) {
+
+      console.log('control version true');
+
+      this.correctSide = Math.random() <= 0.5 ? Side.LEFT : Side.RIGHT;
+      this.currentSample.showDotOnNeutralFace = this.correctSide == this.neutralSide;
+    } else {
+
+      console.log('control version false');
+
+      this.correctSide = this.neutralSide;
+      this.currentSample.showDotOnNeutralFace = true;
+    }
+
+    // response
+    this.showCorrectLeft = false;
+    this.showIncorrectLeft = false;
+    this.showCorrectRight = false;
+    this.showIncorrectRight = false;
+
+    this.responseTime = null;
+    this.showCorrect = false;
+    this.showIncorrect = false;
+
+    // input
+    this.showShapes = false;
+    this.showShapes = false;
+    this.showDotLeft = false;
+    this.showDotRight = false;
+    this.canClick = false;
+
+    this.showFaces = true;
 
 
   }
@@ -218,7 +224,7 @@ left = 0, affective right = 0).
 
   clickLeft() {
 
-      console.log('left')
+      // console.log('left')
 
       let correct = this.correctSide == Side.LEFT;
       if(correct) {
@@ -235,7 +241,7 @@ left = 0, affective right = 0).
   }
 
   clickRight() {
-      console.log('right')
+      // console.log('right')
 
       let correct = this.correctSide == Side.RIGHT;
       if(correct) {
@@ -254,42 +260,45 @@ left = 0, affective right = 0).
 
       this.currentSample.correct = correct;
       this.currentSample.time = Date.now() - this.currentSample.startTime;
+      this.currentSample.timeClass = this.classForTime(this.currentSample.time);
 
       this.responseTime = this.responseTimeString(this.currentSample.time);
 
       this.samples.push(this.currentSample);
-      this.currentSample = null;
-      this.canClick = false;
 
       this.checkAccuracy();
+
+      this.currentSample = null;
+      this.canClick = false;
 
       setTimeout(() => {
           this.nextSample();
       }, 1000);
   }
 
-  responseTimeString(time: number) : string {
+  classForTime(time: number) : TimeClass {
 
     if(time <= responseTime.fast)
-      return 'Fast';
+      return TimeClass.FAST;
 
-    if(time <= responseTime.ok)
-      return 'Ok';
+    if(time < responseTime.slow) {
+      return TimeClass.OK;
+    }
 
-    if(time < responseTime.timeout)
-      return 'Slow'
-
-    return 'Timeout'
+    return TimeClass.TOO_SLOW;
   }
 
+  responseTimeString(timeClass: TimeClass) : string {
 
-  classForIndex(index: number) {
+    switch (timeClass) {
+      case TimeClass.FAST:
+          return 'Fast';
+      case TimeClass.OK:
+          return 'OK';
+      default:
+          return 'Too Slow';
+    }
 
-      if(this.currentIndex != null && this.currentIndex === index) {
-          return 'face-set show';
-      }
-
-      return 'face-set hidden';
   }
 
   checkAccuracy()  {
@@ -300,11 +309,7 @@ left = 0, affective right = 0).
 
      this.accuracy = Math.floor(numberCorrect / this.samples.length * 100);
 
-    // console.log(this.accuracy);
-
   }
-
-
 
 
 }

@@ -22,7 +22,7 @@
 
   </div>
 
-  <div *ngFor="let f of faces; index as i" id="f{{i}}" [class]="classForIndex(i)">
+  <div class="face-set">
 
       <app-face
         *ngIf="showCorrect == false && showIncorrect == false"

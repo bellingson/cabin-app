@@ -1,0 +1,12 @@
+
+sudo ln -s ~/workspace/josh_carlson/cabin-app/server/cabin/nginx/cabin.conf /etc/nginx/sites-available/cabin.conf
+
+sudo ln -s ~/workspace/josh_carlson/cabin-app/server/cabin/nginx/cabin-app.conf /etc/nginx/conf.d/cabin-app.conf
+sudo ln -s ~/workspace/josh_carlson/cabin-app/server/cabin/nginx/cabin-ssl.conf /etc/nginx/conf.d/cabin-ssl.conf
+
+sudo rm -rf /etc/nginx/sites-enabled/*
+
+sudo ln -s /etc/nginx/sites-available/cabin.conf /etc/nginx/sites-enabled/cabin.conf
+
+sudo nginx -t
+sudo nginx -s reload

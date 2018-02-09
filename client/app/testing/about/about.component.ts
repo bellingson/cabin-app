@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
@@ -8,9 +10,18 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  signOut() {
+
+    if(!confirm("Are you sure you want to sign out?"))
+      return;
+
+    this.router.navigateByUrl('/clear');
+
   }
 
 }

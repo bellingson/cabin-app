@@ -8,6 +8,6 @@ cd $BASE
 
 docker push bellingson/cabin:latest
 
-ssh -t vhost@cabin01 '~/bin/run.cabin'
+ssh -t vhost@cabin02 '~/bin/run.cabin'
 
 rm -rf $BASE/build

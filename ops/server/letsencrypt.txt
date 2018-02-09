@@ -1,3 +1,12 @@
+apt-get update
+apt-get install software-properties-common
+add-apt-repository ppa:certbot/certbot
+apt-get update
+apt-get install python-certbot-nginx
+
+
+
+
 letsencrypt certonly --text --rsa-key-size 4096 \
             --webroot -w /opt/cabin/data/ssl \
              --email nnmhelp@gmail.com \

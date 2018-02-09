@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import {FACES} from "./faces";
 
@@ -34,6 +34,7 @@ export class FaceTestComponent implements OnInit {
   currentIndex: number;
 
   sampleCount: number;
+  extraSampleCount: number;
   accuracy: number;
 
   correctSide: Side;
@@ -59,7 +60,9 @@ export class FaceTestComponent implements OnInit {
   showCorrect = false;
   showIncorrect = false;
 
-  responseTime;
+  showResume = false;
+
+  responseTime: string;
 
   settings: any;
 
@@ -69,37 +72,61 @@ export class FaceTestComponent implements OnInit {
 
   options: any;
 
+  timer: any;
+
   constructor(private userService: UserService,
               private testService: TestService,
+              private route: ActivatedRoute,
               private router: Router) {
 
   }
 
   ngOnInit() {
-
+    
       this.testService.options.subscribe(options => this.options = options);
 
       this.testService.sampleCount.subscribe(_sampleCount => this.sampleCount = _sampleCount);
+      this.testService.extraSampleCount.subscribe(_extraSampleCount => this.extraSampleCount = _extraSampleCount);
 
       this.userService.user.subscribe(user => this.user = user);
-
+     
       this.testService.preloadImages()
-            .subscribe(() => {
-                this.loading = false;
-                this.nextSample();
-            }, err => {
-              console.log(err);
-                this.loading = false;
-                this.nextSample();
-            });
-
-      // this.currentIndex = 0;
-      // this.showDotLeft = true;
+            .subscribe(this.loadingComplete.bind(this),
+                       this.loadingComplete.bind(this));
 
       // console.log('screen width: ' + window.innerWidth);
 
-
   }
+  
+  private loadingComplete() {
+
+    this.loading = false;
+
+    this.route.queryParams.subscribe(queryParams => {
+      if(queryParams['resume']) {
+        this.resumeSession();
+      }
+
+      this.nextSample();
+
+    });
+    
+  }
+  
+  private resumeSession() {
+
+    console.log('resuming session...')
+    
+    let _session;
+    this.testService.currentSession.subscribe(session => _session = session);
+    if(_session) {
+      this.samples = _session.samples;
+    } else {
+      this.samples = [];
+    }
+    
+  }
+  
 
   /*
 Control version: in the control version the target dot will occur in equal numbers
@@ -112,6 +139,9 @@ left = 0, affective right = 0).
    */
 
   nextSample() {
+
+      // clear timer
+      this.clearTimer();
 
       // finish
       if(this.checkFinished()) {
@@ -159,13 +189,43 @@ left = 0, affective right = 0).
       this.showShapes = false;
       this.showDotLeft = false;
       this.showDotRight = false;
+      this.setTimeoutTimer();
     }
 
   }
 
+  setTimeoutTimer() {
+
+    this.timer = setTimeout(this.doTimeout.bind(this), this.options.display.timeOut);
+
+  }
+
+  clearTimer() {
+     if(this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+     }
+  }
+
+  doTimeout() {
+
+    console.log('do timeout');
+
+    this.clearTimer();
+
+    this.hideInputAndResponseControls();
+
+    this.showResume = true;
+
+  }
+
+  resume() {
+      this.nextSample();
+  }
+
   private displayFaces() {
 
-    if(this.user.controlVersion) {
+    if(this.shouldUseControlVersion()) {
 
       // console.log('control version true');
 
@@ -178,6 +238,15 @@ left = 0, affective right = 0).
       this.correctSide = this.neutralSide;
       this.currentSample.showDotOnNeutralFace = true;
     }
+
+    this.hideInputAndResponseControls();
+
+    this.showResume = false;
+    this.showFaces = true;
+
+  }
+
+  hideInputAndResponseControls() {
 
     // response
     this.showCorrectLeft = false;
@@ -196,15 +265,32 @@ left = 0, affective right = 0).
     this.showDotRight = false;
     this.canClick = false;
 
-    this.showFaces = true;
+  }
 
+  shouldUseControlVersion() : boolean {
+
+    if(this.user.controlVersion) {
+      return true;
+    }
+
+    let samples = _filter(this.samples, sample => sample.timeClass != TimeClass.TOO_SLOW);
+    if(samples.length > this.sampleCount) {
+       return true;
+    }
+
+    return false;
+  }
+
+  validSamples() : Array<TestSample> {
+    return _filter(this.samples, sample => sample.timeClass != TimeClass.TOO_SLOW);
   }
 
 
   checkFinished() : boolean {
 
-      let samples = _filter(this.samples, sample => sample.timeClass != TimeClass.TOO_SLOW);
-      if(samples.length < this.sampleCount) {
+      let samples = this.validSamples();
+      let totalSamples = this.sampleCount + this.extraSampleCount;
+      if(samples.length < totalSamples) {
           return false;
       }
 
@@ -269,6 +355,10 @@ left = 0, affective right = 0).
 
   handleResponse(correct: boolean) {
 
+    console.log('response : ' + correct);
+
+      this.clearTimer();
+
       this.currentSample.correct = correct;
       this.currentSample.time = Date.now() - this.currentSample.startTime;
       this.currentSample.timeClass = this.classForTime(this.currentSample.time);
@@ -279,6 +369,8 @@ left = 0, affective right = 0).
 
       this.checkAccuracy();
 
+      this.testService.saveSession(this.samples);
+
       this.currentSample = null;
       this.canClick = false;
 
@@ -286,6 +378,8 @@ left = 0, affective right = 0).
           this.nextSample();
       }, 1000);
   }
+
+
 
   classForTime(time: number) : TimeClass {
 

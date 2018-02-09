@@ -32,7 +32,13 @@
         <tr>
           <th>Sample Size: </th>
           <td>
-            <input type="text" class="sample-count" name="sampleCount" [(ngModel)]="sampleCount" />
+            <input type="number" class="sample-count" name="sampleCount" [(ngModel)]="sampleCount" required />
+          </td>
+        </tr>
+        <tr>
+          <th>X Sample Size: </th>
+          <td>
+            <input type="number" class="sample-count" name="extraSampleCount" [(ngModel)]="extraSampleCount" required />
           </td>
         </tr>
         <tr>

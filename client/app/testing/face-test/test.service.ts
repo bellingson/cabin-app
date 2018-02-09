@@ -28,12 +28,17 @@ import * as _last from 'lodash/last';
 import {TestStats} from "./test-stats.model";
 import {User} from "../user/user.model";
 
+export const CURRENT_SESSION_KEY = 'current_session';
+
 const SESSIONS_KEY = 'sessions';
 const STATS_KEY = 'stats';
 const OPTIONS_KEY = 'options';
 
 export const DEFAULT_SAMPLE_COUNT = 200;
 export const SAMPLE_COUNT_KEY = 'sample_count';
+
+export const DEFAULT_EXTRA_SAMPLE_COUNT = 30;
+export const EXTRA_SAMPLE_COUNT_KEY = 'extra_sample_count';
 
 @Injectable()
 export class TestService {
@@ -42,13 +47,14 @@ export class TestService {
 
   testSessions = new ReplaySubject<Array<TestSession>>(1);
 
-  private currentSession = new ReplaySubject<TestSession>(1);
+  currentSession = new ReplaySubject<TestSession>(1);
 
   stats = new ReplaySubject<TestStats>(1);
 
   user: User;
 
   sampleCount = new ReplaySubject<number>(1);
+  extraSampleCount = new ReplaySubject<number>(1);
 
   options = new ReplaySubject<any>(1);
 
@@ -89,6 +95,12 @@ export class TestService {
 
      this.sampleCount.next(sampleCount);
 
+     let extraSampleCount = DEFAULT_EXTRA_SAMPLE_COUNT;
+     const _extraSampleSize = localStorage.getItem(EXTRA_SAMPLE_COUNT_KEY);
+     if(_extraSampleSize) {
+        extraSampleCount = parseInt(_extraSampleSize, 10);
+     }
+     this.extraSampleCount.next(extraSampleCount);
   }
 
   initializeStats() {
@@ -143,6 +155,8 @@ export class TestService {
       this.http.post(url, session )
         .subscribe(r => {
 
+          localStorage.removeItem(CURRENT_SESSION_KEY);
+
           this.fetchSummaries().subscribe(sessionSummaries => {
 
             this.testSessions.next(sessionSummaries);
@@ -160,6 +174,22 @@ export class TestService {
         });
 
        return response;
+
+  }
+
+  saveSession(samples: Array<TestSample>) {
+
+    let session;
+    this.currentSession.subscribe(_session => session = _session);
+
+    if(session == null) {
+       session = this.createSession();
+    }
+    session.samples = samples;
+
+    const _session = JSON.stringify(session);
+
+    localStorage.setItem(CURRENT_SESSION_KEY, _session);
 
   }
 
@@ -229,6 +259,11 @@ export class TestService {
       return _last(sessions);
   }
 
+  resumeSession(testSession: TestSession) {
+
+    this.currentSession.next(testSession);
+  }
+
   startSession() {
 
     const session = this.createSession();
@@ -279,6 +314,10 @@ export class TestService {
 
       let user;
       this.userService.user.subscribe(_user => user = _user);
+
+      if(user == null) {
+         return;
+      }
 
       let stats = new TestStats();
       stats.totalWeeks = 6;
@@ -390,7 +429,7 @@ export class TestService {
 
   }
 
-  updateSampleCount(_sampleCount: number) {
+  updateSampleCount(_sampleCount: number, _extraSampleCount: number) {
 
     if(_sampleCount == DEFAULT_SAMPLE_COUNT) {
         localStorage.removeItem(SAMPLE_COUNT_KEY);
@@ -399,6 +438,14 @@ export class TestService {
     }
 
     this.sampleCount.next(_sampleCount);
+
+    if(_extraSampleCount == DEFAULT_EXTRA_SAMPLE_COUNT) {
+       localStorage.removeItem(EXTRA_SAMPLE_COUNT_KEY);
+    } else {
+       localStorage.setItem(EXTRA_SAMPLE_COUNT_KEY, _extraSampleCount.toString());
+    }
+
+    this.extraSampleCount.next(_extraSampleCount);
   }
 
   fetchOptions() : Observable<boolean> {

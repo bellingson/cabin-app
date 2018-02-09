@@ -1,0 +1,16 @@
+
+div.start-wrapper {
+   display: table;
+  width: 100%;
+  height: 100%;
+
+  div.start-cell {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+
+    button, img { display: block; margin: 0 auto 20px auto; }
+
+  }
+
+}

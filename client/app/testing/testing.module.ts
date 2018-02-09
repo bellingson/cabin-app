@@ -23,6 +23,7 @@ import { MoodComponent } from './face-test/mood.component';
 import { FaceComponent } from './face-test/face.component';
 import {testingRoutes} from "./testing.routes";
 import {TestingBaseComponent} from "./testing-base.component";
+import {StartComponent} from "./user/start.component";
 
 
 @NgModule({
@@ -36,6 +37,8 @@ import {TestingBaseComponent} from "./testing-base.component";
      TestCompleteComponent,
      UploadFailedComponent,
      MoodButtonsComponent,
+
+     StartComponent,
 
      SettingsComponent,
      MoodComponent,

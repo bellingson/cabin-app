@@ -1,0 +1,15 @@
+{
+  "short_name": "CabinApp",
+  "name": "CabinApp",
+  "icons": [
+    {
+      "src": "/assets/cabin_logo.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    }
+   ],
+   "start_url": "/?launcher=true",
+  "background_color": "#000000",
+  "display": "standalone",
+  "orientation": "landscape"
+}

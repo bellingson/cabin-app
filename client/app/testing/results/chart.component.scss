@@ -1,6 +1,9 @@
 
 div.chart-page {
+  position: absolute;
+  top: 0; left: 0;
   width: 100%;
+  min-height: 100%;
   text-align: center;
 
   div.chart-wrapper {
@@ -11,21 +14,16 @@ div.chart-page {
   }
 
   div.data-wrapper {
+      max-height: 300px;
       width: 100%;
+      overflow: auto;
       table {
          margin: 0 auto;
          min-width: 600px;
+         td.milli { text-align: right; width: 45px; }
       }
   }
 
-
-}
-
-@media (max-width: 600px) {
-
-  div.chart-page {
-    display: none;
-  }
 
 }
 

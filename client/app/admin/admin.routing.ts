@@ -13,7 +13,7 @@ const routes: Routes = [
     { path: 'list', component: TestSessionListComponent },
     { path: 'detail/:id', component: TestSessionDetailComponent },
     { path: 'participant-list', component: ParticipantListComponent },
-    { path: 'settings', component: AdminSettingsComponent }
+    { path: 'options', component: AdminSettingsComponent }
   ]}
 ];
 

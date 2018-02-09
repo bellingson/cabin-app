@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
+import { Router } from '@angular/router';
+
 import {User} from "./user.model";
 import {UserService} from "./user.service";
 import {TestService} from "../face-test/test.service";
@@ -20,11 +23,18 @@ export class PreTestComponent implements OnInit {
   error: string;
 
   constructor(userService: UserService,
-              private testService: TestService) {
+              private testService: TestService,
+              private router: Router) {
      userService.user.subscribe(user => this.user = user);
+
   }
 
   ngOnInit() {
+
+    if(this.user == null) {
+      this.router.navigateByUrl('/t/user-init');
+      return;
+    }
 
     this.fetchSummariesAndOptions();
 

@@ -14,12 +14,14 @@ import {MoodComponent} from "./face-test/mood.component";
 import {AdminGuard} from "../admin/admin.guard";
 
 import {TestingBaseComponent} from "./testing-base.component";
+import {StartComponent} from "./user/start.component";
 
 const routes: Routes = [
 
   { path: '', component: TestingBaseComponent, children: [
 
-    { path: '', redirectTo: 'init', pathMatch: 'full' },
+    { path: '', redirectTo: 'start', pathMatch: 'full' },
+    { path: 'start', component: StartComponent },
     { path: 'init', component: AppInitComponent },
     { path: 'user-init', component: UserInitComponent },
     { path: 'pre-test', component: PreTestComponent },

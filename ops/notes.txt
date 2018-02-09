@@ -42,8 +42,14 @@ sudo ufw allow ssh
 
 
 sudo ufw allow 80/tcp
-sudo ufw allow 1080/tcp
+sudo ufw deny 1080/tcp
 sudo ufw allow 443/tcp
 
 
 sudo ufw status
+
+d pull mongo
+
+sudo apt-get install nginx
+
+

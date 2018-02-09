@@ -39,4 +39,12 @@ export class TestAdminService {
     return this.http.get(url);
   }
 
+  updateOptions(options: any) : Observable<any> {
+
+    let url = '/api/admin/options';
+
+    return this.http.put(url, options);
+
+  }
+
 }

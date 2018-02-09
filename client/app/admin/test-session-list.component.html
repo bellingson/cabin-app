@@ -57,7 +57,7 @@
     <td>{{test.correctCount}}</td>
     <td>{{test.incorrectCount}}</td>
     <td>{{test.percentCorrect}}</td>
-    <td>{{test.averageResponseMilli}}</td>
+    <td>{{test.averageResponseMilli.toFixed(0)}}</td>
     <td>
       <button class="btn btn-default" (click)="deleteTest(test)">Delete</button>
     </td>

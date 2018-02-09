@@ -22,6 +22,7 @@ export class SettingsComponent implements OnInit {
   message: string;
 
   sampleCount: number;
+  extraSampleCount: number;
 
   constructor(private userService: UserService,
               private testService: TestService) {
@@ -31,6 +32,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
 
     this.testService.sampleCount.subscribe(_sampleCount => this.sampleCount = _sampleCount);
+    this.testService.extraSampleCount.subscribe(_extraSampleCount => this.extraSampleCount = _extraSampleCount);
 
     this.userService.user.subscribe(user => {
       this.user = _clone(user);
@@ -67,7 +69,7 @@ export class SettingsComponent implements OnInit {
 
       // console.log(this.user);
 
-      this.testService.updateSampleCount(this.sampleCount);
+      this.testService.updateSampleCount(this.sampleCount, this.extraSampleCount);
 
       this.message = 'Update complete';
 

@@ -17,15 +17,15 @@
 
 
     <div class="sample-counter" *ngIf="samples.length">
-      {{samples.length}} of {{sampleCount}}
+      {{validSamples().length}} of {{sampleCount + extraSampleCount}}
     </div>
 
-  </div>
+  </div>  <!-- // header -->
 
   <div class="face-set">
 
       <app-face
-        *ngIf="showCorrect == false && showIncorrect == false"
+        *ngIf="showCorrect == false && showIncorrect == false && showResume == false"
         [level]="user.level"
         [image]="leftImage"
         [showFaces]="showFaces"
@@ -38,12 +38,12 @@
       >
       </app-face>
 
-      <div class="plus" *ngIf="showCorrect == false && showIncorrect == false">
+      <div class="plus" *ngIf="showCorrect == false && showIncorrect == false && showResume == false">
         +
       </div>
 
       <app-face
-        *ngIf="showCorrect == false && showIncorrect == false"
+        *ngIf="showCorrect == false && showIncorrect == false && showResume == false"
         [level]="user.level"
         [image]="rightImage"
         [showFaces]="showFaces"
@@ -68,11 +68,19 @@
 
 
       </div>
-    </div>
+    </div>    <!-- // result-wrapper -->
 
-</div>
+    <div class="resume-wrapper" *ngIf="showResume">
 
-<app-portrait-message></app-portrait-message>
+      <div class="resume-cell">
 
-</div>
+          <p>Session Timed Out</p>
+
+          <button type="button" (click)="resume()">Resume</button>
+      </div>
+
+    </div>  <!-- // resume-wrapper -->
+
+  </div>  <!-- // face-set -->
+</div>   <!-- // face-wrapper -->
 

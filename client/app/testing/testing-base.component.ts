@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
     template: `
       <div class="testing-wrapper">
         <router-outlet></router-outlet>
-      </div>    
+      </div>
+      <app-portrait-message></app-portrait-message>
     `
 })
 

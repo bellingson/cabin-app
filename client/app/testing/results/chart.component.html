@@ -37,7 +37,7 @@
         <td>{{session.level}}</td>
         <td>{{session.startTime | date: 'EEE. MMM, d yyyy'}}</td>
         <td>{{session.percentCorrect}} %</td>
-        <td>{{session.averageResponseMilli}}</td>
+        <td class="milli">{{session.averageResponseMilli.toFixed(0)}}</td>
       </tr>
     </table>
 
@@ -48,4 +48,3 @@
 
 </div>
 
-<app-portrait-message></app-portrait-message>

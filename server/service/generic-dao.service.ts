@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import {Subject} from "rxjs/Subject";
 
+import * as _ from 'lodash';
+
 // export const dbUrl = 'mongodb://localhost:27017';
 
 export const dbUrl = 'mongodb://cabindb:27017';
@@ -13,6 +15,38 @@ export const dbUrl = 'mongodb://cabindb:27017';
 export const dbName = 'cabin';
 
 export class GenericDao {
+
+  save(collection: string, object: any) : Observable<boolean> {
+
+    let response = new Subject<boolean>();
+
+    this.connect().subscribe(client => {
+
+       const _update = { $set: _.omit(object,['_id']) };
+
+       const db = client.db(dbName);
+       db.collection(collection)
+         .updateOne({ _id: ObjectID(object._id) }, _update, (err, res) => {
+
+            if(err) {
+               response.error(err);
+               response.complete();
+               return;
+            }
+
+             response.next(true);
+             response.complete();
+
+         });
+
+    }, err => {
+        response.error(err);
+        response.complete();
+    });
+
+    return response;
+
+  }
 
   getSingleton(collection: string) : Observable<any> {
 

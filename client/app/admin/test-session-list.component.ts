@@ -51,7 +51,6 @@ export class TestSessionListComponent implements OnInit {
           this.fetchTestSessions(this.findText.value);
         });
 
-
   }
 
 }

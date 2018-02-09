@@ -167,5 +167,21 @@ router.get('/settings', jsonParser, (req, res, next) => {
       res.status(500).send({error: 'Failed to fetch settings'});
   });
 
-
 });
+
+router.put('/options', jsonParser, (req, res, next) => {
+
+  let options = req.body;
+
+  faceTestDao.saveOptions(options)
+              .subscribe(r => {
+                 res.send(OK);
+              }, err => {
+                console.log(err);
+                res.status(500).send({error: 'Failed to save options'});
+              });
+
+
+})
+
+

@@ -11,6 +11,10 @@ const optionsCollection = 'options';
 
 export class FaceTestDao extends GenericDao {
 
+  saveOptions(options: any) : Observable<boolean> {
+    return super.save(optionsCollection, options);
+  }
+
   getTestSession(id: string) : Observable<any> {
     return super.get(testSessionCollection, id);
   }

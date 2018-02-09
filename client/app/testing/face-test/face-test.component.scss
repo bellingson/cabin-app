@@ -79,14 +79,6 @@ div.face-wrapper {
 
 }
 
-@media (max-width: 600px) {
-
-  div.face-wrapper {
-     display: none;
-  }
-
-}
-
 div.preload {
     position: absolute;
     top: -9999px;
@@ -103,7 +95,7 @@ div.result-wrapper {
   div.result-cell {
       display: table-cell;
       vertical-align: middle;
-      p { text-align: center; }
+      p { text-align: center; font-size: 24px; }
 
       div.response-time {
           h5 { font-size: 13px; }
@@ -113,3 +105,23 @@ div.result-wrapper {
 
 
 }
+
+div.resume-wrapper {
+  display: table;
+
+  div.resume-cell {
+     display: table-cell;
+     vertical-align: middle;
+     text-align: center;
+
+     p { font-size: 24px; }
+
+  }
+
+}
+
+
+
+
+
+

@@ -22,7 +22,6 @@ import {AdminGuard} from "./admin/admin.guard";
 import {AuthInterceptor} from "./testing/user/auth.interceptor";
 import {ClearComponent} from "./clear.component";
 
-
 @NgModule({
   declarations: [
     AppComponent,

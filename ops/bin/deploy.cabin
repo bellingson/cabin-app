@@ -4,10 +4,18 @@ BASE=~/workspace/josh_carlson/cabin-app
 
 cd $BASE
 
+echo "BUILD DOCKER CONTAINER"
+
 ./ops/bin/build.container
+
+echo "PUSH DOCKER CONTAINER"
 
 docker push bellingson/cabin:latest
 
-ssh -t vhost@cabin02 '~/bin/run.cabin'
+echo "RUN DOCKER CONTAINER"
+
+ssh -t vhost@cabin02 'docker pull bellingson/cabin:latest && ~/bin/run.cabin'
+
+echo "REMOVE BUILD DIR"
 
 rm -rf $BASE/build

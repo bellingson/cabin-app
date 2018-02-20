@@ -1,1 +1,24 @@
-div.options { margin-top: 30px; }
+
+
+div.instruction-cell {
+
+  text-align: center;
+
+  img {
+    max-width: 150px;
+    margin-bottom: 5px;
+    display: inline-block;
+
+  }
+
+  p { font-size: 13px; }
+
+  a {  margin-bottom: 10px; }
+
+  div.buttons {
+      display: inline-block;
+      button { width: 100px; height: 30px; background: #fff; }
+  }
+
+}
+

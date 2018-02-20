@@ -15,6 +15,8 @@ import {AdminGuard} from "../admin/admin.guard";
 
 import {TestingBaseComponent} from "./testing-base.component";
 import {StartComponent} from "./user/start.component";
+import {PrepareComponent} from "./face-test/prepare.component";
+import {FocusComponent} from "./face-test/focus.component";
 
 const routes: Routes = [
 
@@ -25,6 +27,8 @@ const routes: Routes = [
     { path: 'init', component: AppInitComponent },
     { path: 'user-init', component: UserInitComponent },
     { path: 'pre-test', component: PreTestComponent },
+    { path: 'prepare', component: PrepareComponent },
+    { path: 'focus', component: FocusComponent },
     { path: 'mood', component: MoodComponent },
     { path: 'test', component: FaceTestComponent },
     { path: 'test-complete', component: TestCompleteComponent },

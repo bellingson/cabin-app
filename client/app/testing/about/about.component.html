@@ -1,22 +1,27 @@
 <div class="page-wrapper">
 
   <div class="instruction-cell">
+
     <img src="assets/cabin_logo.png" alt="Cabin" />
 
     <br>
 
     <a href="mailto: cabin.lab@gmail.com">cabin.lab@gmail.com</a>
 
-    <div class="options">
-      <a [routerLink]="['../']">Back</a>
-    </div>
+    <p>
+      The task is similar to the one you completed in the lab.  Remember that the study requires you to complete 6 tests per week (no more than 3 in a single day) for a total of 6 weeks. Each trial of the test will start with  a small ‘+’ (plus sign) in the center of the screen. At all times, keep your eyes fixated on the plus sign. After an initial period of fixation, two stimuli will be briefly presented: one on each side of the screen. After these stimuli disappear. A small dot will appear either on the left or on the right side of the screen. Your task is to locate this dot as quickly as possible. Each test should take between 5-10 mins. Please take the test in a quite distraction free environment. This is a training app meant for reaction time. Over the six-week period, your goal is to decrease your response time to the location of the dot. You may not see a decrease in reaction time from each session to the next, but the overall trend from start to finish should be a decrease in reaction time.
+    </p>
 
-    <div class="options">
-      <button type="button" (click)="signOut()">Sign Out</button>
+
+    <div class="buttons">
+
+        <button type="button" [routerLink]="['/t/pre-test']">Back</button>
+
+        <button type="button" (click)="signOut()">Sign Out</button>
+
     </div>
 
 
   </div>
-
 
 </div>

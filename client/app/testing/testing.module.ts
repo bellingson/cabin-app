@@ -24,6 +24,8 @@ import { FaceComponent } from './face-test/face.component';
 import {testingRoutes} from "./testing.routes";
 import {TestingBaseComponent} from "./testing-base.component";
 import {StartComponent} from "./user/start.component";
+import { PrepareComponent } from './face-test/prepare.component';
+import { FocusComponent } from './face-test/focus.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import {StartComponent} from "./user/start.component";
 
      SettingsComponent,
      MoodComponent,
-     FaceComponent
+     FaceComponent,
+     PrepareComponent,
+     FocusComponent
    ],
    imports: [
      CommonModule,

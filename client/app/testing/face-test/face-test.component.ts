@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 
-import {FACES} from "./faces";
+import {FACES, WORDS} from "./faces";
 
 import * as _filter from 'lodash/filter';
 
@@ -27,6 +27,7 @@ const responseTime = { fast: 600, ok: 900, slow: 1500, timeout: 3000 };
 export class FaceTestComponent implements OnInit {
 
   faces: Array<any> = FACES;
+  words: Array<any> = WORDS;
 
   currentSample: TestSample;
   samples: Array<TestSample> = [];
@@ -82,14 +83,14 @@ export class FaceTestComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
       this.testService.options.subscribe(options => this.options = options);
 
       this.testService.sampleCount.subscribe(_sampleCount => this.sampleCount = _sampleCount);
       this.testService.extraSampleCount.subscribe(_extraSampleCount => this.extraSampleCount = _extraSampleCount);
 
       this.userService.user.subscribe(user => this.user = user);
-     
+
       this.testService.preloadImages()
             .subscribe(this.loadingComplete.bind(this),
                        this.loadingComplete.bind(this));
@@ -97,7 +98,7 @@ export class FaceTestComponent implements OnInit {
       // console.log('screen width: ' + window.innerWidth);
 
   }
-  
+
   private loadingComplete() {
 
     this.loading = false;
@@ -110,13 +111,13 @@ export class FaceTestComponent implements OnInit {
       this.nextSample();
 
     });
-    
+
   }
-  
+
   private resumeSession() {
 
     console.log('resuming session...')
-    
+
     let _session;
     this.testService.currentSession.subscribe(session => _session = session);
     if(_session) {
@@ -124,9 +125,9 @@ export class FaceTestComponent implements OnInit {
     } else {
       this.samples = [];
     }
-    
+
   }
-  
+
 
   /*
 Control version: in the control version the target dot will occur in equal numbers

@@ -22,4 +22,35 @@ export const FACES = [
 { f: '213Fcrop.jpg', n: '213Ncrop.jpg' } ];
 
 
-  
+export const WORDS = [
+    { f: 'trauma', n: 'runner' },
+    { f: 'pollute', n: 'ketchup' },
+    { f: 'massacre', n: 'windmill' },
+    { f: 'unfaithful', n: 'skyscraper' },
+    { f: 'noose', n: 'jelly' },
+    { f: 'torture', n: 'volcano' },
+    { f: 'mutilate', n: 'radiator' },
+    { f: 'assassin', n: 'umbrella' },
+    { f: 'ambulance', n: 'sheltered' },
+    { f: 'terrified ', n: 'appliance' },
+    { f: 'bloody', n: 'locker' },
+    { f: 'neglect ', n: 'lantern' },
+    { f: 'fearful', n: 'cabinet' },
+    { f: 'cruel', n: 'stove' },
+    { f: 'horror', n: 'violin' },
+    { f: 'hatred', n: 'sphere' },
+    { f: 'jail', n: 'bowl' },
+    { f: 'panic ', n: 'salad' },
+    { f: 'nervous', n: 'prairie' },
+    { f: 'devil', n: 'bench' },
+    { f: 'cliff', n: 'tower' },
+    { f: 'violent', n: 'stomach' },
+    { f: 'rejected', n: 'reserved' },
+    { f: 'bomb', n: 'tool' },
+    { f: 'sin', n: 'hat' },
+    { f: 'afraid', n: 'yellow' },
+    { f: 'danger', n: 'column' },
+    { f: 'hospital', n: 'machine' },
+    { f: 'fear', n: 'farm' },
+    { f: 'alone', n: 'table' }
+];

@@ -1,0 +1,41 @@
+table.summary {
+  border: 1px solid #999;
+  margin-bottom: 30px;
+
+  th {
+    min-width: 100px;
+    background: #f1f1f1;
+    border: 1px solid #999;
+    padding: 3px;
+  }
+  td {
+    min-width: 100px;
+    border: 1px solid #999;
+    padding: 3px;
+  }
+
+
+}
+
+table.levels {
+
+  tr.future {
+    td {
+      background: #fff;
+    }
+  }
+
+  tr.current {
+      td {
+          background: greenyellow;
+      }
+  }
+
+  tr.past {
+    td {
+      background: #FFFFCC;
+    }
+  }
+
+
+}

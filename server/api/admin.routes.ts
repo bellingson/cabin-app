@@ -9,6 +9,8 @@ import * as moment from 'moment';
 
 import {FaceTestDao} from "../service/face-test-dao.service";
 import {OK} from "./face-test.routes";
+import {ParticipantDao} from "../service/participant-dao.service";
+import {Observable} from "rxjs/Observable";
 
 export const router = express.Router();
 
@@ -16,6 +18,7 @@ var jsonParser = bodyParser.json({ type: 'application/*+json'});
 
 
 const faceTestDao = new FaceTestDao();
+const participantDao = new ParticipantDao();
 
 const moodCategory = [
   'Active',
@@ -129,16 +132,29 @@ router.get('/face-test/:id', jsonParser, (req, res, next) => {
 
 });
 
-router.get('/patients', jsonParser, (req, res, next) => {
+router.get('/participant', jsonParser, (req, res, next) => {
 
-  faceTestDao.patients()
-      .subscribe(patients => {
-          res.send(patients);
-      }, err => {
-          console.log(err);
-          res.status(500).send({error: 'server errro'});
-      });
+  participantDao.query()
+    .subscribe(participants => {
+        res.send(participants)
+    }, err => {
+      console.log(err);
+      res.status(500).send({error: 'server errro'});
+    })
 
+});
+
+router.get('/participant/:id', jsonParser, (req, res, next) => {
+
+  const id = req.params.id;
+
+  participantDao.get(id)
+    .subscribe(participant => {
+      res.send(participant)
+    }, err => {
+      console.log(err);
+      res.status(500).send({error: 'server error'});
+    })
 
 });
 
@@ -184,4 +200,58 @@ router.put('/options', jsonParser, (req, res, next) => {
 
 })
 
+router.post('/participant/:id/stats', jsonParser, (req, res, next) => {
+
+
+  const id = req.params.id;
+
+  console.log(id);
+
+  let testP = participantDao.create(id);
+
+  console.log(testP);
+
+  participantDao.updateParticipantStats(id)
+    .subscribe(r => {
+       res.send(OK);
+    }, err => {
+      console.log(err);
+      res.status(500).send({error: 'Failed to save options'});
+    })
+
+});
+
+router.post('/participant/stats', jsonParser, (req, res, next) => {
+
+  faceTestDao.patients()
+    .subscribe(participant => {
+
+      let obsA = _.map(participant, participant => {
+                     return participantDao.updateParticipantStats(participant.participantId);
+                  });
+
+      Observable.forkJoin(obsA)
+        .subscribe(r => {
+            res.send(OK);
+        });
+
+    }, err => {
+      console.log(err);
+      res.status(500).send({error: 'server errro'});
+    });
+
+});
+
+router.get('/face-test/participant/:participantId', jsonParser, (req, res, next) => {
+
+  const participantId = req.params.participantId;
+
+  faceTestDao.sessionSummary(participantId).subscribe(r => {
+    res.send(r);
+  }, err => {
+    res.status(500).send({error: 'Failed to get summaries'});
+  });
+
+
+});
 

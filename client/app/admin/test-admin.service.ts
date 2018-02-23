@@ -47,4 +47,19 @@ export class TestAdminService {
 
   }
 
+  updateParticipantStats(participant: any) : Observable<any> {
+
+    let url = `/api/admin/participant/${participant.participantId}/stats`;
+
+    return this.http.post(url,{});
+  }
+
+  updateAllParticipants() : Observable<any> {
+    let url = '/api/admin/participant/stats';
+    return this.http.post(url,{});
+
+  }
+
+
+
 }

@@ -14,17 +14,20 @@ import { AdminLinksComponent } from './admin-links.component';
 import {AdminGuard} from "./admin.guard";
 import { AdminSettingsComponent } from './admin-settings.component';
 import {AuthInterceptor} from "../testing/user/auth.interceptor";
+import { ParticipantViewComponent } from './participant-view.component';
+import {ParticipantAdminService} from "./participant-admin.service";
+import { TestSessionTableComponent } from './test-session-table.component';
 
 
 @NgModule({
-  declarations: [ TestSessionListComponent, AdminBaseComponent, TestSessionDetailComponent, ParticipantListComponent, AdminLinksComponent, AdminSettingsComponent ],
+  declarations: [ TestSessionListComponent, AdminBaseComponent, TestSessionDetailComponent, ParticipantListComponent, AdminLinksComponent, AdminSettingsComponent, ParticipantViewComponent, TestSessionTableComponent ],
   imports: [ CommonModule,
               FormsModule,
               ReactiveFormsModule,
               HttpClientModule,
               adminRouting],
   providers: [
-    TestAdminService, AdminGuard,
+    TestAdminService, ParticipantAdminService, AdminGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, }
   ]
 })

@@ -47,25 +47,7 @@ export class FaceTestDao extends GenericDao {
       super.query(testSessionCollection)
         .subscribe(testSessions => {
 
-              let r = [];
-
-              let byId = _(testSessions)
-                        .groupBy('participantId')
-                        .valueOf();
-
-              // console.log(byId);
-
-              for(let id in byId) {
-                // console.log(id);
-                  let _sessions = byId[id];
-
-                  let lastSession = _.maxBy(_sessions, 'startTime');
-
-                  let participant = { participantId: id, sessionCount: _sessions.length, lastTest: lastSession.startTime }
-                  r.push(participant);
-              }
-
-
+              const r = this.formatPatientSummary(testSessions);
 
               response.next(r);
 
@@ -74,6 +56,30 @@ export class FaceTestDao extends GenericDao {
 
       return response;
   }
+
+  private formatPatientSummary(testSessions: Array<any>) : Array<any> {
+
+    let r = [];
+
+    let byId = _(testSessions)
+      .groupBy('participantId')
+      .valueOf();
+
+    // console.log(byId);
+
+    for(let id in byId) {
+      // console.log(id);
+      let _sessions = byId[id];
+
+      let lastSession = _.maxBy(_sessions, 'startTime');
+
+      let participant = { participantId: id, sessionCount: _sessions.length, lastTest: lastSession.startTime }
+      r.push(participant);
+    }
+
+    return r;
+  }
+
 
   settings() : Observable<any> {
      return this.getSingleton(settingsCollection);
@@ -120,12 +126,14 @@ export class FaceTestDao extends GenericDao {
                                  });
 
           response.next(sessionSummaries);
+          response.complete();
+      }, err => {
+          console.log()
+          response.error(err);
+          response.complete();
       });
 
     return response;
   }
-
-
-
 
 }

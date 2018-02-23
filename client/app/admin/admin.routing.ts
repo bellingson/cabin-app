@@ -5,6 +5,7 @@ import {TestSessionDetailComponent} from "./test-session-detail.component";
 import {ParticipantListComponent} from "./participant-list.component";
 import {AdminGuard} from "./admin.guard";
 import {AdminSettingsComponent} from "./admin-settings.component";
+import {ParticipantViewComponent} from "./participant-view.component";
 
 const routes: Routes = [
 
@@ -13,6 +14,7 @@ const routes: Routes = [
     { path: 'list', component: TestSessionListComponent },
     { path: 'detail/:id', component: TestSessionDetailComponent },
     { path: 'participant-list', component: ParticipantListComponent },
+    { path: 'participant/:id', component: ParticipantViewComponent },
     { path: 'options', component: AdminSettingsComponent }
   ]}
 ];

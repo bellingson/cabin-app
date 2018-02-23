@@ -1,0 +1,99 @@
+
+<h1>Participant Detail</h1>
+
+<div class="clearfix">
+  <div class="float-right">
+    <app-admin-links></app-admin-links>
+  </div>
+</div>
+
+<div *ngIf="participant == null" class="spinner"></div>
+
+
+<div *ngIf="participant">
+
+
+
+  <table class="summary">
+
+    <!--
+    <tr>
+      <th>ID</th>
+      <td>{{participant._id}}</td>
+    </tr>
+    -->
+    <tr>
+      <th>Participant #</th>
+      <td>{{participant.participantId}}</td>
+    </tr>
+    <tr>
+      <th>Created</th>
+      <td>{{participant.created | date: 'EEEE MMM d, yyyy'}}</td>
+    </tr>
+    <tr>
+      <th>Start Date</th>
+      <td>{{participant.startTime | date: 'EEEE MMM d, yyyy'}}</td>
+    </tr>
+    <tr>
+      <th>End Date</th>
+      <td>{{participant.endTime | date: 'EEEE MMM d, yyyy'}}</td>
+    </tr>
+    <tr>
+      <th>Days Left</th>
+      <td>{{participant.daysLeft}}</td>
+    </tr>
+
+    <tr>
+      <th>Level</th>
+      <td>{{participant?.currentLevel?.level}}</td>
+    </tr>
+
+    <tr>
+      <th>Session Count</th>
+      <td>{{participant.sessionCount}}</td>
+    </tr>
+    <tr>
+      <th>Sessions Today</th>
+      <td>{{participant.sessionsToday}}</td>
+    </tr>
+
+    <tr>
+      <th>Missing Count</th>
+      <td>{{participant.sessionsMissing}}</td>
+    </tr>
+
+
+  </table>
+
+  <h3>Levels</h3>
+
+  <table class="table table-stripped levels">
+    <tr>
+      <th>Level</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Session Count</th>
+      <th>To Do</th>
+      <th>Missing</th>
+    </tr>
+    <tr *ngFor="let level of participant.levels" [class]="levelClass(level)">
+      <td>{{level.level}}</td>
+      <td>{{level.startTime | date: 'EEE MM/dd/yyyy'}}</td>
+      <td>{{level.endTime | date: 'EEE MM/dd/yyyy'}}</td>
+      <td>{{level.sessionCount}}</td>
+      <td>{{level.sessionsToDo}}</td>
+      <td>{{level.sessionsMissing}}</td>
+    </tr>
+
+  </table>
+
+
+
+  <h3>Sessions</h3>
+
+  <app-test-session-table [testSessions]="sessions" (delete)="deleteTest($event)"></app-test-session-table>
+
+  <button class="btn btn-primary" (click)="updateStats()">Update Stats</button>
+
+</div>
+

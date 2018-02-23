@@ -32,37 +32,5 @@
 
 
 
-<table class="table table-striped table-hover">
-  <thead>
-  <tr>
-
-    <th>Participant #</th>
-    <th>Test #</th>
-    <th>Week</th>
-    <th>Time</th>
-    <th>Correct #</th>
-    <th>In-Correct #</th>
-    <th>% Correct</th>
-    <th>Avg Resp ms</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let test of testSessions" >
-
-    <td><a (click)="fetchTestSessions(test.participantId)">{{test.participantId}}</a></td>
-    <td>{{test.testNumber}}  <a [routerLink]="['../', 'detail', test._id ]"><i class="fas fa-eye"></i></a></td>
-    <td>{{test.level}}</td>
-    <td>{{test.startTime | date: 'M/d/yyyy hh:mm aa' }}</td>
-    <td>{{test.correctCount}}</td>
-    <td>{{test.incorrectCount}}</td>
-    <td>{{test.percentCorrect}}</td>
-    <td>{{test.averageResponseMilli.toFixed(0)}}</td>
-    <td>
-      <button class="btn btn-default" (click)="deleteTest(test)">Delete</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
+<app-test-session-table [testSessions]="testSessions" (delete)="deleteTest($event)"></app-test-session-table>
 

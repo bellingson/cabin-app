@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {TestAdminService} from "./test-admin.service";
 
+import * as _map from 'lodash/map';
+import * as _find from 'lodash/find';
+import {ParticipantAdminService} from "./participant-admin.service";
+
 @Component({
   selector: 'app-participant-list',
   templateUrl: './participant-list.component.html',
@@ -8,17 +12,56 @@ import {TestAdminService} from "./test-admin.service";
 })
 export class ParticipantListComponent implements OnInit {
 
-  patients: Array<any>;
+  participants: Array<any>;
 
-  constructor(private testAdminService: TestAdminService) { }
+  _participant: any;
+
+  constructor(private participantService: ParticipantAdminService,
+              private testAdminService: TestAdminService) { }
 
   ngOnInit() {
-    this.fetchPatients();
+    this.fetchParticipants();
   }
 
-  fetchPatients() {
-    this.testAdminService.patients()
-      .subscribe(patients => this.patients = patients)
+  fetchParticipants() {
+    this.participantService.query()
+      .subscribe(participants => {
+        this.participants = this.formatParticipantData(participants);
+      });
+  }
+
+  formatParticipantData(participants) : Array<any> {
+
+
+
+      return _map(participants, participant => {
+
+           participant.daysLeft = this.participantService.daysLeft(participant);
+           participant.currentLevel = this.participantService.currentLevel(participant);
+
+              return participant;
+        });
+
+  }
+
+
+
+  updateStats(participant) {
+     this.testAdminService.updateParticipantStats(participant)
+       .subscribe(success => {
+          this.fetchParticipants();
+       });
+  }
+
+  updateAllParticipants() {
+    this.testAdminService.updateAllParticipants()
+      .subscribe(r => {
+         this.fetchParticipants();
+      });
+  }
+
+  participantDetail(p) {
+    this._participant = p;
   }
 
 

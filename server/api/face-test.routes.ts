@@ -6,6 +6,8 @@ import * as jwt from 'jsonwebtoken';
 import { authVerification } from '../service/auth-verification';
 
 import {FaceTestDao} from "../service/face-test-dao.service";
+import {ParticipantDao} from "../service/participant-dao.service";
+import {Participant} from "../model/participant.model";
 
 export const router = express.Router();
 
@@ -14,6 +16,7 @@ var jsonParser = bodyParser.json({ type: 'application/*+json'});
 export const OK = { message: 'ok'};
 
 const faceTestDao = new FaceTestDao();
+const participantDao = new ParticipantDao();
 
 let settings;
 faceTestDao.settings().subscribe(_settings => settings = _settings);
@@ -33,14 +36,57 @@ router.post('/verify-pin', jsonParser, (req, res, next) => {
 
   if(isPinValid(req)) {
 
-    let token = jwt.sign({participantId: req.body.participantId}, settings.jwtSecret);
-    res.send({token: token});
+    const participantId = req.body.participantId;
+
+    participantDao.findByParticipantId(participantId)
+      .subscribe(participant => {
+
+        if(participant) {
+          let token = jwt.sign(participant, settings.jwtSecret);
+          res.send({token: token, participant: participant });
+          return;
+        }
+
+        participant = participantDao.create(participantId);
+        participantDao.save(participant)
+          .subscribe(success => {
+
+            participantDao.findByParticipantId(participantId)
+              .subscribe(participant => {
+                let token = jwt.sign(participant, settings.jwtSecret);
+                res.send({token: token, participant: participant });
+
+              });
+
+          });
+
+      });
+
     return;
   }
 
   res.status(401).send('Invalid PIN');
 
 });
+
+function verifyPinResponse(participantId: string, participant: Participant, res) {
+
+  participantDao.save(participant)
+    .subscribe(success => {
+
+      participantDao.findByParticipantId(participantId)
+        .subscribe(participant => {
+
+          let token = jwt.sign(participant, settings.jwtSecret);
+          res.send({token: token});
+
+        });
+
+    });
+
+
+}
+
 
 function isPinValid(req) : boolean {
 
@@ -64,15 +110,35 @@ router.post('/', authVerification, jsonParser, (req, res, next) => {
      return;
   }
 
+  console.log('do save: ' + testSession);
+
   faceTestDao.saveTestSession(testSession)
     .subscribe(r => {
        console.log('saved test session');
-        res.send(OK);
+
+        participantDao.updateParticipantStats(testSession.participantId)
+          .subscribe(r => {
+            res.send(OK);
+          }, err => {
+            console.log('update participant error');
+            console.log(err);
+            res.status(500).send({error: 'Failed to save test'});
+          });
+
     }, err => {
       console.log('save face test error');
         console.log(err);
         res.status(500).send({error: 'Failed to save test'});
     });
+
+});
+
+router.post('/participant', authVerification, jsonParser, (req, res, next) => {
+
+  let participant = req.body;
+
+  console.log(participant);
+
 
 });
 

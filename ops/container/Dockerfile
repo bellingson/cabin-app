@@ -1,5 +1,8 @@
 FROM node:8.9.4
 
+RUN echo "America/New_York" > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
 RUN groupadd vhost
 RUN useradd -s /bin/bash -g vhost vhost
 

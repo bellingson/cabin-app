@@ -17,7 +17,8 @@
     ]
   },
   "files": [
-    "server.ts"
+    "server.ts",
+    "update-stats.ts"
   ],
   "include": [
     "server/*"

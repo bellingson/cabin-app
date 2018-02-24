@@ -1,14 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminSettingsComponent } from './admin-settings.component';
+import {testImports, testProviders} from "../testing/face-test/test.helper.spec";
+import {AdminLinksComponent} from "./admin-links.component";
 
-describe('AdminSettingsComponent', () => {
+fdescribe('AdminSettingsComponent', () => {
+
   let component: AdminSettingsComponent;
   let fixture: ComponentFixture<AdminSettingsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminSettingsComponent ]
+      declarations: [ AdminSettingsComponent, AdminLinksComponent ],
+      imports: testImports,
+      providers: testProviders
     })
     .compileComponents();
   }));

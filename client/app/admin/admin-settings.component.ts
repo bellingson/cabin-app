@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TestAdminService} from "./test-admin.service";
 import {TestService} from "../testing/face-test/test.service";
+import {TestDataService} from "../testing/face-test/test-data.service";
 
 @Component({
   selector: 'app-admin-settings',
@@ -14,13 +15,14 @@ export class AdminSettingsComponent implements OnInit {
   message: string;
 
   constructor(private testAdminService: TestAdminService,
-              private testService: TestService) { }
+              private testService: TestService,
+              private testDataService: TestDataService) { }
 
   ngOnInit() {
 
     this.testService.options.subscribe(options => this.options = options);
 
-    this.testService.fetchOptions();
+    this.testDataService.fetchOptions();
 
 
   }
@@ -31,7 +33,7 @@ export class AdminSettingsComponent implements OnInit {
 
     this.testAdminService.updateOptions(this.options)
       .subscribe(r => {
-          this.testService.fetchOptions();
+          this.testDataService.fetchOptions();
           this.message = 'Update complete';
       }, err => {
           this.message = 'Update failed';

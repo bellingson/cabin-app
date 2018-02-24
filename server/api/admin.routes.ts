@@ -162,13 +162,26 @@ router.delete('/face-test/:id', jsonParser, (req, res, next) => {
 
   const id = req.params.id;
 
-  faceTestDao.delete(id).subscribe(r => {
-      res.send(OK);
-  }, err => {
-      console.log(err);
-      res.status(500).send({error: 'server error'});
-  });
+  const handleError = err => {
+    console.log(err);
+    res.status(500).send({error: 'server error'});
+  };
 
+  faceTestDao.getTestSession(id)
+    .subscribe(session => {
+
+      const participantId = session.participantId;
+
+      faceTestDao.delete(id).subscribe(r => {
+        participantDao.updateParticipantStats(participantId).subscribe(r => {
+
+          res.send(OK);
+
+        }, handleError);
+
+      },handleError);
+
+    }, handleError);
 
 });
 

@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { FocusComponent } from './focus.component';
+import {testProviders} from "./test.helper.spec";
+
+import {Router} from "@angular/router";
+import {RouterMock} from "./router.mock";
 
 describe('FocusComponent', () => {
   let component: FocusComponent;
@@ -8,7 +12,8 @@ describe('FocusComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FocusComponent ]
+      declarations: [ FocusComponent ],
+      providers: testProviders
     })
     .compileComponents();
   }));
@@ -22,4 +27,21 @@ describe('FocusComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('ngOnInit', () => {
+
+    component.ngOnInit();
+
+    expect(component).toBeTruthy();
+  });
+
+  it('next', inject([Router],(router: RouterMock) => {
+
+    component.next();
+
+    expect(router.called).toBe(true);
+
+  }));
+
+
 });

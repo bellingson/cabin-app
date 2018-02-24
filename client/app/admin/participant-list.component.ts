@@ -32,8 +32,6 @@ export class ParticipantListComponent implements OnInit {
 
   formatParticipantData(participants) : Array<any> {
 
-
-
       return _map(participants, participant => {
 
            participant.daysLeft = this.participantService.daysLeft(participant);

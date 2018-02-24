@@ -1,0 +1,3 @@
+#!/bin/sh
+
+docker exec -it cabin /usr/local/bin/node /opt/cabin/app/update-stats.js

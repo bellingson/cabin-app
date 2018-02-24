@@ -22,4 +22,32 @@ describe('FaceComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('ngOnInit', () => {
+
+    component.ngOnInit();
+
+    expect(component).toBeTruthy();
+  });
+
+  it('click', () => {
+
+    component.ngOnInit();
+
+    let clicked = false;
+
+    component.clicked.subscribe(() => {
+       clicked = true;
+    });
+
+    component.click();
+
+    expect(clicked).toBe(true);
+  });
+
+
+
+
+
+
 });

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {TestService} from "./test.service";
+import {TestDataService} from "./test-data.service";
 
 @Component({
   selector: 'app-upload-failed',
@@ -11,7 +12,7 @@ export class UploadFailedComponent implements OnInit {
 
   message: string;
 
-  constructor(private testService: TestService) { }
+  constructor(private testDataService: TestDataService) { }
 
   ngOnInit() {
   }
@@ -20,14 +21,14 @@ export class UploadFailedComponent implements OnInit {
 
       this.message = null;
 
-      this.testService.uploadResults()
+      this.testDataService.uploadResults()
           .subscribe(() => {
 
               // complete
 
           }, err => {
             this.message = 'Uploaded failed again...';
-          
+
           });
 
     }

@@ -3,10 +3,28 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import * as _clone from 'lodash/clone';
 import {User} from "./user.model";
+import {UserService} from "./user.service";
 
-export const testUser = { participantId: 'ab123', startTime: Date.now(), level: 1, pin: '1234', controlVersion: false, admin: false, token: 'foo' } as User;
+export const testUser = { participantId: 'ab123',
+                          startTime: Date.now(),
+                          level: 1,
+                          controlVersion: false,
+                          restrictSessions: false,
+                          admin: false } as User;
 
 export class UserServiceMock {
+
+  initialize(): void {
+
+  }
+
+  updateUserLevel(): void {
+    this.setLevel(1);
+  }
+
+  updateUser(user: User): void {
+    this.user.next(user);
+  }
 
   user = new ReplaySubject<any>(1);
 

@@ -10,6 +10,7 @@ export class FaceComponent implements OnInit {
   @Input() level: number;
 
   @Input() image: string;
+  @Input() word: string;
   @Input() showFaces = false;
   @Input() canClick = false;
   @Input() showDot = false;

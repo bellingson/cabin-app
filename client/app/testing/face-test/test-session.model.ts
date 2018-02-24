@@ -12,6 +12,8 @@ export interface TestSession {
     testNumber: number;
     level: number;
 
+    stimuli: string;
+
     startTime: number;
     samples: Array<TestSample>;
 
@@ -22,9 +24,6 @@ export interface TestSession {
 
     averageResponseMilli: number;
     averageResponseSeconds: string;
-
-    active: Mood;
-    afraid: Mood;
 
     moods: Array<any>;
 

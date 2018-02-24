@@ -1,7 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { TestCompleteComponent } from './test-complete.component';
 import {testImports, testProviders} from "./test.helper.spec";
+import {TestService} from "./test.service";
 
 describe('TestCompleteComponent', () => {
   let component: TestCompleteComponent;
@@ -25,4 +26,16 @@ describe('TestCompleteComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('ngOnInit', inject([TestService],(testService: TestService) => {
+
+    let session = testService.createSession();
+
+    testService.testSessions.next([session]);
+
+    component.ngOnInit();
+
+    expect(component.session).toBeTruthy();
+  }));
+
 });

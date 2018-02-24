@@ -7,16 +7,16 @@ import {FACES, WORDS} from "./faces";
 import * as _filter from 'lodash/filter';
 
 import {TestSample, TimeClass} from "./test-sample.model";
-import {TestService} from "./test.service";
+import {STIMULI_FACES, TestService} from "./test.service";
 import {UserService} from "../user/user.service";
 import {User} from "../user/user.model";
+import {TestSession} from "./test-session.model";
+import {TestDataService} from "./test-data.service";
 
-enum Side {
+export enum Side {
     LEFT,
     RIGHT
 }
-
-const responseTime = { fast: 600, ok: 900, slow: 1500, timeout: 3000 };
 
 @Component({
   selector: 'app-face-test',
@@ -29,6 +29,7 @@ export class FaceTestComponent implements OnInit {
   faces: Array<any> = FACES;
   words: Array<any> = WORDS;
 
+  testSession: TestSession;
   currentSample: TestSample;
   samples: Array<TestSample> = [];
 
@@ -44,6 +45,10 @@ export class FaceTestComponent implements OnInit {
   // images
   leftImage: string;
   rightImage: string;
+
+  // words
+  leftWord: string;
+  rightWord: string;
 
   // UI State
   showFaces = false;
@@ -77,6 +82,7 @@ export class FaceTestComponent implements OnInit {
 
   constructor(private userService: UserService,
               private testService: TestService,
+              private testDataService: TestDataService,
               private route: ActivatedRoute,
               private router: Router) {
 
@@ -90,6 +96,13 @@ export class FaceTestComponent implements OnInit {
       this.testService.extraSampleCount.subscribe(_extraSampleCount => this.extraSampleCount = _extraSampleCount);
 
       this.userService.user.subscribe(user => this.user = user);
+
+      this.testService.currentSession.subscribe(testSession => this.testSession = testSession);
+      if(this.testSession == null) {
+        this.testService.startSession();
+      }
+
+      // console.log('new session: ' + this.testSession.stimuli);
 
       this.testService.preloadImages()
             .subscribe(this.loadingComplete.bind(this),
@@ -152,13 +165,24 @@ left = 0, affective right = 0).
       this.currentSample = new TestSample();
       this.currentSample.ordinal = this.samples.length;
 
-      this.currentIndex = Math.floor(Math.random() * this.faces.length);
       this.neutralSide = Math.random() <= 0.5 ? Side.LEFT : Side.RIGHT;
 
-      let face = this.faces[this.currentIndex];
-      this.assignImages(face);
+      if(this.testSession.stimuli == STIMULI_FACES) {
 
-      this.displayFaces();
+        this.currentIndex = Math.floor(Math.random() * this.faces.length);
+
+        const face = this.faces[this.currentIndex];
+        this.assignImages(face);
+
+      } else {
+
+        this.currentIndex = Math.floor(Math.random() * this.words.length);
+        const words = this.words[this.currentIndex];
+        this.assignWords(words);
+      }
+
+      this.displayStimuli();
+
 
       // 1 show faces
       setTimeout(() => {
@@ -172,7 +196,7 @@ left = 0, affective right = 0).
 
   }
 
-  private displayShapes() {
+  displayShapes() {
 
     this.canClick = true;
     this.showShapes = true;
@@ -184,7 +208,7 @@ left = 0, affective right = 0).
     setTimeout(this.hideShapes.bind(this), this.options.display.showShapes);
   }
 
-  private hideShapes() {
+  hideShapes() {
 
     if(this.currentSample) {
       this.showShapes = false;
@@ -210,7 +234,7 @@ left = 0, affective right = 0).
 
   doTimeout() {
 
-    console.log('do timeout');
+    // console.log('do timeout');
 
     this.clearTimer();
 
@@ -224,7 +248,7 @@ left = 0, affective right = 0).
       this.nextSample();
   }
 
-  private displayFaces() {
+  displayStimuli() {
 
     if(this.shouldUseControlVersion()) {
 
@@ -247,7 +271,7 @@ left = 0, affective right = 0).
 
   }
 
-  hideInputAndResponseControls() {
+  private hideInputAndResponseControls() {
 
     // response
     this.showCorrectLeft = false;
@@ -268,7 +292,7 @@ left = 0, affective right = 0).
 
   }
 
-  shouldUseControlVersion() : boolean {
+  private shouldUseControlVersion() : boolean {
 
     if(this.user.controlVersion) {
       return true;
@@ -289,15 +313,15 @@ left = 0, affective right = 0).
 
   checkFinished() : boolean {
 
-      let samples = this.validSamples();
-      let totalSamples = this.sampleCount + this.extraSampleCount;
+      const samples = this.validSamples();
+      const totalSamples = this.sampleCount + this.extraSampleCount;
       if(samples.length < totalSamples) {
           return false;
       }
 
-      let testSession = this.testService.testComplete(this.samples)
+      const testSession = this.testService.testComplete(this.samples)
 
-      this.testService.uploadResults(testSession)
+      this.testDataService.uploadResults(testSession)
                         .subscribe(success => {
                               this.router.navigateByUrl('/t/test-complete');
                           }, err => {
@@ -319,6 +343,19 @@ left = 0, affective right = 0).
           // console.log('netural right');
       }
   }
+
+  assignWords(words: any) {
+    if(this.neutralSide == Side.LEFT) {
+      this.leftWord = words.n;
+      this.rightWord = words.f;
+      // console.log('netural left');
+    } else {
+      this.leftWord = words.f;
+      this.rightWord = words.n;
+      // console.log('netural right');
+    }
+  }
+
 
   clickLeft() {
 
@@ -356,7 +393,7 @@ left = 0, affective right = 0).
 
   handleResponse(correct: boolean) {
 
-    console.log('response : ' + correct);
+    // console.log('response : ' + correct);
 
       this.clearTimer();
 

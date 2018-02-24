@@ -17,6 +17,7 @@ import {AuthInterceptor} from "../testing/user/auth.interceptor";
 import { ParticipantViewComponent } from './participant-view.component';
 import {ParticipantAdminService} from "./participant-admin.service";
 import { TestSessionTableComponent } from './test-session-table.component';
+import {TestDataService} from "../testing/face-test/test-data.service";
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { TestSessionTableComponent } from './test-session-table.component';
               HttpClientModule,
               adminRouting],
   providers: [
-    TestAdminService, ParticipantAdminService, AdminGuard,
+    TestAdminService, TestDataService, ParticipantAdminService, AdminGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, }
   ]
 })

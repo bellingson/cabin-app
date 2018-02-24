@@ -1,5 +1,8 @@
 <div class="face">
-  <img *ngIf="showFaces" src="assets/faces/{{image}}" />
+
+  <img *ngIf="showFaces && image" src="assets/faces/{{image}}" />
+
+  <h3 *ngIf="showFaces && word">{{word}}</h3>
 
   <div *ngIf="canClick" class="dot-container" (click)="click()">
 

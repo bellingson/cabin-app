@@ -190,8 +190,7 @@ export class ParticipantDao extends GenericDao {
 
     participant.sessionsToday = _.filter(sessions, session => this.isToday(session.startTime)).length;
 
-    console.log('today: ' + participant.sessionsToday);
-
+    // console.log('today: ' + participant.sessionsToday);
 
   }
 
@@ -229,21 +228,7 @@ export class ParticipantDao extends GenericDao {
   }
 
   isToday(time: number) {
-
-    let startOfDay = this.startOfDay(time);
-    let endOfDay = this.endOfDay(time);
-
-    // console.log('today: ' + moment(startOfDay).format('M/D/YYYY HH:mm:ss') + ' -> ' + moment(endOfDay).format('M/D/YYYY HH:mm:ss'))
-
-    if(time < startOfDay) {
-      return false;
-    }
-
-    if(time > endOfDay) {
-      return false;
-    }
-
-    return true;
+    return moment(time).format('MM/DD/YYYY') == moment().format('MM/DD/YYYY');
   }
 
   startOfDay(time: number) : number {

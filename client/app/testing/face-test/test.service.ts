@@ -32,13 +32,16 @@ export const CURRENT_SESSION_KEY = 'current_session';
 
 const SESSIONS_KEY = 'sessions';
 const STATS_KEY = 'stats';
-const OPTIONS_KEY = 'options';
+export const OPTIONS_KEY = 'options';
 
 export const DEFAULT_SAMPLE_COUNT = 200;
 export const SAMPLE_COUNT_KEY = 'sample_count';
 
 export const DEFAULT_EXTRA_SAMPLE_COUNT = 30;
 export const EXTRA_SAMPLE_COUNT_KEY = 'extra_sample_count';
+
+export const STIMULI_WORDS = 'words';
+export const STIMULI_FACES = 'faces';
 
 @Injectable()
 export class TestService {
@@ -58,8 +61,7 @@ export class TestService {
 
   options = new ReplaySubject<any>(1);
 
-  constructor(private userService: UserService,
-              private http: HttpClient) {
+  constructor(private userService: UserService) {
       this.initialize();
   }
 
@@ -144,39 +146,6 @@ export class TestService {
 
   }
 
-
-  uploadResults(session?: TestSession) : Observable<boolean> {
-
-      session = session ? session : this.lastSession();
-
-      let response = new ReplaySubject<boolean>(1);
-
-      let url = '/api/face-test';
-      this.http.post(url, session )
-        .subscribe(r => {
-
-          localStorage.removeItem(CURRENT_SESSION_KEY);
-
-          this.fetchSummaries().subscribe(sessionSummaries => {
-
-            this.testSessions.next(sessionSummaries);
-            response.next(true);
-            response.complete();
-
-          }, err => {
-              response.error(err);
-              response.complete();
-          });
-
-        }, er => {
-          response.error(er);
-          response.complete();
-        });
-
-       return response;
-
-  }
-
   saveSession(samples: Array<TestSample>) {
 
     let session;
@@ -211,7 +180,7 @@ export class TestService {
       session.samples = samples;
       session.testNumber = this.nextTestNumber();
 
-      console.log('complete: ' + totalTime + ' : ' + session.sampleCount);
+      // console.log('complete: ' + totalTime + ' : ' + session.sampleCount);
 
       session.averageResponseMilli = totalTime / session.sampleCount;
       session.averageResponseSeconds = ( (totalTime / 1000) / session.sampleCount).toFixed(1);
@@ -266,6 +235,7 @@ export class TestService {
 
   startSession() {
 
+
     const session = this.createSession();
     this.currentSession.next(session);
 
@@ -279,9 +249,29 @@ export class TestService {
 
     session.startTime = Date.now();
     session.level = this.user.level;
-    return session
+
+    session.stimuli = this.selectStimuliType(session.level);
+
+    return session;
 
   }
+
+  private selectStimuliType(level: number) : string {
+    if(level == 1) {
+      return STIMULI_FACES;
+    } else {
+      // how to choose
+
+      let ordinal = 1;
+      this.testSessions.subscribe(sessions => {
+                                      ordinal = _size(sessions) + 1;
+                                  });
+
+      return ordinal % 2 == 0 ? STIMULI_FACES : STIMULI_WORDS;
+    }
+
+  }
+
 
   setMoods(moods: Array<any>) {
 
@@ -359,12 +349,13 @@ export class TestService {
 
   sessionsToday() : Array<TestSession> {
 
-    let today = moment();
+    let today = moment().format('MM/DD/YYYY');
 
     let testSessions;
     this.testSessions.subscribe(_testSessions => {
       testSessions = _.filter(_testSessions, testSession => {
-        return moment(testSession.startTime).diff(today, 'days') == 0;
+         return moment(testSession.startTime).format('MM/DD/YYYY') == today;
+        // return moment(testSession.startTime).diff(today, 'days') == 0;
       });
     });
 
@@ -421,13 +412,6 @@ export class TestService {
 
   }
 
-  fetchSummaries() : Observable<Array<TestSession>> {
-
-    let url = '/api/face-test/session-summary';
-
-    return this.http.get<Array<TestSession>>(url);
-
-  }
 
   updateSampleCount(_sampleCount: number, _extraSampleCount: number) {
 
@@ -448,25 +432,6 @@ export class TestService {
     this.extraSampleCount.next(_extraSampleCount);
   }
 
-  fetchOptions() : Observable<boolean> {
-
-    let response = new Subject<boolean>();
-
-    let url = '/api/face-test/options';
-    this.http.get(url).subscribe(options => {
-
-      let _options = JSON.stringify(options);
-      localStorage.setItem(OPTIONS_KEY, _options);
-      this.options.next(options);
-      response.next(true);
-      response.complete();
-    }, err => {
-       response.error(err);
-       response.complete();
-    });
-
-    return response;
-  }
 
 
 }

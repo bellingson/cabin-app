@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestSessionDetailComponent } from './test-session-detail.component';
+import {AdminLinksComponent} from "./admin-links.component";
+import {testImports, testProviders} from "../testing/face-test/test.helper.spec";
 
 describe('TestSessionDetailComponent', () => {
   let component: TestSessionDetailComponent;
@@ -8,7 +10,9 @@ describe('TestSessionDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TestSessionDetailComponent ]
+      declarations: [ TestSessionDetailComponent, AdminLinksComponent ],
+      imports: testImports,
+      providers: testProviders
     })
     .compileComponents();
   }));

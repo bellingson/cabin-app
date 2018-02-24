@@ -110,17 +110,17 @@ router.post('/', authVerification, jsonParser, (req, res, next) => {
      return;
   }
 
-  console.log('do save: ' + testSession);
+  // console.log('do save: ' + testSession);
 
   faceTestDao.saveTestSession(testSession)
     .subscribe(r => {
-       console.log('saved test session');
+       // console.log('saved test session');
 
         participantDao.updateParticipantStats(testSession.participantId)
           .subscribe(r => {
             res.send(OK);
           }, err => {
-            console.log('update participant error');
+            // console.log('update participant error');
             console.log(err);
             res.status(500).send({error: 'Failed to save test'});
           });

@@ -26,6 +26,7 @@ import {TestingBaseComponent} from "./testing-base.component";
 import {StartComponent} from "./user/start.component";
 import { PrepareComponent } from './face-test/prepare.component';
 import { FocusComponent } from './face-test/focus.component';
+import {TestDataService} from "./face-test/test-data.service";
 
 
 @NgModule({
@@ -55,7 +56,7 @@ import { FocusComponent } from './face-test/focus.component';
      SharedModule,
      testingRoutes
    ],
-   providers: [ ]
+   providers: [ TestDataService ]
 })
 
 export class TestingModule {

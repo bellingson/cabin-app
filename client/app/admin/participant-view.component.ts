@@ -7,6 +7,7 @@ import {TestAdminService} from "./test-admin.service";
 
 
 import * as _find from 'lodash/find';
+import * as _reverse from 'lodash/reverse';
 
 import {TestSession} from "../testing/face-test/test-session.model";
 
@@ -59,7 +60,7 @@ export class ParticipantViewComponent implements OnInit {
     }
 
     this.participant = participant;
-    this.sessions = sessions;
+    this.sessions = _reverse(sessions);
 
   }
 

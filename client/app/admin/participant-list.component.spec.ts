@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ParticipantListComponent } from './participant-list.component';
+import {AdminLinksComponent} from "./admin-links.component";
+import {testImports, testProviders} from "../testing/face-test/test.helper.spec";
 
 describe('ParticipantListComponent', () => {
   let component: ParticipantListComponent;
@@ -8,7 +10,9 @@ describe('ParticipantListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParticipantListComponent ]
+      declarations: [ ParticipantListComponent, AdminLinksComponent ],
+      imports: testImports,
+      providers: testProviders
     })
     .compileComponents();
   }));

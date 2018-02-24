@@ -6,7 +6,28 @@
       "src": "/assets/cabin_logo.png",
       "type": "image/png",
       "sizes": "32x32"
+    },
+    {
+      "src": "/assets/cabin57.png",
+      "type": "image/png",
+      "sizes": "57x57"
+    },
+    {
+      "src": "/assets/cabin72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "/assets/cabin114.png",
+      "type": "image/png",
+      "sizes": "114x114"
+    },
+    {
+      "src": "/assets/cabin144.png",
+      "type": "image/png",
+      "sizes": "144x144"
     }
+
    ],
    "start_url": "/?launcher=true",
   "background_color": "#000000",

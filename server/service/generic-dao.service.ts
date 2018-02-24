@@ -159,7 +159,7 @@ export class GenericDao {
         return;
       }
 
-      console.log('insert one: ');
+      // console.log('insert one: ');
 
       db.collection(collection)
         .insertOne(value, (err, result) => {

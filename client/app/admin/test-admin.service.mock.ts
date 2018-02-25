@@ -5,8 +5,9 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/of';
 
 import {TestSession} from "../testing/face-test/test-session.model";
-import {OK} from "../../../server/api/face-test.routes";
+
 import {ReplaySubject} from "rxjs/ReplaySubject";
+import {OK} from "../testing/face-test/test.helper.spec";
 
 const testSession = {"_id":"5a91887e1d5a756dffe4462f","clientId":1519487080961,"participantId":"-1","startTime":1519487080961,"level":2,"stimuli":"words","moods":[{"mood":"Active","value":1},{"mood":"Determined","value":1},{"mood":"Attentive","value":1},{"mood":"Inspired","value":1},{"mood":"Alert","value":1},{"mood":"Afraid","value":1},{"mood":"Nervous","value":1},{"mood":"Upset","value":1},{"mood":"Hostile","value":1},{"mood":"Ashamed","value":1}],"samples":[{"ordinal":0,"showDotOnNeutralFace":true,"startTime":1519487087027,"correct":false,"time":291,"timeClass":0},{"ordinal":1,"showDotOnNeutralFace":true,"startTime":1519487089621,"correct":true,"time":730,"timeClass":1},{"ordinal":2,"showDotOnNeutralFace":true,"startTime":1519487092654,"correct":true,"time":667,"timeClass":1},{"ordinal":3,"showDotOnNeutralFace":true,"startTime":1519487095636,"correct":false,"time":413,"timeClass":0},{"ordinal":4,"showDotOnNeutralFace":true,"startTime":1519487098359,"correct":true,"time":465,"timeClass":0},{"ordinal":5,"showDotOnNeutralFace":true,"startTime":1519487101137,"correct":true,"time":285,"timeClass":0}],"sampleCount":6,"correctCount":4,"incorrectCount":2,"percentCorrect":"67","testNumber":17,"averageResponseMilli":475.1666666666667,"averageResponseSeconds":"0.5","ip":"::ffff:127.0.0.1","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36"};
 
@@ -36,12 +37,12 @@ export class TestAdminServiceMock  {
   }
 
   settings(): Observable<any> {
-    return undefined;
+    return Observable.of(testOptions);
   }
 
   updateOptions(options: any): Observable<any> {
 
-    this.options.next(this.options);
+    this.options.next(testOptions);
 
     return Observable.of(OK);
   }

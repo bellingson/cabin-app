@@ -11,67 +11,67 @@
   <form #f="ngForm" (ngSubmit)="updateOptions()" class="form-horizontal" role="form">
 
 
-  <div class="form-group">
-    <legend>Update Options</legend>
-  </div>
-
-  <p>
-    Values are in milliseconds.
-  </p>
-
-  <h3>Response Time</h3>
-
-  <div class="form-group">
-    <label for="fast" class="col-sm-2 control-label">Fast</label>
-    <div class="col-sm-10">
-      <input type="number" name="fast" [(ngModel)]="options.timeClass.fast" class="form-control" placeholder="600" required>
+    <div class="form-group">
+      <legend>Update Options</legend>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="tooSlow" class="col-sm-2 control-label">Too Slow</label>
-    <div class="col-sm-10">
-      <input type="number" name="tooSlow"  [(ngModel)]="options.timeClass.tooSlow" class="form-control" id="tooSlow" placeholder="1000" required>
+    <p>
+      Values are in milliseconds.
+    </p>
+
+    <h3>Response Time</h3>
+
+    <div class="form-group">
+      <label for="fast" class="col-sm-2 control-label">Fast</label>
+      <div class="col-sm-10">
+        <input type="number" name="fast" [(ngModel)]="options.timeClass.fast" class="form-control" placeholder="600" required>
+      </div>
     </div>
-  </div>
 
-  <h3>Test Display</h3>
-
-  <div class="form-group">
-    <label for="showFaces" class="col-sm-2 control-label">Show Faces</label>
-    <div class="col-sm-10">
-      <input type="number" name="showFaces"  [(ngModel)]="options.display.showFaces" class="form-control" id="showFaces" placeholder="1000" required>
+    <div class="form-group">
+      <label for="tooSlow" class="col-sm-2 control-label">Too Slow</label>
+      <div class="col-sm-10">
+        <input type="number" name="tooSlow"  [(ngModel)]="options.timeClass.tooSlow" class="form-control" id="tooSlow" placeholder="1000" required>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="hideFaces" class="col-sm-2 control-label">Hide Faces</label>
-    <div class="col-sm-10">
-      <input type="number" name="hideFaces"  [(ngModel)]="options.display.hideFaces" class="form-control" id="hideFaces" placeholder="300" required>
+    <h3>Test Display</h3>
+
+    <div class="form-group">
+      <label for="showFaces" class="col-sm-2 control-label">Show Faces</label>
+      <div class="col-sm-10">
+        <input type="number" name="showFaces"  [(ngModel)]="options.display.showFaces" class="form-control" id="showFaces" placeholder="1000" required>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="showShapes" class="col-sm-2 control-label">Show Shapes</label>
-    <div class="col-sm-10">
-      <input type="number" name="showShapes"  [(ngModel)]="options.display.showShapes" class="form-control" id="showShapes" placeholder="1000" required>
+    <div class="form-group">
+      <label for="hideFaces" class="col-sm-2 control-label">Hide Faces</label>
+      <div class="col-sm-10">
+        <input type="number" name="hideFaces"  [(ngModel)]="options.display.hideFaces" class="form-control" id="hideFaces" placeholder="300" required>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="timeOut" class="col-sm-2 control-label">Time Out</label>
-    <div class="col-sm-10">
-      <input type="number" name="timeOut"  [(ngModel)]="options.display.timeOut" class="form-control" id="timeOut" placeholder="3000" required>
+    <div class="form-group">
+      <label for="showShapes" class="col-sm-2 control-label">Show Shapes</label>
+      <div class="col-sm-10">
+        <input type="number" name="showShapes"  [(ngModel)]="options.display.showShapes" class="form-control" id="showShapes" placeholder="1000" required>
+      </div>
     </div>
-  </div>
 
-
-  <div class="form-group">
-    <div class="col-sm-10 col-sm-offset-2">
-      <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+      <label for="timeOut" class="col-sm-2 control-label">Time Out</label>
+      <div class="col-sm-10">
+        <input type="number" name="timeOut"  [(ngModel)]="options.display.timeOut" class="form-control" id="timeOut" placeholder="3000" required>
+      </div>
     </div>
-  </div>
-</form>
+
+
+    <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+        <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
 
   <div *ngIf="message" class="alert alert-info">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

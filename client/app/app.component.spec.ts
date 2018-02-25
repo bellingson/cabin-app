@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {testImports} from "./testing/face-test/test.helper.spec";
+import {testImports, testProviders} from "./testing/face-test/test.helper.spec";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -8,7 +8,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      imports: testImports
+      imports: testImports,
+      providers: testProviders
     }).compileComponents();
   }));
 

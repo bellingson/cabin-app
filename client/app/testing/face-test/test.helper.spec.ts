@@ -16,6 +16,11 @@ import {TestDataService} from "./test-data.service";
 import {TestDataServiceMock, testOptions} from "./test-data.service.mock";
 import {TestAdminService} from "../../admin/test-admin.service";
 import {TestAdminServiceMock} from "../../admin/test-admin.service.mock";
+import {ParticipantAdminService} from "../../admin/participant-admin.service";
+import {ParticipantAdminDataService} from "../../admin/participant-admin-data.service";
+import {ParticipantAdminDataServiceMock} from "../../admin/participant-admin-data.service.mock";
+
+export const OK = { message: 'ok' };
 
 export const testProviders = [
 
@@ -29,14 +34,18 @@ export const testProviders = [
   },
   { provide: TestDataService, useClass: TestDataServiceMock },
   { provide: TestAdminService, useClass: TestAdminServiceMock },
+  { provide: ParticipantAdminService, useClass: ParticipantAdminService },
+  { provide: ParticipantAdminDataService, useClass: ParticipantAdminDataServiceMock }
+  /*
   { provide: Router, useClass: RouterMock },
   { provide: ActivatedRoute, useClass: ActivatedRouteMock }
+  */
 ];
 
 
 export const testImports = [
+
   RouterTestingModule,
   FormsModule,
   ReactiveFormsModule
-
 ];

@@ -10,6 +10,7 @@ import * as _find from 'lodash/find';
 import * as _reverse from 'lodash/reverse';
 
 import {TestSession} from "../testing/face-test/test-session.model";
+import {ParticipantAdminDataService} from "./participant-admin-data.service";
 
 @Component({
   selector: 'app-participant-view',
@@ -22,6 +23,7 @@ export class ParticipantViewComponent implements OnInit {
   sessions: Array<TestSession>;
 
   constructor(private participantService: ParticipantAdminService,
+              private participantDataService: ParticipantAdminDataService,
               private testAdminService: TestAdminService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -37,9 +39,9 @@ export class ParticipantViewComponent implements OnInit {
 
   fetchData(id: string) {
 
-    this.participantService.get(id)
+    this.participantDataService.get(id)
         .subscribe(participant => {
-        this.participantService.sessions(participant.participantId)
+        this.participantDataService.sessions(participant.participantId)
           .subscribe(sessions => {
                this.formatData(participant, sessions);
           });

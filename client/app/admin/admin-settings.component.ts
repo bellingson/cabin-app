@@ -16,14 +16,14 @@ export class AdminSettingsComponent implements OnInit {
 
   constructor(private testAdminService: TestAdminService,
               private testService: TestService,
-              private testDataService: TestDataService) { }
+              private testDataService: TestDataService) {
+  }
 
   ngOnInit() {
 
     this.testService.options.subscribe(options => this.options = options);
 
     this.testDataService.fetchOptions();
-
 
   }
 

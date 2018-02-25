@@ -19,7 +19,7 @@ export class UserInitComponent implements OnInit {
 
   ngOnInit() {
 
-      console.log('user init');
+      // console.log('user init');
 
   }
 

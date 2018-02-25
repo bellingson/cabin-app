@@ -4,6 +4,7 @@ import {TestAdminService} from "./test-admin.service";
 import * as _map from 'lodash/map';
 import * as _find from 'lodash/find';
 import {ParticipantAdminService} from "./participant-admin.service";
+import {ParticipantAdminDataService} from "./participant-admin-data.service";
 
 @Component({
   selector: 'app-participant-list',
@@ -17,6 +18,7 @@ export class ParticipantListComponent implements OnInit {
   _participant: any;
 
   constructor(private participantService: ParticipantAdminService,
+              private participantDataService: ParticipantAdminDataService,
               private testAdminService: TestAdminService) { }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   fetchParticipants() {
-    this.participantService.query()
+    this.participantDataService.query()
       .subscribe(participants => {
         this.participants = this.formatParticipantData(participants);
       });

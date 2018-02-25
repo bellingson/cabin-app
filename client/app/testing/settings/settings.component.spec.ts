@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SettingsComponent } from './settings.component';
+import {testImports, testProviders} from "../face-test/test.helper.spec";
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
@@ -8,7 +9,9 @@ describe('SettingsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SettingsComponent ]
+      declarations: [ SettingsComponent ],
+      imports: testImports,
+      providers: testProviders
     })
     .compileComponents();
   }));

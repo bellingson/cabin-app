@@ -16,7 +16,7 @@ export class MoodButtonsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // console.log(this.buttons);
+
   }
 
   moodDescription(mood: number) : string {

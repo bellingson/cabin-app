@@ -4,7 +4,7 @@ import { AdminSettingsComponent } from './admin-settings.component';
 import {testImports, testProviders} from "../testing/face-test/test.helper.spec";
 import {AdminLinksComponent} from "./admin-links.component";
 
-fdescribe('AdminSettingsComponent', () => {
+describe('AdminSettingsComponent', () => {
 
   let component: AdminSettingsComponent;
   let fixture: ComponentFixture<AdminSettingsComponent>;
@@ -19,12 +19,21 @@ fdescribe('AdminSettingsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminSettingsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+
+      fixture = TestBed.createComponent(AdminSettingsComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('ngOnInit', () => {
+    component.ngOnInit();
+    expect(component).toBeTruthy();
+  });
+
+
 });

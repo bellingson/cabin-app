@@ -11,7 +11,6 @@ export const testSessionSummaries = [{"_id":"5a8f1382516b381c6d334f44","clientId
 
 export class TestDataServiceMock  {
 
-
   fetchSummaries(): Observable<Array<TestSession>> {
     return Observable.of(testSessionSummaries);
   }

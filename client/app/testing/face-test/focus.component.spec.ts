@@ -1,19 +1,21 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { FocusComponent } from './focus.component';
-import {testProviders} from "./test.helper.spec";
+import {testImports, testProviders} from "./test.helper.spec";
 
 import {Router} from "@angular/router";
 import {RouterMock} from "./router.mock";
 
 describe('FocusComponent', () => {
+
   let component: FocusComponent;
   let fixture: ComponentFixture<FocusComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FocusComponent ],
-      providers: testProviders
+      providers: testProviders,
+      imports: testImports
     })
     .compileComponents();
   }));

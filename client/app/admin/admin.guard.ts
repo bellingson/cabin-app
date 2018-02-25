@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
+
 import {User} from "../testing/user/user.model";
 import {UserService} from "../testing/user/user.service";
 
@@ -39,7 +40,5 @@ export class AdminGuard implements CanActivate {
      console.log('redirecting home')
      this.router.navigateByUrl('/');
   }
-
-
 
 }

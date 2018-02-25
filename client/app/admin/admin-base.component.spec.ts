@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminBaseComponent } from './admin-base.component';
-import {testImports, testProviders} from "../testing/face-test/test.helper.spec";
+import {testImports, testProviders} from "./test-admin.helper.spec";
+
 
 describe('AdminBaseComponent', () => {
   let component: AdminBaseComponent;

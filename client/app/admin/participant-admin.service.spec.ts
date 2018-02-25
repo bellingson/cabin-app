@@ -1,7 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ParticipantAdminService } from './participant-admin.service';
-import {testImports} from "../testing/face-test/test.helper.spec";
+import {testImports} from "./test-admin.helper.spec";
+
 
 describe('ParticipantAdminService', () => {
 

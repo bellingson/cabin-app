@@ -185,16 +185,22 @@ left = 0, affective right = 0).
 
 
       // 1 show faces
-      setTimeout(() => {
+      this.setMyTimeout(() => {
           this.showFaces = false;
 
           // 2 show shapes
-          setTimeout(this.displayShapes.bind(this), this.options.display.hideFaces);
+          this.setMyTimeout(this.displayShapes.bind(this), this.options.display.hideFaces);
 
       }, this.options.display.showFaces); // 1000
 
 
   }
+
+  // mock it to facilitate testing
+  setMyTimeout(fn: any, time: number) : number {
+     return setTimeout(fn, time);
+  }
+
 
   displayShapes() {
 
@@ -205,7 +211,7 @@ left = 0, affective right = 0).
     this.currentSample.startTime = Date.now();
 
     // 3 hide dot
-    setTimeout(this.hideShapes.bind(this), this.options.display.showShapes);
+    this.setMyTimeout(this.hideShapes.bind(this), this.options.display.showShapes);
   }
 
   hideShapes() {
@@ -221,7 +227,7 @@ left = 0, affective right = 0).
 
   setTimeoutTimer() {
 
-    this.timer = setTimeout(this.doTimeout.bind(this), this.options.display.timeOut);
+    this.timer = this.setMyTimeout(this.doTimeout.bind(this), this.options.display.timeOut);
 
   }
 
@@ -412,9 +418,7 @@ left = 0, affective right = 0).
       this.currentSample = null;
       this.canClick = false;
 
-      setTimeout(() => {
-          this.nextSample();
-      }, 1000);
+      this.setMyTimeout(this.nextSample.bind(this), 1000);
   }
 
 

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestSessionDetailComponent } from './test-session-detail.component';
 import {AdminLinksComponent} from "./admin-links.component";
-import {testImports, testProviders} from "../testing/face-test/test.helper.spec";
+import {testImports, testProviders} from "./test-admin.helper.spec";
 
 describe('TestSessionDetailComponent', () => {
   let component: TestSessionDetailComponent;

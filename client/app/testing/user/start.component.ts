@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {TestSession} from "../face-test/test-session.model";
 import {CURRENT_SESSION_KEY, TestService} from "../face-test/test.service";
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
@@ -21,8 +23,16 @@ export class StartComponent implements OnInit {
     let _session = localStorage.getItem(CURRENT_SESSION_KEY)
     if(_session) {
        this.previousSession = JSON.parse(_session);
-    }
 
+       const hours = moment().diff(moment(this.previousSession.startTime),'hours');
+       // console.log('hours: ' + hours);
+       if(hours >= 24) {
+         localStorage.removeItem(CURRENT_SESSION_KEY);
+         this.previousSession = null;
+       }
+       // console.log(this.previousSession);
+
+    }
 
   }
 

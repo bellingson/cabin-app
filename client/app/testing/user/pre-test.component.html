@@ -14,13 +14,17 @@
 
     <div class="error">
       {{error}}
+
+      <br>
+      {{errorDetail}}
+
     </div>
 
   </div>
 
 </div>
 
-<div *ngIf="loading == false" class="page-wrapper pre-test">
+<div *ngIf="loading == false && error == null" class="page-wrapper pre-test">
 
   <div class="instruction-cell">
 

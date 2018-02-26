@@ -24,27 +24,29 @@ export class PreTestComponent implements OnInit {
 
   loading = true;
   error: string;
+  errorDetail: string;
 
   constructor(private userService: UserService,
               private testService: TestService,
               private testDataService: TestDataService,
               private router: Router) {
-     userService.user.subscribe(user => this.user = user);
+
 
   }
 
   ngOnInit() {
+
+    this.userService.user.subscribe(user => this.user = user);
+    if(this.user == null) {
+      this.router.navigateByUrl('/t/user-init');
+      return;
+    }
 
     this.testService.testSessions.subscribe(sessions => {
         this.badge = this.testService.highestBadge(sessions);
     });
 
     this.userService.updateUserLevel();
-
-    if(this.user == null) {
-      this.router.navigateByUrl('/t/user-init');
-      return;
-    }
 
     this.fetchSummariesAndOptions();
 
@@ -53,6 +55,8 @@ export class PreTestComponent implements OnInit {
   fetchSummariesAndOptions() {
 
     this.error = null;
+    this.errorDetail = null;
+
     this.loading = true;
 
     Observable.forkJoin(
@@ -64,7 +68,10 @@ export class PreTestComponent implements OnInit {
     }, err => {
         this.loading = false;
         this.error = 'Initialization failed.  Check internet connection';
+
         console.log(err);
+        this.errorDetail = err;
+
     });
 
   }

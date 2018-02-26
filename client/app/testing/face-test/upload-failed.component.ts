@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {TestService} from "./test.service";
+
+import { Router } from '@angular/router';
+
 import {TestDataService} from "./test-data.service";
 
 @Component({
@@ -12,7 +14,10 @@ export class UploadFailedComponent implements OnInit {
 
   message: string;
 
-  constructor(private testDataService: TestDataService) { }
+  retryCount = 0;
+
+  constructor(private testDataService: TestDataService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -21,15 +26,24 @@ export class UploadFailedComponent implements OnInit {
 
       this.message = null;
 
+      this.retryCount++;
+
       this.testDataService.uploadResults()
           .subscribe(() => {
 
               // complete
+            this.router.navigateByUrl('/t/test-complete');
 
           }, err => {
             this.message = 'Uploaded failed again...';
 
           });
+
+    }
+
+    back() {
+
+      this.router.navigateByUrl('/t/pre-test');
 
     }
 

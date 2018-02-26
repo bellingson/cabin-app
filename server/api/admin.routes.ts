@@ -127,7 +127,12 @@ router.get('/face-test/:id', jsonParser, (req, res, next) => {
   const id = req.params.id;
 
   faceTestDao.getTestSession(id).subscribe(testSession => {
+    console.log('got session');
+    console.log(testSession);
     res.send(testSession);
+  }, err => {
+    console.log(err);
+    res.status(500).send({error: 'server error'});
   });
 
 });

@@ -15,6 +15,8 @@ export class TestSessionDetailComponent implements OnInit {
 
   testSession: TestSession;
 
+  error: string;
+
   constructor(private testAdminService: TestAdminService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -31,7 +33,14 @@ export class TestSessionDetailComponent implements OnInit {
   fetchSession(id: string) {
 
     this.testAdminService.get(id)
-      .subscribe(session => this.testSession = session);
+      .subscribe(session => {
+
+        if(session == null) {
+          this.error = "Did not find session: " + id;
+        }
+
+        this.testSession = session;
+      });
 
   }
 

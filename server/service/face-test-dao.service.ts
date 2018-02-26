@@ -22,8 +22,31 @@ export class FaceTestDao extends GenericDao {
   saveTestSession(testSession: any) : Observable<boolean> {
 
     // console.log('save test session');
+    const result = new Subject<boolean>();
 
-    return super.insertOne(testSessionCollection, testSession);
+    const handleError = err => {
+      result.error(err);
+      result.complete();
+    };
+
+    const params =  { participantId: testSession.participantId, clientId: testSession.clientId };
+
+    super.query(testSessionCollection, params).subscribe(session => {
+
+      if(session.length == 0) {
+          super.insertOne(testSessionCollection, testSession).subscribe(r => {
+              result.next(true);
+          }, handleError);
+      } else {
+
+        console.log('already inserted these results');
+        result.next(true);
+        result.complete();
+      }
+
+    }, handleError);
+
+    return result;
   }
 
   getTestSessions(findText?: string) : Observable<Array<any>> {

@@ -1,14 +1,26 @@
 <div class="page-wrapper">
 
+  <div class="instruction-cell">
+
     <h3>Upload Failed</h3>
 
     <div *ngIf="message" class="message">
-        {{message}}
+      {{message}}
     </div>
 
+
+    <p>
+      Use a web browser to verify
+      that you have an internet connection and then try uploading results
+      again.
+    </p>
 
     <button type="button" (click)="retry()">Retry Upload</button>
 
 
+    <button *ngIf="retryCount >= 5" type="button" (click)="back()">Back</button>
+
+
+  </div>
 
 </div>

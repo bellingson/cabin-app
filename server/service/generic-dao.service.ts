@@ -28,14 +28,10 @@ export class GenericDao {
        db.collection(collection)
          .updateOne({ _id: ObjectID(object._id) }, _update, (err, res) => {
 
-            if(err) {
-               response.error(err);
-               response.complete();
-               return;
-            }
+           if(checkMongoError(err, client, response) == true)  return;
 
-             response.next(true);
-             response.complete();
+           response.next(true);
+           response.complete();
 
          });
 
@@ -81,12 +77,7 @@ export class GenericDao {
 
     MongoClient.connect(dbUrl, (err, client) => {
 
-      if(err) {
-        response.error(err);
-        response.complete();
-        client.close();
-        return;
-      }
+      if(checkMongoError(err, client, response) == true)  return;
 
       response.next(client);
       response.complete();
@@ -97,45 +88,34 @@ export class GenericDao {
   }
 
 
-  checkError(err, client, response: Subject<any>) : boolean {
-
-      if(err) {
-        client.close();
-        response.error(err);
-        response.complete();
-        return true;
-      }
-
-      return false;
-  }
-
-
   get(collection: string, id: string) : Observable<any> {
+
+    console.log('get: ' + id);
 
     const response = new ReplaySubject<any>(1);
 
     MongoClient.connect(dbUrl, (err, client) => {
 
+      if(checkMongoError(err, client, response) == true)  return;
+
       const db = client.db(dbName);
 
-      if (err) {
-        client.close();
-        response.error(err);
-        response.complete();
-        return;
-      }
-
       db.collection(collection)
-        .find({_id: new ObjectID(id)}).limit(1).next((err, doc) => {
-            if (err) {
-              client.close();
-              response.error(err);
-              response.complete();
-              return;
-            }
+        // .find({_id: new ObjectID(id)}).limit(1).next((err, doc) => {
+        .find({ _id: new ObjectID(id) }).limit(1).toArray((err, docs) => {
+
+            if(checkMongoError(err, client, response) == true)  return;
+
+            console.log('doc: ' + docs);
 
             client.close();
-            response.next(doc)
+
+            if(docs && docs.length) {
+              response.next(docs[0]);
+            } else {
+              response.next(null);
+            }
+
             response.complete();
 
           });
@@ -150,26 +130,15 @@ export class GenericDao {
 
     MongoClient.connect(dbUrl, (err, client) => {
 
+      if(checkMongoError(err, client, response) == true)  return;
+
       const db = client.db(dbName);
 
-      if (err) {
-        client.close();
-        response.error(err);
-        response.complete();
-        return;
-      }
-
-      // console.log('insert one: ');
 
       db.collection(collection)
         .insertOne(value, (err, result) => {
 
-          if (err) {
-            client.close();
-            response.error(err);
-            response.complete();
-            return;
-          }
+          if(checkMongoError(err, client, response) == true)  return;
 
           client.close();
           response.next(true)
@@ -187,14 +156,9 @@ export class GenericDao {
 
     MongoClient.connect(dbUrl, (err, client) => {
 
-      const db = client.db(dbName);
+      if(checkMongoError(err, client, response) == true)  return;
 
-      if (err) {
-        client.close();
-        response.error(err);
-        response.complete();
-        return;
-      }
+      const db = client.db(dbName);
 
       const findParams = params ? params : {};
 
@@ -207,12 +171,7 @@ export class GenericDao {
 
       find.toArray((err, docs) => {
 
-        if(err) {
-          client.close();
-          response.error(err);
-          response.complete();
-          return;
-        }
+        if(checkMongoError(err, client, response) == true)  return;
 
         client.close();
         response.next(docs);
@@ -226,36 +185,24 @@ export class GenericDao {
   }
 
 
-
-
-
-
   delete(collection: string, id: string) : Observable<boolean> {
 
     const response = new ReplaySubject<boolean>(1);
 
     MongoClient.connect(dbUrl, (err, client) => {
 
+      if(checkMongoError(err, client, response) == true)  return;
+
       const db = client.db(dbName);
 
-      if (err) {
-        client.close();
-        response.error(err);
-        response.complete();
-        return;
-      }
+
       db.collection(collection)
         .deleteOne({_id: new ObjectID(id) }, (err, r) => {
 
-        if(err) {
-          client.close();
-          response.error(err);
-          response.complete();
-          return;
-        }
+        if(checkMongoError(err, client, response) == true)  return;
 
-          console.log('delete');
-          console.log(r);
+        console.log('deleted record');
+          // console.log(r);
 
         client.close();
         response.next(true);

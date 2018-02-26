@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-
-
 import * as _range from 'lodash/range';
 import * as _map from 'lodash/map';
 import * as _reverse from 'lodash/reverse';
 
 import {TestService} from "../face-test/test.service";
 import {TestSession} from "../face-test/test-session.model";
+import {User} from "../user/user.model";
+import {UserService} from "../user/user.service";
 
 @Component({
   selector: 'app-chart',
@@ -56,8 +56,9 @@ export class ChartComponent implements OnInit {
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
-
   displayData = false;
+
+  constructor(private testService: TestService) { }
 
   ngOnInit() {
 
@@ -69,8 +70,6 @@ export class ChartComponent implements OnInit {
     this.showResponseTime();
 
   }
-
-  constructor(private testService: TestService) { }
 
   showResponseTime() {
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+
 
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/forkJoin';
@@ -431,6 +431,21 @@ export class TestService {
 
     this.extraSampleCount.next(_extraSampleCount);
   }
+
+  highestBadge(sessions: Array<TestSession>) : number | null {
+
+    for(let i = 6;i>0;i--) {
+
+      let _sessionsForLevel = _filter(sessions, { level: i })
+      if(_sessionsForLevel.length >= 6) {
+        return i;
+      }
+
+    }
+
+    return null;
+  }
+
 
 
 

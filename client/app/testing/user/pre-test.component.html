@@ -24,13 +24,31 @@
 
   <div class="instruction-cell">
 
-
         <div class="options">
+
+          <div *ngIf="badge" class="badge-wrapper">
+
+            <p *ngIf="badge == 1">Congratulations!  You finished level 1 and win your FIRST badge!</p>
+            <p *ngIf="badge == 2">Congratulations!  You finished level 2 and win your SECOND badge!</p>
+            <p *ngIf="badge == 3">Congratulations!  You finished level 3 and win your THIRD badge!</p>
+            <p *ngIf="badge == 4">Congratulations!  You finished level 4 and win your FOURTH badge!</p>
+            <p *ngIf="badge == 5">Congratulations!  You finished level 5 and win your FIFTH badge!</p>
+            <p *ngIf="badge == 6">Congratulations!  You finished level 6 and have now completed badge collection!</p>
+
+            <img src="/assets/badges/{{badge}}.png" alt="Badge {{badge}}">
+
+          </div>
+
+          <div class="links">
+
             <a [routerLink]="['../prepare']">Start Now</a>
             <a [routerLink]="['../results/chart']">Results</a>
             <a [routerLink]="['../about']">About</a>
 
-            <div *ngIf="user && user.admin">
+          </div>
+
+
+            <div class="admin-links" *ngIf="user && user.admin">
               <a [routerLink]="['../settings']">Settings</a>
               <a [routerLink]="['/admin/list']">Admin</a>
             </div>

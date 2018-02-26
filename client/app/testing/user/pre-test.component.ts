@@ -20,6 +20,8 @@ export class PreTestComponent implements OnInit {
 
   user: User;
 
+  badge: number;
+
   loading = true;
   error: string;
 
@@ -32,6 +34,10 @@ export class PreTestComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.testService.testSessions.subscribe(sessions => {
+        this.badge = this.testService.highestBadge(sessions);
+    });
 
     this.userService.updateUserLevel();
 

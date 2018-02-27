@@ -30,5 +30,11 @@
       <button class="btn btn-default" (click)="deleteTest(test)">Delete</button>
     </td>
   </tr>
+  <tr *ngIf="testSessions.length == 0">
+    <td colspan="9">
+      <em>No records found</em>
+    </td>
+  </tr>
+
   </tbody>
 </table>

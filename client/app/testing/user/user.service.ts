@@ -69,9 +69,13 @@ export class UserService {
 
           const controlVersion = participantNumber % 2 == 0;
 
-          const _user: User = { participantId: participantId,
-                                startTime: Date.now(),
-                                level: 1,
+          const _participant = r.participant;
+
+          const _user: User = { _id: _participant._id,
+                                participantId: _participant.participantId,
+                                startTime: _participant.startTime,
+                                endTime: _participant.endTime,
+                                level: _participant.level,
                                 controlVersion: controlVersion,
                                 restrictSessions: true,
                                 admin: admin

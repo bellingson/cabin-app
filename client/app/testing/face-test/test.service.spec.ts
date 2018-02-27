@@ -66,8 +66,6 @@ describe('TestService', () => {
 
     let sessions = createTestSessions();
 
-    console.log('CTS: ' )
-
     service.testSessions.next(sessions);
 
     let stats = service.countStats();

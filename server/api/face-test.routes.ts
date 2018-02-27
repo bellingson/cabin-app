@@ -56,7 +56,8 @@ router.post('/verify-pin', jsonParser, (req, res, next) => {
 
             participantDao.findByParticipantId(participantId)
               .subscribe(participant => {
-                let token = jwt.sign(participant, settings.jwtSecret);
+                const _participant = _.omit(participant,['levels']);
+                let token = jwt.sign(_participant, settings.jwtSecret);
                 res.send({token: token, participant: participant });
 
               });

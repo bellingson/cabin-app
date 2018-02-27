@@ -5,10 +5,10 @@
     <div class="content">
 
       <p>
-        Please try your best to concentrate on the task. Your performance may be compared anonymously with other participants' performance at a later time.
+        {{displayMessage}}
       </p>
 
-      <button type="button" (click)="next()">Next &#187;</button>
+      <button *ngIf="messageComplete" type="button" (click)="next()">Next &#187;</button>
 
     </div>
 

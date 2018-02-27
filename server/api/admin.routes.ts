@@ -38,7 +38,7 @@ router.get('/face-test-summary.csv', (req, res, next) => {
 
    faceTestDao.getTestSessions(req.query.findText).subscribe(testSessions => {
 
-         let headers = ['Test ID','Participant #', 'Test #', 'Week', 'Start Time', 'Correct #','In-Correct #', '% Correct', 'Avg Resp ms'];
+         let headers = ['Test ID','Participant #', 'Test #', 'Week', 'Start Time', 'Stimuli', 'Correct #','In-Correct #', '% Correct', 'Avg Resp ms'];
          _.each(moodCategory, moodName => {
            headers.push(moodName);
          });
@@ -54,6 +54,7 @@ router.get('/face-test-summary.csv', (req, res, next) => {
                        session.testNumber,
                        session.level,
                        moment(session.startTime).format('YYYY-MM-DD HH:mm:ss'),
+                       session.stimuli,
                        session.correctCount,
                        session.incorrectCount,
                        session.percentCorrect,
@@ -79,7 +80,7 @@ router.get('/face-test-samples.csv', (req, res, next) => {
 
   faceTestDao.getTestSessions(req.query.findText).subscribe(testSessions => {
 
-    let writer = csvWriter({headers: ['Test ID','Participant #', 'Test #', 'Start Time', 'Sample #','Neutral Face', 'Correct','Time']});
+    let writer = csvWriter({headers: ['Test ID','Participant #', 'Test #', 'Start Time', 'Stimuli', 'Sample #','Neutral', 'Correct','Time']});
 
     writer.pipe(res);
 
@@ -90,6 +91,7 @@ router.get('/face-test-samples.csv', (req, res, next) => {
           session.participantId,
           session.testNumber,
           moment(session.startTime).format('YYYY-DD-MM HH:mm:ss'),
+          session.stimuli,
           sample.ordinal,
           sample.showDotOnNeutralFace,
           sample.correct,

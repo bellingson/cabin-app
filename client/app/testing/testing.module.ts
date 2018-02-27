@@ -27,6 +27,7 @@ import {StartComponent} from "./user/start.component";
 import { PrepareComponent } from './face-test/prepare.component';
 import { FocusComponent } from './face-test/focus.component';
 import {TestDataService} from "./face-test/test-data.service";
+import {TryYourBestComponent} from "./face-test/try-your-best.component";
 
 
 @NgModule({
@@ -44,6 +45,8 @@ import {TestDataService} from "./face-test/test-data.service";
      StartComponent,
 
      SettingsComponent,
+     TryYourBestComponent,
+
      MoodComponent,
      FaceComponent,
      PrepareComponent,

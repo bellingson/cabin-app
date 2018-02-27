@@ -48,7 +48,7 @@ export class MoodComponent implements OnInit {
 
     if(this.index == MOOD_CATEGORY.length) {
        this.testService.setMoods(this.responses);
-       this.router.navigateByUrl('/t/focus');
+       this.router.navigateByUrl('/t/try-your-best');
        return;
     }
 

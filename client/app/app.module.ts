@@ -23,6 +23,7 @@ import {AuthInterceptor} from "./testing/user/auth.interceptor";
 import {ClearComponent} from "./clear.component";
 import {TestDataService} from "./testing/face-test/test-data.service";
 
+
 @NgModule({
   declarations: [
     AppComponent,

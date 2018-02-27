@@ -17,6 +17,7 @@ import {TestingBaseComponent} from "./testing-base.component";
 import {StartComponent} from "./user/start.component";
 import {PrepareComponent} from "./face-test/prepare.component";
 import {FocusComponent} from "./face-test/focus.component";
+import {TryYourBestComponent} from "./face-test/try-your-best.component";
 
 const routes: Routes = [
 
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'user-init', component: UserInitComponent },
     { path: 'pre-test', component: PreTestComponent },
     { path: 'prepare', component: PrepareComponent },
+    { path: 'try-your-best', component: TryYourBestComponent },
     { path: 'focus', component: FocusComponent },
     { path: 'mood', component: MoodComponent },
     { path: 'test', component: FaceTestComponent },

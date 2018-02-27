@@ -21,6 +21,7 @@ import {TestService} from "./testing/face-test/test.service";
 import {AdminGuard} from "./admin/admin.guard";
 import {AuthInterceptor} from "./testing/user/auth.interceptor";
 import {ClearComponent} from "./clear.component";
+import {TestDataService} from "./testing/face-test/test-data.service";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {ClearComponent} from "./clear.component";
   providers: [UserService,
               AuthService,
               TestService,
+              TestDataService,
               { provide: LocationStrategy, useClass: HashLocationStrategy },
               AdminGuard,
               { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, }

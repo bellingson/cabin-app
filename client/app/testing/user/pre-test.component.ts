@@ -9,6 +9,7 @@ import {TestService} from "../face-test/test.service";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import {TestDataService} from "../face-test/test-data.service";
+import {AuthService} from "./auth.service";
 
 @Component({
   selector: 'app-pre-test',
@@ -26,7 +27,10 @@ export class PreTestComponent implements OnInit {
   error: string;
   errorDetail: string;
 
-  constructor(private userService: UserService,
+  token: string;
+
+  constructor(private authService: AuthService,
+              private userService: UserService,
               private testService: TestService,
               private testDataService: TestDataService,
               private router: Router) {
@@ -35,6 +39,8 @@ export class PreTestComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    // this.token = this.authService.getToken();
 
     this.userService.user.subscribe(user => this.user = user);
     if(this.user == null) {
@@ -69,10 +75,20 @@ export class PreTestComponent implements OnInit {
         this.loading = false;
         this.error = 'Initialization failed.  Check internet connection';
 
-        console.log(err);
-        this.errorDetail = err;
+        if(err.error) {
+          this.errorDetail = err.error;
+        } else {
+          console.log(err);
+          this.errorDetail = err;
+        }
 
     });
+
+  }
+
+  back() {
+
+    this.router.navigateByUrl('/t/start');
 
   }
 

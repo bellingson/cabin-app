@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {TestService} from "./test.service";
 import {TestSession} from "./test-session.model";
@@ -7,8 +7,7 @@ import {TestStats} from "./test-stats.model";
 @Component({
   selector: 'app-test-complete',
   templateUrl: './test-complete.component.html',
-  styleUrls: ['./test-complete.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./test-complete.component.scss']
 })
 export class TestCompleteComponent implements OnInit {
 

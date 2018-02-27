@@ -56,7 +56,7 @@ import {TestDataService} from "./face-test/test-data.service";
      SharedModule,
      testingRoutes
    ],
-   providers: [ TestDataService ]
+   providers: [ ]
 })
 
 export class TestingModule {

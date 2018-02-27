@@ -3,6 +3,8 @@ import * as bodyParser from 'body-parser';
 
 import * as jwt from 'jsonwebtoken';
 
+import * as _ from 'lodash';
+
 import { authVerification } from '../service/auth-verification';
 
 import {FaceTestDao} from "../service/face-test-dao.service";
@@ -42,7 +44,8 @@ router.post('/verify-pin', jsonParser, (req, res, next) => {
       .subscribe(participant => {
 
         if(participant) {
-          let token = jwt.sign(participant, settings.jwtSecret);
+          const _participant = _.omit(participant,['levels']);
+          const token = jwt.sign(_participant, settings.jwtSecret);
           res.send({token: token, participant: participant });
           return;
         }

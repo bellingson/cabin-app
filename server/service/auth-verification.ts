@@ -12,6 +12,8 @@ export function authVerification(req, res, next) {
 
   // let token = req.get('Authorization');
   let token = getToken(req);
+
+  // console.log(`auth: ${req.originalUrl} : ${token}`);
   if(token == null) {
     res.status(401).send('Authorization failed');
     return;
@@ -40,6 +42,7 @@ export function adminVerification(req, res, next) {
   // console.log('admin verification');
 
   let token = getToken(req);
+  // console.log(`admin auth: ${req.originalUrl} : ${token}`);
   if(token == null) {
     res.status(401).send('Authorization failed');
     return;

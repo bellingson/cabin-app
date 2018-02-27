@@ -20,6 +20,11 @@ export class FaceTestDao extends GenericDao {
   }
 
   saveTestSession(testSession: any) : Observable<boolean> {
+    return super.insertOne(testSessionCollection, testSession);
+  }
+
+  /*
+  saveTestSession(testSession: any) : Observable<boolean> {
 
     // console.log('save test session');
     const result = new Subject<boolean>();
@@ -48,6 +53,7 @@ export class FaceTestDao extends GenericDao {
 
     return result;
   }
+  */
 
   getTestSessions(findText?: string) : Observable<Array<any>> {
 

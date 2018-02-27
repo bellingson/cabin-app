@@ -8,6 +8,7 @@
 
     <th>Participant #</th>
     <th>Test #</th>
+    <th></th>
     <th>Week</th>
     <th>Time</th>
     <th>Correct #</th>
@@ -23,7 +24,12 @@
     <td>
       {{test.participantId}}
     </td>
-    <td>{{test.testNumber}}  <a [routerLink]="['/','admin', 'detail', test._id ]"><i class="fas fa-eye"></i></a></td>
+    <td>{{test.testNumber}}  </td>
+    <td>
+      <a [routerLink]="['/','admin', 'detail', test._id ]">View</a>
+
+      <!--<i class="fas fa-eye"></i>-->
+    </td>
     <td>{{test.level}}</td>
     <td>{{test.startTime | date: 'M/d/yyyy hh:mm aa' }}</td>
     <td>{{test.correctCount}}</td>
@@ -35,7 +41,7 @@
     </td>
   </tr>
   <tr *ngIf="testSessions.length == 0">
-    <td colspan="9">
+    <td colspan="10">
       <em>No records found</em>
     </td>
   </tr>

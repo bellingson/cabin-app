@@ -15,6 +15,8 @@ export class BadgesComponent implements OnInit {
 
   user: User;
 
+  badge: number;
+
   testSessions: Array<TestSession>;
 
   constructor(private userService: UserService,
@@ -23,7 +25,13 @@ export class BadgesComponent implements OnInit {
   ngOnInit() {
 
     this.userService.user.subscribe(user => this.user = user);
-    this.testService.testSessions.subscribe(testSessions => this.testSessions = testSessions);
+
+
+
+    this.testService.testSessions.subscribe(testSessions => {
+      this.testSessions = testSessions;
+      this.badge = this.testService.highestBadge(testSessions);
+    });
 
   }
 

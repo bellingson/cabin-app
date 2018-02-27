@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -21,8 +21,7 @@ export enum Side {
 @Component({
   selector: 'app-face-test',
   templateUrl: './face-test.component.html',
-  styleUrls: ['./face-test.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./face-test.component.scss']
 })
 export class FaceTestComponent implements OnInit {
 

@@ -32,39 +32,6 @@ div.face-wrapper {
     align-items: center;
     height: 100%;
 
-    div.face {
-      //border: 1px solid #fff;
-      flex-basis: auto;
-      min-width: 300px;
-      min-height: 200px;
-      text-align: center;
-      flex-grow: 3;
-      h3 { margin-top: 170px; }
-    }
-
-    div.dot-container {
-      min-height: 200px;
-      width: 100%;
-      //border: 1px solid #fff;
-
-    }
-
-    div.table-wrapper {
-      display: table;
-      min-height: 200px;
-      width: 100%;
-
-      div.table-cell {
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
-      }
-    }
-
-    p.correct { color: green;  }
-    p.not-correct { color: red; }
-
-
     div.plus {
       //border: 1px solid #fff;
       flex-basis: 30px;
@@ -73,6 +40,10 @@ div.face-wrapper {
       font-weight: bold;
     }
 
+    p.correct { color: green;  }
+    p.not-correct { color: red; }
+
+
   }  // face-set
 
   div.face-set.show { display: flex; }
@@ -80,14 +51,6 @@ div.face-wrapper {
 
 }
 
-div.preload {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-}
 
 div.result-wrapper {
 
@@ -103,8 +66,7 @@ div.result-wrapper {
       }
 
   }
-
-
+  
 }
 
 div.message-wrapper {

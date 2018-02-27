@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-const WORD_DELAY = 200;
+const WORD_DELAY = 400;
 
 @Component({
   selector: 'app-try-your-best',

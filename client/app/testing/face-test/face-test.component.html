@@ -25,7 +25,7 @@
   <div class="face-set">
 
       <app-face
-        *ngIf="showCorrect == false && showIncorrect == false && showResume == false"
+        *ngIf="shouldShowFaces()"
         [level]="user.level"
         [image]="leftImage"
         [word]="leftWord"
@@ -39,12 +39,12 @@
       >
       </app-face>
 
-      <div class="plus" *ngIf="showCorrect == false && showIncorrect == false && showResume == false">
+      <div class="plus" *ngIf="shouldShowFaces()">
         +
       </div>
 
       <app-face
-        *ngIf="showCorrect == false && showIncorrect == false && showResume == false"
+        *ngIf="shouldShowFaces()"
         [level]="user.level"
         [image]="rightImage"
         [word]="rightWord"
@@ -72,9 +72,9 @@
       </div>
     </div>    <!-- // result-wrapper -->
 
-    <div class="resume-wrapper" *ngIf="showResume">
+    <div class="message-wrapper resume" *ngIf="showResume">
 
-      <div class="resume-cell">
+      <div class="message-cell">
 
           <p>Trial Timed Out</p>
 
@@ -82,6 +82,20 @@
       </div>
 
     </div>  <!-- // resume-wrapper -->
+
+
+    <div class="message-wrapper finishing" *ngIf="finishing">
+
+      <div class="message-cell">
+
+        <p>Uploading Results..</p>
+
+        <div class="spinner"></div>
+
+      </div>
+
+    </div>  <!-- // finishing-wrapper -->
+
 
   </div>  <!-- // face-set -->
 </div>   <!-- // face-wrapper -->

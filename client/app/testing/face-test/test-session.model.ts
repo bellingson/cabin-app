@@ -27,5 +27,7 @@ export interface TestSession {
 
     moods: Array<any>;
 
+    uploadComplete: boolean;
+
 
 }

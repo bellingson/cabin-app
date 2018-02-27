@@ -73,6 +73,7 @@ export class FaceTestComponent implements OnInit {
   settings: any;
 
   loading = true;
+  finishing = false;
 
   user: User;
 
@@ -316,6 +317,13 @@ left = 0, affective right = 0).
     return _filter(this.samples, sample => sample.timeClass != TimeClass.TOO_SLOW);
   }
 
+  shouldShowFaces() {
+      return this.showCorrect == false &&
+              this.showIncorrect == false &&
+              this.showResume == false &&
+              this.finishing == false;
+  }
+
 
   checkFinished() : boolean {
 
@@ -325,12 +333,23 @@ left = 0, affective right = 0).
           return false;
       }
 
-      const testSession = this.testService.testComplete(this.samples)
+      this.finishing = true;
+      this.showCorrect = false;
+      this.showIncorrect = false;
 
-      this.testDataService.uploadResults(testSession)
+      if(this.testSession == null) {
+        console.log('warning creating session before upload');
+        this.testSession = this.testService.createSession();
+      }
+
+      this.testService.formatSessionStats(this.testSession, this.samples)
+
+      this.testDataService.uploadResults(this.testSession)
                         .subscribe(success => {
+
                               this.router.navigateByUrl('/t/test-complete');
                           }, err => {
+                              this.finishing = false;
                               console.log(err);
                               this.router.navigateByUrl('/t/upload-failed');
                           });

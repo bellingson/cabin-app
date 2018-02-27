@@ -19,3 +19,5 @@ alias dum="du -h -d 1 ."
 
 
 echo '';
+
+alias mongo='docker exec -it cabindb mongo';

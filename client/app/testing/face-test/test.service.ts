@@ -162,16 +162,9 @@ export class TestService {
 
   }
 
-  testComplete(samples: Array<TestSample>) : TestSession {
+  formatSessionStats(session: TestSession, samples: Array<TestSample>) : TestSession {
 
       let totalTime = _sum(_map(samples,'time'));
-
-      let session;
-      this.currentSession.subscribe(_session => session = _clone(_session));
-
-      if(session == null) {
-         session = this.createSession();
-      }
 
       session.sampleCount = _size(samples);
       session.correctCount = _size(_filter(samples, sample => sample.correct));
@@ -184,17 +177,6 @@ export class TestService {
 
       session.averageResponseMilli = totalTime / session.sampleCount;
       session.averageResponseSeconds = ( (totalTime / 1000) / session.sampleCount).toFixed(1);
-
-      let sessions;
-      this.testSessions.subscribe(_sessions => sessions = _sessions);
-
-      sessions.push(session);
-
-
-      this.testSessions.next(sessions);
-      this.currentSession.next(null);
-
-      this.countStats();
 
       return session;
   }
@@ -245,6 +227,7 @@ export class TestService {
 
     const session = { } as TestSession;
     session.clientId = Date.now();
+    session.uploadComplete = false;
     session.participantId = this.user.participantId;
 
     session.startTime = Date.now();

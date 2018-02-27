@@ -5,8 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
 import {TestSession} from "./test-session.model";
-import {ReplaySubject} from "rxjs/ReplaySubject";
+
 import {CURRENT_SESSION_KEY, OPTIONS_KEY, TestService} from "./test.service";
+import {rxErrorHandler} from "../../shared/helper.fn";
 
 @Injectable()
 export class TestDataService {
@@ -15,40 +16,38 @@ export class TestDataService {
 
   fetchSummaries() : Observable<Array<TestSession>> {
 
-    let url = '/api/face-test/session-summary';
+    const url = '/api/face-test/session-summary';
 
     return this.http.get<Array<TestSession>>(url);
 
   }
 
 
-  uploadResults(session?: TestSession) : Observable<boolean> {
+  uploadResults(session: TestSession) : Observable<boolean> {
 
-    session = session ? session : this.testService.lastSession();
+    const response = new Subject<boolean>();
 
-    let response = new ReplaySubject<boolean>(1);
+    const handleError = rxErrorHandler(response);
 
-    let url = '/api/face-test';
+    const url = '/api/face-test';
     this.http.post(url, session )
       .subscribe(r => {
+
+        session.uploadComplete = true;
+        this.testService.currentSession.next(null);
 
         localStorage.removeItem(CURRENT_SESSION_KEY);
 
         this.fetchSummaries().subscribe(sessionSummaries => {
 
           this.testService.testSessions.next(sessionSummaries);
+          this.testService.countStats();
           response.next(true);
           response.complete();
 
-        }, err => {
-          response.error(err);
-          response.complete();
-        });
+        }, handleError);
 
-      }, er => {
-        response.error(er);
-        response.complete();
-      });
+      }, handleError);
 
     return response;
 
@@ -56,9 +55,10 @@ export class TestDataService {
 
   fetchOptions() : Observable<boolean> {
 
-    let response = new Subject<boolean>();
+    const response = new Subject<boolean>();
+    const handleError = rxErrorHandler(response);
 
-    let url = '/api/face-test/options';
+    const url = '/api/face-test/options';
     this.http.get(url).subscribe(options => {
 
       let _options = JSON.stringify(options);
@@ -66,10 +66,8 @@ export class TestDataService {
       this.testService.options.next(options);
       response.next(true);
       response.complete();
-    }, err => {
-      response.error(err);
-      response.complete();
-    });
+
+    }, handleError);
 
     return response;
   }

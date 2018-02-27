@@ -3,6 +3,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {TestDataService} from "./test-data.service";
+import {TestService} from "./test.service";
+import {TestSession} from "./test-session.model";
 
 @Component({
   selector: 'app-upload-failed',
@@ -16,10 +18,16 @@ export class UploadFailedComponent implements OnInit {
 
   retryCount = 0;
 
-  constructor(private testDataService: TestDataService,
+  testSession: TestSession;
+
+  constructor(private testService: TestService,
+              private testDataService: TestDataService,
               private router: Router) { }
 
   ngOnInit() {
+
+    this.testService.currentSession.subscribe(testSession => this.testSession = testSession);
+
   }
 
     retry() {
@@ -28,7 +36,12 @@ export class UploadFailedComponent implements OnInit {
 
       this.retryCount++;
 
-      this.testDataService.uploadResults()
+      if(this.testSession == null || this.testSession.uploadComplete) {
+        this.router.navigateByUrl('/t/test-complete');
+        return;
+      }
+
+      this.testDataService.uploadResults(this.testSession)
           .subscribe(() => {
 
               // complete

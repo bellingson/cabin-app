@@ -13,6 +13,9 @@ import {User} from "../user/user.model";
 import {TestSession} from "./test-session.model";
 import {TestDataService} from "./test-data.service";
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+
 export enum Side {
     LEFT,
     RIGHT
@@ -77,6 +80,7 @@ export class FaceTestComponent implements OnInit {
   user: User;
 
   options: any;
+  display: any;
 
   timer: any;
 
@@ -90,12 +94,16 @@ export class FaceTestComponent implements OnInit {
 
   ngOnInit() {
 
-      this.testService.options.subscribe(options => this.options = options);
+      this.testService.options.subscribe(options => {
+        this.options = options;
+        this.userService.user.subscribe(user => {
+          this.user = user;
+          this.display = this.options.display[`level${this.user.level}`];
+        });
+      });
 
       this.testService.sampleCount.subscribe(_sampleCount => this.sampleCount = _sampleCount);
       this.testService.extraSampleCount.subscribe(_extraSampleCount => this.extraSampleCount = _extraSampleCount);
-
-      this.userService.user.subscribe(user => this.user = user);
 
       this.testService.currentSession.subscribe(testSession => this.testSession = testSession);
       if(this.testSession == null) {
@@ -189,9 +197,9 @@ left = 0, affective right = 0).
           this.showFaces = false;
 
           // 2 show shapes
-          this.setMyTimeout(this.displayShapes.bind(this), this.options.display.hideFaces);
+          this.setMyTimeout(this.displayShapes.bind(this), this.display.hideFaces);
 
-      }, this.options.display.showFaces); // 1000
+      }, this.display.showFaces); // 1000 showFaces
 
 
   }
@@ -211,7 +219,7 @@ left = 0, affective right = 0).
     this.currentSample.startTime = Date.now();
 
     // 3 hide dot
-    this.setMyTimeout(this.hideShapes.bind(this), this.options.display.showShapes);
+    this.setMyTimeout(this.hideShapes.bind(this), this.display.showShapes);
   }
 
   hideShapes() {
@@ -227,7 +235,7 @@ left = 0, affective right = 0).
 
   setTimeoutTimer() {
 
-    this.timer = this.setMyTimeout(this.doTimeout.bind(this), this.options.display.timeOut);
+    this.timer = this.setMyTimeout(this.doTimeout.bind(this), this.display.timeOut);
 
   }
 

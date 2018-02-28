@@ -1,2 +1,28 @@
 
 input[type='text'], input[type='number'] { max-width: 100px; }
+
+div.levels {
+
+  h3 { font-size: 18px; }
+
+  div.field {
+    max-width: 22%;
+    margin-bottom: 20px;
+    display: inline-block;
+
+    label, input { display: block; }
+
+    label {
+       font-size: 14px;
+    }
+
+    input {
+       border-radius: 4px;
+    }
+
+
+
+  }
+
+
+}

@@ -20,6 +20,8 @@ export class StartComponent implements OnInit {
 
   ngOnInit() {
 
+    // alert(window.screen.width + ' ' + window.screen.height);
+
     let _session = localStorage.getItem(CURRENT_SESSION_KEY)
     if(_session) {
        this.previousSession = JSON.parse(_session);

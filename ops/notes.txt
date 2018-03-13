@@ -3,7 +3,7 @@ userdel vhost
 rm -rf /home/vhost
 
 groupadd wheel
-useradd -m -G wheel vhost -s /bin/bash
+useradd -m -G wheel -g vhost vhost -s /bin/bash
 usermod -aG sudo vhost
 passwd vhost
 

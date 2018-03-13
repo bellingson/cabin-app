@@ -52,7 +52,7 @@ export class PreTestComponent implements OnInit {
         this.badge = this.testService.highestBadge(sessions);
     });
 
-    this.userService.updateUserLevel();
+    // this.userService.updateUserLevel();
 
     this.fetchSummariesAndOptions();
 
@@ -67,9 +67,23 @@ export class PreTestComponent implements OnInit {
 
     Observable.forkJoin(
         this.testDataService.fetchOptions(),
-        this.testDataService.fetchSummaries()
+        this.testDataService.fetchSummaries(),
+        this.userService.fetchParticipant()
     ).subscribe(data => {
         this.testService.testSessions.next(data[1]);
+
+        // console.log(data[2]);
+        // console.log(this.user);
+
+        const _participant = data[2];
+
+        this.user.startTime = _participant.startTime;
+        this.user.endTime = _participant.endTime;
+
+        this.userService.updateUserLevel();
+
+        // console.log(this.user);
+
         this.loading = false;
     }, err => {
         this.loading = false;

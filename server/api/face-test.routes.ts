@@ -143,7 +143,6 @@ router.post('/participant', authVerification, jsonParser, (req, res, next) => {
 
   console.log(participant);
 
-
 });
 
 router.get('/stats', authVerification, jsonParser, (req, res, next) => {
@@ -176,8 +175,25 @@ router.get('/options', authVerification, jsonParser, (req, res, next) => {
         res.send(options);
     }, err => {
       res.status(500).send({error: 'Failed to get options'});
-    })
+    });
 
+});
+
+
+router.get('/participant', authVerification, jsonParser, (req, res, next) => {
+
+  const participantId = req.token.participantId
+
+  console.log('participantId: ' + participantId);
+
+  participantDao.findByParticipantId(participantId)
+    .subscribe(participant => {
+
+      res.send(participant);
+
+    }, err => {
+      res.status(500).send({error: 'Failed to get participant'});
+    });
 
 });
 

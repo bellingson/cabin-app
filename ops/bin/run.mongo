@@ -1,10 +1,12 @@
 #!/bin/bash
 
 #docker exec -it cabindb mongo
+#docker exec -it cabindb mongodump -h localhost --port 27017 -d cabin --gzip --out /backup
 
 docker rm -f cabindb
 
 docker run --name cabindb \
             --restart=always \
             -v /opt/cabin/mongo/data:/data/db  \
+            -v /opt/cabin/mongo/backup:/backup  \
             -d mongo

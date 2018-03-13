@@ -53,6 +53,7 @@ export class FaceTestComponent implements OnInit {
   rightWord: string;
 
   // UI State
+  showPlus = true;
   showFaces = false;
   showShapes = false;
   showDotLeft = false;
@@ -99,6 +100,7 @@ export class FaceTestComponent implements OnInit {
         this.userService.user.subscribe(user => {
           this.user = user;
           this.display = this.options.display[`level${this.user.level}`];
+          // console.log(this.display);
         });
       });
 
@@ -143,9 +145,11 @@ export class FaceTestComponent implements OnInit {
     this.testService.currentSession.subscribe(session => _session = session);
     if(_session) {
       this.samples = _session.samples;
-    } else {
-      this.samples = [];
     }
+
+    this.samples = this.samples ? this.samples : [];
+
+    // console.log(this.samples.length);
 
   }
 
@@ -175,31 +179,27 @@ left = 0, affective right = 0).
 
       this.neutralSide = Math.random() <= 0.5 ? Side.LEFT : Side.RIGHT;
 
-      if(this.testSession.stimuli == STIMULI_FACES) {
+      this.showPlus = true;
+      this.showFaces = false;
 
-        this.currentIndex = Math.floor(Math.random() * this.faces.length);
+      this.hideInputAndResponseControls();
 
-        const face = this.faces[this.currentIndex];
-        this.assignImages(face);
-
-      } else {
-
-        this.currentIndex = Math.floor(Math.random() * this.words.length);
-        const words = this.words[this.currentIndex];
-        this.assignWords(words);
-      }
-
-      this.displayStimuli();
-
-
-      // 1 show faces
       this.setMyTimeout(() => {
+
+        this.selectStimuli();
+
+        this.displayStimuli();
+
+        // 1 show faces
+        this.setMyTimeout(() => {
           this.showFaces = false;
 
           // 2 show shapes
           this.setMyTimeout(this.displayShapes.bind(this), this.display.hideFaces);
 
-      }, this.display.showFaces); // 1000 showFaces
+        }, this.display.showFaces); // 1000 showFaces
+
+      }, 1000);  // 1000 show plus
 
 
   }
@@ -212,17 +212,23 @@ left = 0, affective right = 0).
 
   displayShapes() {
 
+    // console.log('display shapes');
+
     this.canClick = true;
     this.showShapes = true;
     this.showDotLeft = this.correctSide == Side.LEFT;
     this.showDotRight = this.correctSide == Side.RIGHT;
     this.currentSample.startTime = Date.now();
 
+    // console.log('user: ' + this.user.level + " : " + this.showShapes + ' : ' + this.showDotLeft + ' : ' + this.showDotRight);
+
     // 3 hide dot
     this.setMyTimeout(this.hideShapes.bind(this), this.display.showShapes);
   }
 
   hideShapes() {
+
+    // console.log('hide shapes');
 
     if(this.currentSample) {
       this.showShapes = false;
@@ -262,6 +268,24 @@ left = 0, affective right = 0).
       this.nextSample();
   }
 
+  selectStimuli() {
+
+    if(this.testSession.stimuli == STIMULI_FACES) {
+
+      this.currentIndex = Math.floor(Math.random() * this.faces.length);
+
+      const face = this.faces[this.currentIndex];
+      this.assignImages(face);
+
+    } else {
+
+      this.currentIndex = Math.floor(Math.random() * this.words.length);
+      const words = this.words[this.currentIndex];
+      this.assignWords(words);
+    }
+
+  }
+
   displayStimuli() {
 
     if(this.shouldUseControlVersion()) {
@@ -278,9 +302,8 @@ left = 0, affective right = 0).
       this.currentSample.showDotOnNeutralFace = true;
     }
 
-    this.hideInputAndResponseControls();
+    // this.hideInputAndResponseControls();
 
-    this.showResume = false;
     this.showFaces = true;
 
   }
@@ -304,6 +327,8 @@ left = 0, affective right = 0).
     this.showDotRight = false;
     this.canClick = false;
 
+    this.showResume = false;
+
   }
 
   private shouldUseControlVersion() : boolean {
@@ -325,10 +350,18 @@ left = 0, affective right = 0).
   }
 
   shouldShowFaces() {
-      return this.showCorrect == false &&
+      return  this.showCorrect == false &&
               this.showIncorrect == false &&
               this.showResume == false &&
               this.finishing == false;
+  }
+
+  shouldShowPlus() {
+    return  this.showPlus == true &&
+            this.showCorrect == false &&
+            this.showIncorrect == false &&
+            this.showResume == false &&
+            this.finishing == false;
   }
 
 
@@ -443,6 +476,7 @@ left = 0, affective right = 0).
 
       this.currentSample = null;
       this.canClick = false;
+      this.showPlus = false;
 
       this.setMyTimeout(this.nextSample.bind(this), 1000);
   }

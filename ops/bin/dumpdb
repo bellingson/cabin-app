@@ -1,0 +1,14 @@
+#!/bin/bash
+
+DATETAG=`date +%Y%m%d-%H%M`;
+DIR="cabin-$DATETAG"
+FULLDIR="/backup/$DIR"
+TARBALL="cabin-$DATETAG.tar.gz"
+
+cd $FULLDIR
+
+mongodump -h localhost --port 27017 -d cabin --out $FULLDIR
+
+tar -zcvf $TARBALL $DIR
+
+rm -rf $DIR

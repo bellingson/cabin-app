@@ -12,7 +12,8 @@ export class ClearComponent implements OnInit {
   ngOnInit() {
 
      localStorage.clear();
-     document.cookie = '';
+     // document.cookie = '';
+    document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
      document.location.href = '';
 

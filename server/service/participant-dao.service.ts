@@ -22,18 +22,21 @@ export class ParticipantDao extends GenericDao {
 
      const startTime = moment(start);
      startTime.day('Monday');
+     startTime.hour(0);
+     startTime.minute(0);
+     startTime.second(0);
+
+     const endOfStartDay = moment(startTime);
+     endOfStartDay.hour(23);
+     endOfStartDay.minute(59);
+     endOfStartDay.second(59);
 
      const now = moment();
-     if(now.isAfter(startTime)) {
+     if(now.isAfter(endOfStartDay)) {
        startTime.add(7, 'days');
      }
 
-     const endTime = moment(startTime.toDate());
-     endTime.add(6, 'weeks');
-     endTime.day('Sunday');
-     endTime.hour(23);
-     endTime.minute(59);
-     endTime.second(59);
+    const endTime = this.calculateEndTime(startTime.toDate());
 
     console.log('start: ' + startTime.format('LLLL MM/DD/YYYY') + ' end: ' + endTime.format('LLLL MM/DD/YYYY'));
 
@@ -77,6 +80,20 @@ export class ParticipantDao extends GenericDao {
 
      return participant;
   }
+
+  // date
+  calculateEndTime(startTime: any) : any {
+
+    const endTime = moment(startTime);
+    endTime.add(6, 'weeks');
+    endTime.day('Sunday');
+    endTime.hour(23);
+    endTime.minute(59);
+    endTime.second(59);
+
+    return endTime;
+  }
+
 
   query() : Observable<Array<Participant>> {
     return super.query(participantCollection, {});

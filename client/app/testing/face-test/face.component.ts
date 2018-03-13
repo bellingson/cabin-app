@@ -26,6 +26,9 @@ export class FaceComponent implements OnInit {
   }
 
   click() {
+
+    // console.log('clicked...');
+
     this.clicked.emit(true);
   }
 

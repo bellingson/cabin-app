@@ -19,10 +19,11 @@ import {ParticipantAdminService} from "./participant-admin.service";
 import { TestSessionTableComponent } from './test-session-table.component';
 import {TestDataService} from "../testing/face-test/test-data.service";
 import {ParticipantAdminDataService} from "./participant-admin-data.service";
+import { StartDateEditComponent } from './start-date-edit.component';
 
 
 @NgModule({
-  declarations: [ TestSessionListComponent, AdminBaseComponent, TestSessionDetailComponent, ParticipantListComponent, AdminLinksComponent, AdminSettingsComponent, ParticipantViewComponent, TestSessionTableComponent ],
+  declarations: [ TestSessionListComponent, AdminBaseComponent, TestSessionDetailComponent, ParticipantListComponent, AdminLinksComponent, AdminSettingsComponent, ParticipantViewComponent, TestSessionTableComponent, StartDateEditComponent ],
   imports: [ CommonModule,
               FormsModule,
               ReactiveFormsModule,

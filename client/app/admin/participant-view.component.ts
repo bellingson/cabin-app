@@ -37,7 +37,10 @@ export class ParticipantViewComponent implements OnInit {
 
   }
 
-  fetchData(id: string) {
+  fetchData(id?: string) {
+
+    // refresh test
+    id = id ? id: this.participant._id;
 
     this.participantDataService.get(id)
         .subscribe(participant => {

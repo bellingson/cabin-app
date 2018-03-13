@@ -275,3 +275,34 @@ router.get('/face-test/participant/:participantId', jsonParser, (req, res, next)
 
 });
 
+router.put('/face-test/participant/:participantId/start_time', jsonParser, (req, res, next) => {
+
+  const participantId = req.params.participantId;
+  const startTime = req.body.startTime;
+
+  console.log(participantId);
+
+  console.log(req.body.startTime);
+
+  const handleError = err => {
+    res.status(500).send({error: 'Server Error'});
+  };
+
+  participantDao.findByParticipantId(participantId)
+    .subscribe(participant => {
+
+      participant.startTime = startTime;
+      participant.endTime = participantDao.calculateEndTime(startTime).toDate().getTime();
+
+      participantDao.save(participant)
+        .subscribe(r => {
+
+          res.send(OK);
+
+        }, handleError);
+
+
+    }, handleError);
+
+});
+

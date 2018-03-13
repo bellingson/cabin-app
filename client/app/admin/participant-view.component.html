@@ -32,7 +32,12 @@
     </tr>
     <tr>
       <th>Start Date</th>
-      <td>{{participant.startTime | date: 'EEEE MMM d, yyyy'}}</td>
+      <td>
+          {{participant.startTime | date: 'EEEE MMM d, yyyy'}}
+
+          <a class="btn btn-secondary" data-toggle="modal" href="#startDate">Edit</a>
+
+      </td>
     </tr>
     <tr>
       <th>End Date</th>
@@ -94,6 +99,8 @@
   <app-test-session-table [testSessions]="sessions" (delete)="deleteTest($event)"></app-test-session-table>
 
   <button class="btn btn-primary" (click)="updateStats()">Update Stats</button>
+
+  <app-start-date-edit [participant]="participant" (updateComplete)="fetchData()"></app-start-date-edit>
 
 </div>
 

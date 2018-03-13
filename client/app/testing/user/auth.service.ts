@@ -32,7 +32,9 @@ export class AuthService {
 
   setToken(token: string) {
 
-     document.cookie = `auth=${token}`;
+    // 1000 milli, 60 seconds, 60 minutes * 24 hours * 365 days * 10 years
+    let expire = new Date(Date.now() + (1000 * 60 * 60 * 24 * 365 * 10)).toUTCString();
+    document.cookie = `auth=${token}; expires=${expire}; path=/`;
 
      this.token.next(token);
   }

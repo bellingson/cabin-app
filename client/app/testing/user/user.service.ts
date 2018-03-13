@@ -104,6 +104,13 @@ export class UserService {
 
   }
 
+  fetchParticipant() : Observable<any> {
+
+    const url = `/api/face-test/participant`;
+
+    return this.http.get(url);
+  }
+
   setLevel(level: number) {
 
     let user;

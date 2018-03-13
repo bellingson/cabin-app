@@ -38,7 +38,12 @@ export class ParticipantAdminService {
     if(participant.endTime < now)
       return 0;
 
-    return moment(participant.endTime).diff(moment(),'days');
+    try {
+      return moment(participant.endTime).diff(moment(),'days');
+    } catch(t) {
+      return 0;
+    }
+
   }
 
   currentLevel(participant: any) {

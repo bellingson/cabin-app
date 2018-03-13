@@ -280,10 +280,6 @@ router.put('/face-test/participant/:participantId/start_time', jsonParser, (req,
   const participantId = req.params.participantId;
   const startTime = req.body.startTime;
 
-  console.log(participantId);
-
-  console.log(req.body.startTime);
-
   const handleError = err => {
     res.status(500).send({error: 'Server Error'});
   };
@@ -293,15 +289,16 @@ router.put('/face-test/participant/:participantId/start_time', jsonParser, (req,
 
       participant.startTime = startTime;
       participant.endTime = participantDao.calculateEndTime(startTime).toDate().getTime();
+      participant.levels = participantDao.formatLevels(startTime);
 
       participantDao.save(participant)
         .subscribe(r => {
 
-          res.send(OK);
+          participantDao.updateParticipantStats(participant.participantId).subscribe(r => {
+            res.send(OK);
 
+          }, handleError);
         }, handleError);
-
-
     }, handleError);
 
 });

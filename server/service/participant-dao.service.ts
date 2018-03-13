@@ -53,33 +53,43 @@ export class ParticipantDao extends GenericDao {
                                 sessionsToday: 0
                                 };
 
-     participant.levels = _.map(_.range(0, 6), i => {
+     participant.levels = this.formatLevels(startTime);
 
-       let levelStartTime = moment(startTime).add(i,'week');
-       levelStartTime.day('Monday');
-       levelStartTime.hour(0);
-       levelStartTime.minute(0);
-       levelStartTime.second(1);
+     return participant;
+  }
 
-       let levelEndTime = moment(levelStartTime.toDate());
-       levelEndTime.add(6,'days');
-       levelEndTime.hour(23);
-       levelEndTime.minute(59);
-       levelEndTime.second(59);
+  formatLevels(startTime: any) : Array<any> {
 
-       // console.log('end: ' + levelEndTime.format('LLLL MM/DD/YYYY hh:mm a'));
-       // console.log('level' + i + ': ' + levelStartTime.format('LLLL MM/DD/YYYY hh:mm a') + ' -> ' + levelEndTime.format('LLLL MM/DD/YYYY hh:mm a'));
+    const dayNumbers = _.range(0, 6);
 
-       return { level: (i + 1),
+    return _.map(dayNumbers, i => {
+
+              let levelStartTime = moment(startTime).add(i,'week');
+              levelStartTime.day('Monday');
+              levelStartTime.hour(0);
+              levelStartTime.minute(0);
+              levelStartTime.second(1);
+
+              let levelEndTime = moment(levelStartTime.toDate());
+              levelEndTime.add(6,'days');
+              levelEndTime.hour(23);
+              levelEndTime.minute(59);
+              levelEndTime.second(59);
+
+              // console.log('end: ' + levelEndTime.format('LLLL MM/DD/YYYY hh:mm a'));
+              // console.log('level' + i + ': ' + levelStartTime.format('LLLL MM/DD/YYYY hh:mm a') + ' -> ' + levelEndTime.format('LLLL MM/DD/YYYY hh:mm a'));
+
+              return { level: (i + 1),
                 startTime: levelStartTime.toDate().getTime(),
                 endTime: levelEndTime.toDate().getTime(),
                 sessionCount: 0,
                 sessionsToDo: 6,
                 sessionsMissing: null } as Level;
-     });
 
-     return participant;
+            });
+
   }
+
 
   // date
   calculateEndTime(startTime: any) : any {

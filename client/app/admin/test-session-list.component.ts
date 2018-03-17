@@ -6,6 +6,7 @@ import 'rxjs/add/operator/debounceTime';
 
 import {TestAdminService} from "./test-admin.service";
 import {TestSession} from "../testing/face-test/test-session.model";
+import {AuthService} from "../testing/user/auth.service";
 
 declare var jQuery;
 
@@ -22,9 +23,14 @@ export class TestSessionListComponent implements OnInit {
 
   selectedSession:TestSession;
 
-  constructor(private testAdminService: TestAdminService) { }
+  token: string;
+
+  constructor(private testAdminService: TestAdminService,
+              private authService: AuthService) { }
 
   ngOnInit() {
+
+    this.authService.token.subscribe(token => this.token = token);
 
     this.findText.valueChanges
       .debounceTime(500)

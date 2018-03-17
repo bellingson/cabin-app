@@ -7,7 +7,7 @@ const TOKEN_KEY = 'token';
 @Injectable()
 export class AuthService {
 
-  private token =  new ReplaySubject<string>(1);
+  token =  new ReplaySubject<string>(1);
 
   constructor() {
      this.initialize();

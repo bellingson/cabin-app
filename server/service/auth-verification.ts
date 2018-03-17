@@ -73,6 +73,11 @@ function getToken(req) : string {
     return token;
   }
 
+  token = req.query.token;
+  if(token) {
+    return token;
+  }
+
   const cookie = req.get('Cookie');
   if(cookie == null) {
     return null;

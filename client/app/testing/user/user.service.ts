@@ -11,6 +11,7 @@ import * as _clone from 'lodash/clone';
 import {Observable} from "rxjs/Observable";
 import {User} from "./user.model";
 import {AuthService} from "./auth.service";
+import {Subject} from "rxjs/Subject";
 
 const USER_KEY = 'participant';
 
@@ -38,7 +39,6 @@ export class UserService {
     this.user.subscribe(user => {
 
       if(user) {
-         this.updateLevel(user);
          let json = JSON.stringify(user);
          localStorage.setItem(USER_KEY, json);
       } else {
@@ -104,49 +104,38 @@ export class UserService {
 
   }
 
+  fetchAndUpdateParticipant() : Observable<boolean> {
+
+    let response = new Subject<boolean>();
+
+    let _user;
+    this.user.subscribe(user => _user = user);
+
+    this.fetchParticipant().subscribe(_participant => {
+
+        _user.startTime = _participant.startTime;
+        _user.endTime = _participant.endTime;
+        _user.level = _participant.level;
+
+        this.user.next(_user);
+
+        response.next(true);
+        response.complete();
+    }, err => {
+        response.error(err);
+        response.complete();
+    });
+
+    return response;
+
+  }
+
+
   fetchParticipant() : Observable<any> {
 
     const url = `/api/face-test/participant`;
 
     return this.http.get(url);
-  }
-
-  setLevel(level: number) {
-
-    let user;
-    this.user.subscribe(_user => user = _user);
-
-    if(user.level === level) {
-      return;
-    }
-
-    user = _clone(user);
-    user.level = level;
-
-    this.user.next(user);
-  }
-
-  updateUserLevel() {
-      let user;
-      this.user.subscribe(_user => user = _user);
-
-      const level = this.calculateLevel(user);
-      if(user.level != level) {
-         user = _clone(user);
-         this.user.next(user); // will set level
-      }
-
-  }
-
-  private updateLevel(user: User) {
-
-    user.level = this.calculateLevel(user);
-
-  }
-
-  private calculateLevel(user: User) : number {
-      return moment().diff(moment(user.startTime),'weeks') + 1;
-
   }
 
   updateUser(user: User) {

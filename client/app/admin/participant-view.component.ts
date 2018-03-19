@@ -58,12 +58,7 @@ export class ParticipantViewComponent implements OnInit {
 
     participant.daysLeft = this.participantService.daysLeft(participant);
 
-    const level = _find(participant.levels, level => this.participantService.isCurrent(level));
-    if(level) {
-      participant.currentLevel = level;
-    } else if(Date.now() < participant.startTime) {
-      participant.currentLevel = participant.levels[0];
-    }
+    participant.currentLevel = this.participantService.currentLevel(participant);
 
     this.participant = participant;
     this.sessions = _reverse(sessions);

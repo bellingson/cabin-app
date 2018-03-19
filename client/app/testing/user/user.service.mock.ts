@@ -18,10 +18,6 @@ export class UserServiceMock {
 
   }
 
-  updateUserLevel(): void {
-    this.setLevel(1);
-  }
-
   updateUser(user: User): void {
     this.user.next(user);
   }

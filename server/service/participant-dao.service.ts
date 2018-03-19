@@ -21,7 +21,7 @@ export class ParticipantDao extends GenericDao {
   create(participantId: string, start?: any) : Participant {
 
      const startTime = moment(start);
-     startTime.day('Monday');
+     // startTime.day('Monday');
      startTime.hour(0);
      startTime.minute(0);
      startTime.second(0);
@@ -65,7 +65,7 @@ export class ParticipantDao extends GenericDao {
     return _.map(dayNumbers, i => {
 
               let levelStartTime = moment(startTime).add(i,'week');
-              levelStartTime.day('Monday');
+              // levelStartTime.day('Monday');
               levelStartTime.hour(0);
               levelStartTime.minute(0);
               levelStartTime.second(1);
@@ -96,7 +96,8 @@ export class ParticipantDao extends GenericDao {
 
     const endTime = moment(startTime);
     endTime.add(6, 'weeks');
-    endTime.day('Sunday');
+    endTime.add(-1, 'days');
+    // endTime.day('Sunday');
     endTime.hour(23);
     endTime.minute(59);
     endTime.second(59);
@@ -235,9 +236,28 @@ export class ParticipantDao extends GenericDao {
       participant.startTime = firstSession ? firstSession.startTime : Date.now();
     }
 
-    participant.level = this.calculateLevel(participant);
+    const currentWeek = this.calculateLevel(participant);
+
+    console.log('update level: ' + participant.level + ' ' + currentWeek);
+
+
+    if(participant.level == currentWeek) {
+      return;
+    }
+
+    if(this.isLevelComplete(participant.level, sessions)) {
+      participant.level = currentWeek;
+    }
 
   }
+
+  private isLevelComplete(level: number, sessions: Array<any>) : boolean {
+
+    let _sessionsForLevel = _.filter(sessions,{ level: level });
+    return _sessionsForLevel.length >= 6;
+  }
+
+
 
   private calculateLevel(participant: any) : number {
     return moment().diff(moment(participant.startTime),'weeks') + 1;

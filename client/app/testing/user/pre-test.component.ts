@@ -68,19 +68,22 @@ export class PreTestComponent implements OnInit {
     Observable.forkJoin(
         this.testDataService.fetchOptions(),
         this.testDataService.fetchSummaries(),
-        this.userService.fetchParticipant()
+        // this.userService.fetchParticipant()
+        this.userService.fetchAndUpdateParticipant()
     ).subscribe(data => {
         this.testService.testSessions.next(data[1]);
 
         // console.log(data[2]);
         // console.log(this.user);
 
+      /*
         const _participant = data[2];
 
         this.user.startTime = _participant.startTime;
         this.user.endTime = _participant.endTime;
 
         this.userService.updateUserLevel();
+        */
 
         // console.log(this.user);
 

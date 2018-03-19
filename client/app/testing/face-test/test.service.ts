@@ -67,7 +67,9 @@ export class TestService {
 
   initialize() {
 
-    this.userService.user.subscribe(user => this.user = user);
+    this.userService.user.subscribe(user => {
+      this.user = user;
+    });
 
     this.initializeOptions()
 
@@ -266,21 +268,6 @@ export class TestService {
 
     this.currentSession.next(newSession);
 
-  }
-
-  checkTestLevel() : number {
-
-    let user;
-    this.userService.user.subscribe(_user => user = _user);
-
-    let daysSinceStart = moment().diff(user.startTime,'days');
-
-    let level = Math.floor(daysSinceStart / 7);
-    this.userService.setLevel(level);
-
-    console.log('days since start: ' + daysSinceStart + ' ' + level);
-
-    return level;
   }
 
   countStats() : TestStats {

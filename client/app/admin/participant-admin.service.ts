@@ -57,9 +57,11 @@ export class ParticipantAdminService {
       return participant.levels[0];
     }
 
-    return _find(participant.levels, level => {
-      return this.isCurrent(level);
-    });
+    return _find(participant.levels, { level: participant.level });
+
+    // return _find(participant.levels, level => {
+    //   return this.isCurrent(level);
+    // });
 
   }
 

@@ -24,25 +24,46 @@ export class MoodComponent implements OnInit {
 
   canTakeTest = false;
 
+  sessionsThisWeekCount: number;
+  sessionsTodayCount: number;
+
+  loading = true;
+
   constructor(private userService: UserService,
               private testService: TestService,
               private router: Router) { }
 
   ngOnInit() {
 
-    this.userService.updateUserLevel();
+    this.userService.fetchAndUpdateParticipant()
+      .subscribe(r => {
+        this.userLoaded();
+      }, err => {
+
+        this.userLoaded();
+      });
+
+  }
+
+  userLoaded() {
+
+    this.loading = false;
 
     this.canTakeTest = this.testService.canTakeTest();
 
     if(this.canTakeTest == false) {
-      return
+      this.sessionsThisWeekCount = this.testService.sessionsThisWeek().length;
+      this.sessionsTodayCount = this.testService.sessionsToday().length;
+      return;
     }
 
 
     this.testService.startSession();
 
     this.showNextMood();
+
   }
+
 
   showNextMood() {
 
@@ -60,5 +81,7 @@ export class MoodComponent implements OnInit {
      this.responses.push({ mood: this.mood, value: value });
      this.showNextMood();
   }
+
+
 
 }

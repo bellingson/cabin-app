@@ -38,7 +38,7 @@ router.post('/verify-pin', jsonParser, (req, res, next) => {
 
   if(isPinValid(req)) {
 
-    const participantId = req.body.participantId;
+    const participantId = _.trim(req.body.participantId);
 
     participantDao.findByParticipantId(participantId)
       .subscribe(participant => {
@@ -95,7 +95,7 @@ function verifyPinResponse(participantId: string, participant: Participant, res)
 function isPinValid(req) : boolean {
 
   const _pin = req.body.pin;
-  const participantId = req.body.participantId;
+  const participantId = _.trim(req.body.participantId);
 
   const validPin = participantId == -1 ? settings.adminPin : settings.pin;
   return _pin == validPin;

@@ -28,33 +28,6 @@ describe('TestService', () => {
   }));
 
 
-  it('should checkTestLevel', inject([TestService, UserService], (service: TestService, userService: UserServiceMock) => {
-
-    let user;
-    userService.user.subscribe(_user => user = _user);
-
-    let startTime = moment().add(-13, 'days');
-
-    console.log('st: ' + startTime.toDate());
-
-    user.startTime = startTime.valueOf();
-
-    let level = service.checkTestLevel();
-
-    expect(level).toBe(1);
-
-    startTime = moment().add(-14, 'days');
-
-    console.log('st: ' + startTime.toDate());
-
-    user.startTime = startTime.valueOf();
-
-    level = service.checkTestLevel();
-
-    expect(level).toBe(2);
-
-  }));
-
   it('countStats', inject([TestService, UserService], (service: TestService, userService: UserServiceMock) => {
 
     let user;

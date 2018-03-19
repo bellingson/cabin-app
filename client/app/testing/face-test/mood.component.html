@@ -1,4 +1,9 @@
-<div class="page-wrapper">
+
+
+
+
+
+<div *ngIf="loading == false" class="page-wrapper">
 
   <div *ngIf="canTakeTest" class="mood-afraid instruction-cell">
 
@@ -13,21 +18,21 @@
 
   <div *ngIf="canTakeTest == false" class="instruction-cell">
 
-      <div *ngIf="sessionsThisWeekCount() >= 6">
+      <div *ngIf="sessionsThisWeekCount >= 6">
         <p>
           You may complete up to 6 sessions per week.
         </p>
         <p>
-          You have completed {{sessionsThisWeekCount()}} this week.
+          You have completed {{sessionsThisWeekCount}} this week.
         </p>
       </div>
 
-    <div *ngIf="sessionsTodayCount() >= 3">
+    <div *ngIf="sessionsTodayCount >= 3">
       <p>
         You may complete up to 3 sessions per day.
       </p>
       <p>
-        You have completed {{sessionsTodayCount()}} today.
+        You have completed {{sessionsTodayCount}} today.
       </p>
     </div>
 
@@ -37,7 +42,16 @@
   </div>
 
 
+</div>  <!-- // page-wrapper -->
+
+
+<div *ngIf="loading" class="page-wrapper">
+
+  <div class="instruction-cell">
+    <div class="spinner"></div>
+  </div>
 </div>
+
 
 <div class="preload">
   <div *ngFor="let face of faces">

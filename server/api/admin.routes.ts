@@ -168,7 +168,7 @@ router.get('/participant/:id', jsonParser, (req, res, next) => {
 router.delete('/participant/:id', jsonParser, (req, res, next) => {
 
   const id = req.params.id;
-  
+
   participantDao.delete(id)
     .subscribe(r => {
       res.send(OK)

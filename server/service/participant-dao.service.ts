@@ -115,6 +115,13 @@ export class ParticipantDao extends GenericDao {
 
   }
 
+  delete(id: string) : Observable<any> {
+
+    return super.delete(participantCollection, id);
+
+  }
+
+
   findByParticipantId(participantId: string) : Observable<Participant> {
 
     const response = new Subject<any>();

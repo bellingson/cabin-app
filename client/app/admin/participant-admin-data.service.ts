@@ -33,4 +33,10 @@ export class ParticipantAdminDataService {
   }
 
 
+  deleteParticipant(_id: string) : Observable<any> {
+
+    const url = `/api/admin/participant/${_id}`;
+    return this.http.delete<any>(url);
+  }
+
 }

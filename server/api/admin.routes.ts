@@ -165,6 +165,20 @@ router.get('/participant/:id', jsonParser, (req, res, next) => {
 
 });
 
+router.delete('/participant/:id', jsonParser, (req, res, next) => {
+
+  const id = req.params.id;
+  
+  participantDao.delete(id)
+    .subscribe(r => {
+      res.send(OK)
+    }, err => {
+      console.log(err);
+      res.status(500).send({error: 'server error'});
+    })
+
+});
+
 router.delete('/face-test/:id', jsonParser, (req, res, next) => {
 
   const id = req.params.id;

@@ -11,6 +11,7 @@ import * as _reverse from 'lodash/reverse';
 
 import {TestSession} from "../testing/face-test/test-session.model";
 import {ParticipantAdminDataService} from "./participant-admin-data.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-participant-view',
@@ -75,6 +76,18 @@ export class ParticipantViewComponent implements OnInit {
       .subscribe(r => {
         this.fetchData(this.participant._id);
       });
+
+  }
+
+  deleteParticipant() {
+
+      if(!confirm("Are you sure you want to delete this participant?"))
+        return;
+
+      this.participantDataService.deleteParticipant(this.participant._id)
+        .subscribe(r => {
+           this.router.navigateByUrl('/admin/participant-list');
+        });
 
   }
 

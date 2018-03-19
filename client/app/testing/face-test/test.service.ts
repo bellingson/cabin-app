@@ -231,6 +231,7 @@ export class TestService {
     session.clientId = Date.now();
     session.uploadComplete = false;
     session.participantId = this.user.participantId;
+    session.controlVersion = this.user.controlVersion;
 
     session.startTime = Date.now();
     session.level = this.user.level;

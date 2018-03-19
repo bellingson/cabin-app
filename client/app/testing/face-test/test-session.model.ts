@@ -9,6 +9,8 @@ export interface TestSession {
 
     participantId: string;
 
+    controlVersion: boolean;
+
     testNumber: number;
     level: number;
 

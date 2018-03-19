@@ -38,7 +38,7 @@ router.get('/face-test-summary.csv', (req, res, next) => {
 
    faceTestDao.getTestSessions(req.query.findText).subscribe(testSessions => {
 
-         let headers = ['Test ID','Participant #', 'Test #', 'Week', 'Start Time', 'Stimuli', 'Correct #','In-Correct #', '% Correct', 'Avg Resp ms'];
+         let headers = ['Test ID','Participant #','Control Group', 'Test #', 'Week', 'Start Time', 'Stimuli', 'Correct #','In-Correct #', '% Correct', 'Avg Resp ms'];
          _.each(moodCategory, moodName => {
            headers.push(moodName);
          });
@@ -49,8 +49,15 @@ router.get('/face-test-summary.csv', (req, res, next) => {
 
          _.each(testSessions, session => {
 
+              let controlVersion = session.controlVersion;
+              if(controlVersion == null) {
+                const participantNumber: number = parseInt(session.participantId.replace(/\D/g, ''), 10);
+                controlVersion = participantNumber % 2 == 0;
+              }
+
               let s = [session._id,
                        session.participantId,
+                       controlVersion,
                        session.testNumber,
                        session.level,
                        moment(session.startTime).format('YYYY-MM-DD HH:mm:ss'),

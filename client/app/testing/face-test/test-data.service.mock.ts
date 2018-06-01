@@ -1,7 +1,6 @@
 
 
-import {Observable} from "rxjs/Observable";
-import 'rxjs/add/observable/of';
+import { Observable, of } from 'rxjs';
 
 import {TestSession} from "./test-session.model";
 
@@ -12,16 +11,16 @@ export const testSessionSummaries = [{"_id":"5a8f1382516b381c6d334f44","clientId
 export class TestDataServiceMock  {
 
   fetchSummaries(): Observable<Array<TestSession>> {
-    return Observable.of(testSessionSummaries);
+    return of(testSessionSummaries);
   }
 
   uploadResults(session?: TestSession): Observable<boolean> {
-    return Observable.of(true)
+    return of(true)
   }
 
   fetchOptions(): Observable<boolean> {
 
-    return Observable.of(true);
+    return of(true);
   }
 
 

@@ -13,9 +13,6 @@ import {User} from "../user/user.model";
 import {TestSession} from "./test-session.model";
 import {TestDataService} from "./test-data.service";
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-
 export enum Side {
     LEFT,
     RIGHT

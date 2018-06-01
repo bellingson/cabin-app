@@ -11,7 +11,7 @@ import * as _reverse from 'lodash/reverse';
 
 import {TestSession} from "../testing/face-test/test-session.model";
 import {ParticipantAdminDataService} from "./participant-admin-data.service";
-import {Observable} from "rxjs/Observable";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-participant-view',

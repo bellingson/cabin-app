@@ -1,8 +1,8 @@
 
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 export class RouterMock  {
 

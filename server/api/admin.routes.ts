@@ -10,7 +10,7 @@ import * as moment from 'moment';
 import {FaceTestDao} from "../service/face-test-dao.service";
 import {OK} from "./face-test.routes";
 import {ParticipantDao} from "../service/participant-dao.service";
-import {Observable} from "rxjs/Observable";
+import {  forkJoin } from 'rxjs';
 
 export const router = express.Router();
 
@@ -271,7 +271,7 @@ router.post('/participant/stats', jsonParser, (req, res, next) => {
                      return participantDao.updateParticipantStats(participant.participantId);
                   });
 
-      Observable.forkJoin(obsA)
+      forkJoin(obsA)
         .subscribe(r => {
             res.send(OK);
         });

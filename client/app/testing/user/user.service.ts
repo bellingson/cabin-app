@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject } from 'rxjs';
 
 import * as moment from 'moment';
 
 import * as _clone from 'lodash/clone';
 
-import {Observable} from "rxjs/Observable";
+import { Observable } from 'rxjs';
 import {User} from "./user.model";
 import {AuthService} from "./auth.service";
-import {Subject} from "rxjs/Subject";
+import {Subject} from 'rxjs';
 
 const USER_KEY = 'participant';
 

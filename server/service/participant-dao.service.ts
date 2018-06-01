@@ -2,9 +2,9 @@
 import {FaceTestDao} from "./face-test-dao.service";
 import {GenericDao} from "./generic-dao.service";
 
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
-import 'rxjs/add/observable/forkJoin';
+import { Observable, forkJoin } from 'rxjs';
+import {Subject} from 'rxjs';
+
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -168,7 +168,7 @@ export class ParticipantDao extends GenericDao {
       response.complete();
     };
 
-    Observable.forkJoin(
+    forkJoin(
       this.findByParticipantId(participantId),
       this.faceTestDao.sessionSummary(participantId)
     ).subscribe(data => {

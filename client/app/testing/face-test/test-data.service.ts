@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
+import { Observable } from 'rxjs';
+import {Subject} from 'rxjs';
 import {TestSession} from "./test-session.model";
 
 import {CURRENT_SESSION_KEY, OPTIONS_KEY, TestService} from "./test.service";

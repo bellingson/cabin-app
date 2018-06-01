@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 
 
 
-import { Observable } from 'rxjs/Observable';
+import { Observable, of, forkJoin } from 'rxjs';
 
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/forkJoin';
+import { ReplaySubject } from 'rxjs';
 
 import {UserService} from "../user/user.service";
 import {TestSample} from "./test-sample.model";
@@ -350,7 +348,7 @@ export class TestService {
 
       // console.log('preload start');
 
-      return Observable.of(true);
+      return of(true);
 
       /*
       const response = new Subject<boolean>();
@@ -368,7 +366,7 @@ export class TestService {
                 }).flatten()
                   .valueOf();
 
-      Observable.forkJoin(obs)
+      forkJoin(obs)
           .subscribe(r => {
             console.log('preload complete');
               response.next(true);

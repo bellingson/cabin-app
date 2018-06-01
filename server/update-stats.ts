@@ -5,8 +5,8 @@ import * as _ from 'lodash';
 
 declare var process: any;
 
-import {Observable} from "rxjs/Observable";
-import 'rxjs/add/observable/forkJoin';
+import { Observable, forkJoin } from 'rxjs';
+
 
 const participantDao = new ParticipantDao()
 
@@ -19,7 +19,7 @@ participantDao.query()
             return participantDao.updateParticipantStats(participant.participantId);
           });
 
-    Observable.forkJoin(obs)
+    forkJoin(obs)
               .subscribe(r => {
                 console.log('update stats complete');
                 process.exit();

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject } from 'rxjs';
 
 const TOKEN_KEY = 'token';
 

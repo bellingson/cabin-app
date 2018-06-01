@@ -1,5 +1,5 @@
 
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject } from 'rxjs';
 
 import * as _clone from 'lodash/clone';
 import {User} from "./user.model";

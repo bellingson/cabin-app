@@ -1,7 +1,7 @@
 
 
-import {Observable} from "rxjs/Observable";
-import 'rxjs/add/observable/of';
+import { Observable, of } from 'rxjs';
+
 
 import {TestSession} from "../testing/face-test/test-session.model";
 
@@ -13,15 +13,15 @@ const testSessions = [{"_id":"5a8f1382516b381c6d334f44","clientId":1519326055903
 export class ParticipantAdminDataServiceMock  {
 
   query(): Observable<Array<any>> {
-    return Observable.of(testParticipants);
+    return of(testParticipants);
   }
 
   get(_id: string): Observable<any> {
-    return Observable.of(testParticipant);
+    return of(testParticipant);
   }
 
   sessions(participantId: string): Observable<Array<TestSession>> {
-    return Observable.of(testSessions);
+    return of(testSessions);
   }
 
 }

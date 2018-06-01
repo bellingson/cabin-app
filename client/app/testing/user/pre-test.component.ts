@@ -6,8 +6,8 @@ import {User} from "./user.model";
 import {UserService} from "./user.service";
 import {TestService} from "../face-test/test.service";
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/forkJoin';
+import { Observable, forkJoin } from 'rxjs';
+
 import {TestDataService} from "../face-test/test-data.service";
 import {AuthService} from "./auth.service";
 
@@ -65,7 +65,7 @@ export class PreTestComponent implements OnInit {
 
     this.loading = true;
 
-    Observable.forkJoin(
+    forkJoin(
         this.testDataService.fetchOptions(),
         this.testDataService.fetchSummaries(),
         // this.userService.fetchParticipant()

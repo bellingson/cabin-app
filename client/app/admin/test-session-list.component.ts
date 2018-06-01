@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormControl } from '@angular/forms';
 
-import 'rxjs/add/operator/debounceTime';
+import { debounceTime } from 'rxjs/operators';
 
 import {TestAdminService} from "./test-admin.service";
 import {TestSession} from "../testing/face-test/test-session.model";
@@ -32,12 +32,11 @@ export class TestSessionListComponent implements OnInit {
 
     this.authService.token.subscribe(token => this.token = token);
 
-    this.findText.valueChanges
-      .debounceTime(500)
-      .subscribe(value => {
+    this.findText.valueChanges.pipe(
+        debounceTime(500)
+      ).subscribe(value => {
        this.fetchTestSessions(value);
     });
-
 
     this.fetchTestSessions();
   }

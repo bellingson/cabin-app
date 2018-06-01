@@ -1,5 +1,5 @@
 
-import {Subject} from "rxjs/Subject";
+import {Subject} from 'rxjs';
 
 export function rxErrorHandler(response: Subject<any>) : any {
   return err => {

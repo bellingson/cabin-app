@@ -48,7 +48,7 @@
         "/favicon.ico",
         "/index.html"
       ],
-      "versionedFiles": [
+      "files": [
         "/*.bundle.css",
         "/*.bundle.js",
         "/*.chunk.js"

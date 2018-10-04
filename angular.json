@@ -37,7 +37,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "serviceWorker": true,
-              "ngswConfigPath": "/src/ngsw-config.json",
+              "ngswConfigPath": "client/ngsw-config.json",
               "fileReplacements": [
                 {
                   "replace": "client/environments/environment.ts",

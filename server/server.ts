@@ -11,6 +11,7 @@ console.log('cabin app server: ' + __dirname);
 
 import * as faceTestApi from './api/face-test.routes';
 import * as faceTestAdminApi from './api/admin.routes';
+
 import {adminVerification} from "./service/auth-verification";
 
 export const app = express();

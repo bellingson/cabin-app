@@ -40,7 +40,7 @@ export function authVerification(req, res, next) {
 export function adminVerification(req, res, next) {
 
   // console.log('admin verification');
-
+  
   let token = getToken(req);
   // console.log(`admin auth: ${req.originalUrl} : ${token}`);
   if(token == null) {

@@ -87,7 +87,7 @@ router.get('/face-test-samples.csv', (req, res, next) => {
 
   faceTestDao.getTestSessions(req.query.findText).subscribe(testSessions => {
 
-    let writer = csvWriter({headers: ['Test ID','Participant #', 'Test #', 'Start Time', 'Stimuli', 'Sample #','Neutral', 'Correct','Time']});
+    let writer = csvWriter({headers: ['Test ID','Participant #', 'Test #', 'Start Time', 'Stimuli', 'Sample #','Neutral', 'Correct','Time','Training Trial']});
 
     writer.pipe(res);
 
@@ -95,15 +95,16 @@ router.get('/face-test-samples.csv', (req, res, next) => {
 
       _.each(session.samples, sample => {
         let s = [session._id,
-          session.participantId,
-          session.testNumber,
-          moment(session.startTime).format('YYYY-DD-MM HH:mm:ss'),
-          session.stimuli,
-          sample.ordinal,
-          sample.showDotOnNeutralFace,
-          sample.correct,
-          sample.time
-        ];
+                session.participantId,
+                session.testNumber,
+                moment(session.startTime).format('YYYY-DD-MM HH:mm:ss'),
+                session.stimuli,
+                sample.ordinal,
+                sample.showDotOnNeutralFace,
+                sample.correct,
+                sample.time,
+                (sample.ordinal < 200)    // is this a training or a test sample
+              ];
         writer.write(s);
       });
 
@@ -123,10 +124,14 @@ router.get('/face-test-samples.csv', (req, res, next) => {
 /* GET. */
 router.get('/face-test', jsonParser, (req, res, next) => {
 
-  // console.log('fd1: ' + req.query.findText);
+  console.log('fd1: ' + req.query.findText);
 
   faceTestDao.getTestSessions(req.query.findText).subscribe(testSessions => {
-      res.send(testSessions);
+
+      const summary = _.map(testSessions, session => _.omit(session, ['samples']));
+      // console.log(summary);
+      // res.send(testSessions);
+      res.send(summary);
   });
 
 });

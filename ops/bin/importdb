@@ -1,17 +1,39 @@
-#!/bin/sh
+#!/bin/bash
 
-DIR=$1
+FILE=$1
 
-read -p "Are you sure you want to import $DIR? " -n 1 -r
-echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
+echo $FILE
+
+if [ -f "$FILE" ]; then
+
+	echo "IMPORT: $FILE";
+
+else
+	echo "FILE: $FILE DOES NOT EXIST";
+	exit 1;
 fi
 
 
-echo "DO IMPORT: $DIR";
+TF=/tmp/cabindb
 
-mongo cabin -eval 'db.dropDatabase();';
+if [ -d $TF ]; then
+	rm -rf $TF
+fi
 
-mongorestore -d cabin $DIR/cabin
+mkdir -p $TF
+
+cd $TF
+
+tar -zxvf $FILE
+
+UNZIPPED=$(ls | sort -n | head -1)
+
+cd $UNZIPPED
+
+mongo cabin --eval "db.dropDatabase();"
+
+rm -rf $TF
+
+ECHO "IMPORT COMPLETE: $UNZIPPED"
+
+
